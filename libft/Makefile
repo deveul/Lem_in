@@ -6,7 +6,7 @@
 #    By: smakni <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/05 09:14:14 by smakni            #+#    #+#              #
-#    Updated: 2018/12/12 11:36:54 by smakni           ###   ########.fr        #
+#    Updated: 2019/02/01 19:07:27 by vrenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRC_NAME		=	ft_putchar.c \
 					ft_strchr.c \
 					ft_strrchr.c \
 					ft_isdigit.c \
+					ft_isnumber.c \
 					ft_isascii.c \
 					ft_isalpha.c \
 					ft_isalnum.c \
