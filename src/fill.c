@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:13:09 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/01 19:10:14 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/01 19:38:45 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,14 @@ int			fill_node(t_env *env, char **tab)
 	return (0);
 }
 
-void		fill_edge(t_env *env, char **tab)
+int			fill_edge(t_env *env, char **tab)
 {
 	int		i;
 	int		j;
+	int		trigger;
 
 	i = 0;
+	trigger = 0;
 	while (i < env->nb_nodes)
 	{
 		if (ft_strequ(tab[0], env->nodes[i].name))
@@ -70,12 +72,19 @@ void		fill_edge(t_env *env, char **tab)
 			{
 				if (ft_strequ(tab[1], env->nodes[j].name))
 				{
+					trigger = 1;
 					env->nodes[j].edges[env->nodes[j].nb_edges++] = ft_strdup(tab[0]);
 				}
 				j++;
 			}
-			env->nodes[i].edges[env->nodes[i].nb_edges++] = ft_strdup(tab[1]);
+			if (trigger == 1)
+			{
+				env->nodes[i].edges[env->nodes[i].nb_edges++] = ft_strdup(tab[1]);
+				return (0);
+			}
 		}
 		i++;
 	}
+	ft_printf("Edge linking at least 1 unknown room\n");
+	return (-1);
 }

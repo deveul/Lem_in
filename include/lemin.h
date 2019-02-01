@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/01 19:06:17 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/01 19:34:09 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ typedef struct		s_env
 int					read_data(t_env *env);
 void				print_env(t_env *env);
 int					fill_node(t_env *env, char **tab);
-void				fill_edge(t_env *env, char **tab);
+int					fill_edge(t_env *env, char **tab);
 
 #endif
