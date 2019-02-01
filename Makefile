@@ -6,7 +6,7 @@
 #    By: smakni <smakni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2019/02/01 12:05:10 by smakni           ###   ########.fr        #
+#    Updated: 2019/02/01 13:10:53 by vrenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ LDFLAGS		=	-L libft
 
 LDLIBS		=	-lft
 
-SRC_NAME	=
+SRC_NAME	=	lem-in.c
 
 OBJ_NAME	=	$(SRC_NAME:.c=.o)
 
