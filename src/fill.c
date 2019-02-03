@@ -60,36 +60,39 @@ int			fill_node(t_env *env, char **tab)
 	return (0);
 }
 
+static	int	check_edge(t_env *env, char *new_edge, int index)
+{
+	int i;
+
+	i = 0;
+	ft_printf("check_edge_for_node(%s)\n", env->nodes[index].name);
+	while (i < env->nodes[index].nb_edges)
+	{
+		ft_printf("check = %s\n", env->nodes[index].edges[i]);
+		ft_printf("new  = %s\n", new_edge);
+		if (ft_strequ(env->nodes[index].edges[i], new_edge))
+			return (-1);
+		i++;
+	}
+	return (0);
+}	
+
 int			fill_edge(t_env *env, char **tab)
 {
 	int		i;
-	int		j;
-	int		trigger;
 
 	i = 0;
-	trigger = 0;
 	while (i < env->nb_nodes)
 	{
-		if (ft_strequ(tab[0], env->nodes[i].name))
-		{
-			j = 0;
-			while (j < env->nb_nodes)
-			{
-				if (ft_strequ(tab[1], env->nodes[j].name))
-				{
-					trigger = 1;
-					env->nodes[j].edges[env->nodes[j].nb_edges++] = ft_strdup(tab[0]);
-				}
-				j++;
-			}
-			if (trigger == 1)
-			{
-				env->nodes[i].edges[env->nodes[i].nb_edges++] = ft_strdup(tab[1]);
-				return (0);
-			}
-		}
+		if (ft_strequ(tab[0], env->nodes[i].name)
+			&& check_edge(env, tab[1], i) == 0)
+			env->nodes[i].edges[env->nodes[i].nb_edges++] = ft_strdup(tab[1]);
+		if (ft_strequ(tab[1], env->nodes[i].name)
+			&& check_edge(env, tab[0], i) == 0)
+			env->nodes[i].edges[env->nodes[i].nb_edges++] = ft_strdup(tab[0]);
 		i++;
 	}
+	return (0);
 	ft_printf("Edge linking at least 1 unknown room\n");
 	return (-1);
 }

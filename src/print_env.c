@@ -22,7 +22,8 @@ void		print_env(t_env *env)
 	ft_printf("Nodes number : %d\n\n", env->nb_nodes);
 	while (i < env->nb_nodes)
 	{
-		ft_printf ("node name : %s\n[\n", env->nodes[i].name);
+		ft_printf ("node name : %s ", env->nodes[i].name);
+		ft_printf ("| nb eges : %d\n[\n", env->nodes[i].nb_edges);
 		j = 0;
 		if (env->nodes[i].start == 1)
 			ft_printf("\tstarting node\n");
