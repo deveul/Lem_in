@@ -29,19 +29,8 @@ static int	check_unicity(t_env *env, char *name)
 	return (0);
 }
 
-int			fill_node(t_env *env, char **tab)
+static	void	check_start_end(t_env *env)
 {
-	if (check_unicity(env, tab[0]) == -1)
-		return (-1);
-	env->nodes[env->nb_nodes].name = ft_strdup(tab[0]);
-	if (ft_isnumber(tab[1]) == -1 || ft_isnumber(tab[2]) == -1)
-	{
-		ft_printf("Wrong coordinates\n");
-		return (-1);
-	}
-	env->nodes[env->nb_nodes].x = ft_atoi(tab[1]);
-	env->nodes[env->nb_nodes].y = ft_atoi(tab[2]);
-	env->nodes[env->nb_nodes++].edges = ft_memalloc(100 * sizeof(char *));
 	if (env->start == 1)
 	{
 		env->nodes[env->nb_nodes].start = 1;
@@ -52,6 +41,22 @@ int			fill_node(t_env *env, char **tab)
 		env->nodes[env->nb_nodes].end = 1;
 		env->end = 2;
 	}
+}
+
+int			fill_node(t_env *env, char **tab)
+{
+	if (check_unicity(env, tab[0]) == -1)
+		return (-1);
+	env->nodes[env->nb_nodes].name = ft_strdup(tab[0]);
+	if (ft_isnumber(tab[1]) == -1 || ft_isnumber(tab[2]) == -1)
+	{
+		ft_printf("Wrong coordinates\n");
+		return (-1);
+	}	
+	check_start_end(env);
+	env->nodes[env->nb_nodes].x = ft_atoi(tab[1]);
+	env->nodes[env->nb_nodes].y = ft_atoi(tab[2]);
+	env->nodes[env->nb_nodes++].edges = ft_memalloc(100 * sizeof(char *));
 	return (0);
 }
 
