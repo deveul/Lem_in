@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:13:09 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/04 13:41:04 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/04 14:34:03 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int			fill_node(t_env *env, char **tab)
 	check_start_end(env);
 	env->nodes[env->nb_nodes].x = ft_atoi(tab[1]);
 	env->nodes[env->nb_nodes].y = ft_atoi(tab[2]);
-	env->nodes[env->nb_nodes++].edges = ft_memalloc(100 * sizeof(char *));
+	env->nodes[env->nb_nodes].edges = ft_memalloc(100 * sizeof(char *));
+	env->nodes[env->nb_nodes++].connexion = ft_memalloc(100 * sizeof(int));
 	return (0);
 }
 
@@ -93,8 +94,10 @@ int			fill_edge(t_env *env, char **tab)
 				if (ft_strequ(tab[1], env->nodes[j].name)
 						&& check_edge(env, tab[0], j) == 0)
 				{
-					env->nodes[i].edges[env->nodes[i].nb_edges++] = ft_strdup(tab[1]);
-					env->nodes[j].edges[env->nodes[j].nb_edges++] = ft_strdup(tab[0]);
+					env->nodes[i].edges[env->nodes[i].nb_edges] = ft_strdup(tab[1]);
+					env->nodes[i].connexion[env->nodes[i].nb_edges++] = j;
+					env->nodes[j].edges[env->nodes[j].nb_edges] = ft_strdup(tab[0]);
+					env->nodes[j].connexion[env->nodes[j].nb_edges++] = i;
 					trigger++;
 				}
 				j++;

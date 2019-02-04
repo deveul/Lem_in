@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/04 13:47:40 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/04 14:28:55 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef struct		s_node
 	int		y;
 	int		nb_edges;
 	char	**edges;
+	int		*connexion;
+	int		nb_connexion;
 	int		start;
 	int		end;
 }					t_node;
