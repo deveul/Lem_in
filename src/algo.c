@@ -65,8 +65,8 @@ void	fill_path(t_env *env, int index, int j)
 	{
 		ft_printf("NODE = %s\n", env->nodes[index].name);
 		ft_printf(">>>>>>>index = %d<<<<<<<<\n", index);
-		env->paths[j].path[i++] = ft_strdup(env->nodes[index].name);
-		env->paths[j].len++;
+	//	env->paths[j].path[i++] = ft_strdup(env->nodes[index].name);
+	//	env->paths[j].len++;
 		z = 0;
 		env->nodes[index].check = 1;
 		while (z < env->nodes[index].nb_edges)
@@ -76,14 +76,15 @@ void	fill_path(t_env *env, int index, int j)
 					&& check_path(env, index, z) == 0)
 			{
 				env->paths[j].path[i] = ft_strdup(env->nodes[index].edges[z]);
+				index = env->nodes[index].connexion[z];
 				break ;
 			}
 			z++;
 		}
 		env->paths[j].len++;
 		ft_printf("cp = %s\n", env->paths[j].path[i]);
-		if ((index = check_index(env, env->nodes[index].connexion[z])) == -1)
-			return ;
+		//if ((index = check_index(env, env->nodes[index].connexion[z])) == -1)
+		//	return ;
 		i++;
 //		break;
 	}
