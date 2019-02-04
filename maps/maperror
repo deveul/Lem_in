@@ -1,11 +1,11 @@
 13
 ##start
-start 1 0
-1 5 0
-2 9 0
+start 0 0
 ##end
-end 3 0
-start-2
+end 0 0
+mediate 0 0
+inter 0 0
+start-mediate
 start-end
-start-1
-end-1
+start-inter
+end-inter
