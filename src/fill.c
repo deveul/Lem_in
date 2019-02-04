@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:13:09 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/04 14:34:03 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/04 17:34:06 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int			fill_node(t_env *env, char **tab)
 	check_start_end(env);
 	env->nodes[env->nb_nodes].x = ft_atoi(tab[1]);
 	env->nodes[env->nb_nodes].y = ft_atoi(tab[2]);
+	env->nodes[env->nb_nodes].check = 0;
 	env->nodes[env->nb_nodes].edges = ft_memalloc(100 * sizeof(char *));
 	env->nodes[env->nb_nodes++].connexion = ft_memalloc(100 * sizeof(int));
 	return (0);

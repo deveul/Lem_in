@@ -6,7 +6,7 @@
 #    By: smakni <smakni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2019/02/01 18:25:12 by vrenaudi         ###   ########.fr        #
+#    Updated: 2019/02/04 15:37:02 by smakni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ LDLIBS		=	-lft
 SRC_NAME	=	lem-in.c \
 				print_env.c \
 				fill.c \
-				read_data.c
+				read_data.c \
+				algo.c
 
 OBJ_NAME	=	$(SRC_NAME:.c=.o)
 

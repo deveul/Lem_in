@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/04 13:44:32 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/04 17:45:02 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int		main(void)
 		return (-1);
 	}
 	print_env(&env);
+	algo(&env);
 	return (0);
 }
