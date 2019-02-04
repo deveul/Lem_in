@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/01 19:14:39 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/04 13:44:32 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void init_env(t_env *env)
 	env->nb_nodes = 0;
 	env->start = 0;
 	env->end = 0;
+	env->delimiter = 0;
 }
 
 int		main(void)
@@ -27,7 +28,11 @@ int		main(void)
 	t_env	env;
 
 	init_env(&env);
-	read_data(&env);
+	if (read_data(&env) == -1 || env.start == 0 || env.end == 0)
+	{
+		ft_printf("ERROR\n");
+		return (-1);
+	}
 	print_env(&env);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/01 19:34:09 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/04 13:47:40 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct		s_env
 	int				end;
 	int				nb_ants;
 	int				nb_nodes;
+	int		delimiter;
 }					t_env;
 
 int					read_data(t_env *env);
