@@ -6,84 +6,92 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 11:33:26 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/05 14:10:25 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/05 18:18:00 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lemin.h>
 
-int		check_path(t_env *env, int index, int index_2)
+int		*dup_table(int *src, int len)
 {
-	int i;
-	int j;
+	int		*dst;
 
-	i = 0;
-	j = 0;
-	while (i < env->paths[j].len)
-	{
-		ft_printf("path = %s | edge = %s\n",  env->paths[j].path[i], env->nodes[index].edges[index_2]);
-		if (ft_strstr(env->nodes[index].edges[index_2], env->paths[j].path[i]))
-			return (-1);
-		i++;
-	}
-	return (0);
+	dst = ft_memalloc(sizeof(int) * len);
+	ft_memcpy(dst, src, len * sizeof(int));
+	free(src);
+	return (dst);
 }
 
-int		fill_path(t_env *env, int index, int j)
-{
-	int i;
-	int z;
 
-	i = 0;
-	env->paths[j].connexion = ft_memalloc(100 * sizeof(int));
-	env->paths[j].path = ft_memalloc(100 * sizeof(char *));
-	while (env->nodes[index].end != 1)
+int		*expand_table(int *src, int len, int to_add)
+{
+	int		*dst;
+
+	dst = ft_memalloc(sizeof(int) * (len + 1));
+	if (src)
 	{
-		ft_printf("NODE = %s\n", env->nodes[index].name);
-		ft_printf(">>>>>>>index = %d<<<<<<<<\n", index);
-		env->nodes[index].check = 1;
-		z = 0;
-		while (z < env->nodes[index].nb_edges)
-		{
-			ft_printf(">>>edge = %s\n", env->nodes[index].edges[z]);
-			if (env->nodes[env->nodes[index].connexion[z]].check == 0)
-			{
-				env->paths[j].path[i] = ft_strdup(env->nodes[index].edges[z]);
-				index = env->nodes[index].connexion[z];
-				break ;
-			}
-			else if (z == env->nodes[index].nb_edges - 1)
-				return (-1);
-			z++;
-		}
-		ft_printf("cp = %s\n", env->paths[j].path[i]);
-		env->paths[j].len++;
-		i++;
+		ft_memcpy(dst, src, len * sizeof(int));
+		free(src);
 	}
-	return (0);
+	dst[len] = to_add;
+	return (dst);
 }
 
+t_path	*add_path(t_path *tocpy, int nb_path)
+{
+	t_path	*paths;
+	int		i;
+
+	paths = ft_memalloc(sizeof(t_path) * (nb_path + 1));
+	i = 0;
+	while (i < nb_path)
+	{
+		paths[i].path = dup_table(tocpy[i].path, tocpy[i].len);
+		paths[i].len = tocpy[i].len;
+		i++;
+	}
+	paths[nb_path].path = dup_table(tocpy[nb_path - 1].path, tocpy[nb_path -1].len);
+	paths[nb_path].len = tocpy[nb_path -1].len;
+	return (paths);
+}
+
+void	init_paths(t_env *env)
+{
+	int		i;
+
+	i = 0;
+	while (i < env->nb_fifo)
+	{
+		env->paths[i].path = expand_table(NULL, 0, env->start_index);
+		env->paths[i].len = 1;
+		i++;
+	}
+}
 
 void	algo(t_env *env)
 {
 	int 	i;
 
+	env->paths = ft_memalloc(sizeof(t_path) * env->nodes[env->start_index].nb_edges);
+	env->nb_fifo = env->nodes[env->start_index].nb_edges;
+	init_paths(env);
 	i = 0;
-	env->paths = ft_memalloc(100 * sizeof(t_path *));
-	while (i < env->nb_nodes)
+	while (i < env->nb_fifo)
 	{
-		if (env->nodes[i].start == 1)
-		{
-			//env->nodes[i].check = 1;
-			break ;
-		}
+		ft_printf("original path : %d\n", env->paths[i].path[0]);
 		i++;
 	}
-	fill_path(env, i, 0);
+	env->fifo = ft_memalloc(sizeof(int) * env->nb_fifo);
 	i = 0;
-	while (i < env->paths[0].len)
+	while (i < env->nb_fifo)
 	{
-		ft_printf("path = %s | index [%d]\n", env->paths[0].path[i]);	
+		env->fifo[i] = env->nodes[env->start_index].connexion[i];
+		env->nodes[env->nodes[env->start_index].connexion[i]].check = 1;
 		i++;
 	}
-}	
+	i = 0;
+	while (env->nb_fifo != env->nb_nodes)
+	{
+
+	}
+}

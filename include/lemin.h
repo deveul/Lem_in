@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/05 14:21:55 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/05 18:18:02 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct		s_node
 	int		nb_edges;
 	char	**edges;
 	int		*connexion;
-	int		nb_connexion;
 	int		start;
 	int		end;
 	int		check;
@@ -40,8 +39,7 @@ typedef struct		s_ant
 
 typedef struct		s_path
 {
-	int				*connexion;
-	char			**path;
+	int				*path;
 	int				len;
 }					t_path;
 
@@ -51,10 +49,16 @@ typedef struct		s_env
 	t_ant			*ants;
 	t_path			*paths;
 	int				**matrice;
+	int				*fifo;
+	int				fifo_index;
 	int				start;
+	int				start_index;
 	int				end;
+	int				end_index;
 	int				nb_ants;
 	int				nb_nodes;
+	int				nb_path;
+	int				nb_fifo;
 	int		delimiter;
 }					t_env;
 

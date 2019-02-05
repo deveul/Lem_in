@@ -1,17 +1,15 @@
 18
+Vlad 1 0
+Sabri 5 0
 ##start
-0 1 0
+KH 21 0
 ##end
-1 5 0
-2 9 0
-3 13 0
-4 15 0
-5 21 0
-0-2
-0-1
-0-4
-0-5
-5-0
-2-0
-2-3
-3-1
+Agathe 2 2
+Simon 12 21
+Anteo  11 0
+Vlad-KH
+Sabri-KH
+Anteo-Sabri
+Agathe-Anteo
+Agathe-Simon
+Anteo-KH
