@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 11:33:26 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/04 19:18:44 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/05 11:22:06 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,6 @@ int		check_path(t_env *env, int index, int index_2)
 		i++;
 	}
 	return (0);
-}
-
-int		check_index(t_env *env, int index)
-{
-	int i;
-
-	i = 0;
-	ft_printf("for node name : %s[%d]\n", env->nodes[index].name, index);
-	ft_printf("nb_connection = %d\n", env->nodes[index].nb_edges);
-	env->nodes[index].check = 1;
-	while (i < env->nodes[index].nb_edges)
-	{
-		ft_printf("for node [%s] |", env->nodes[env->nodes[index].connexion[i]].name);
-		ft_printf(" check = [%d]\n", env->nodes[env->nodes[index].connexion[i]].check);
-		if (env->nodes[env->nodes[index].connexion[i]].check == 0)
-			return (env->nodes[index].connexion[i]);
-		i++;
-	}
-	return (-1);
 }
 
 void	fill_path(t_env *env, int index, int j)
@@ -83,8 +64,6 @@ void	fill_path(t_env *env, int index, int j)
 		}
 		env->paths[j].len++;
 		ft_printf("cp = %s\n", env->paths[j].path[i]);
-		//if ((index = check_index(env, env->nodes[index].connexion[z])) == -1)
-		//	return ;
 		i++;
 //		break;
 	}
