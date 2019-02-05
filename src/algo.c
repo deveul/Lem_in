@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 11:33:26 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/05 11:56:22 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/05 12:03:35 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		check_path(t_env *env, int index, int index_2)
 	return (0);
 }
 
-void	fill_path(t_env *env, int index, int j)
+int		fill_path(t_env *env, int index, int j)
 {
 	int i;
 	int z;
@@ -52,12 +52,15 @@ void	fill_path(t_env *env, int index, int j)
 				index = env->nodes[index].connexion[z];
 				break ;
 			}
+			else if (z == env->nodes[index].nb_edges - 1)
+				return (-1);
 			z++;
 		}
-		env->paths[j].len++;
 		ft_printf("cp = %s\n", env->paths[j].path[i]);
+		env->paths[j].len++;
 		i++;
 	}
+	return (0);
 }
 
 
@@ -71,7 +74,7 @@ void	algo(t_env *env)
 	{
 		if (env->nodes[i].start == 1)
 		{
-			env->nodes[i].check = 1;
+			//env->nodes[i].check = 1;
 			break ;
 		}
 		i++;
