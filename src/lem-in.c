@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/05 11:10:22 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/05 14:25:23 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int		main(void)
 		ft_printf("ERROR\n");
 		return (-1);
 	}
+	fill_matrice(&env);
 	print_env(&env);
 	algo(&env);
 	free_memory(&env);

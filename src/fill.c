@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:13:09 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/05 11:09:25 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/05 14:04:50 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int			fill_node(t_env *env, char **tab)
 		return (-1);
 	}	
 	check_start_end(env);
+	env->nodes[env->nb_nodes].index = env->nb_nodes;
 	env->nodes[env->nb_nodes].x = ft_atoi(tab[1]);
 	env->nodes[env->nb_nodes].y = ft_atoi(tab[2]);
 	env->nodes[env->nb_nodes].check = 0;

@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 11:33:26 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/05 12:03:35 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/05 14:10:25 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	algo(t_env *env)
 	i = 0;
 	while (i < env->paths[0].len)
 	{
-		ft_printf("path = %s\n", env->paths[0].path[i]);	
+		ft_printf("path = %s | index [%d]\n", env->paths[0].path[i]);	
 		i++;
 	}
 }	

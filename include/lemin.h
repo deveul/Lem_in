@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/05 11:17:17 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/05 14:21:55 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct		s_node
 	int		start;
 	int		end;
 	int		check;
+	int		index;
 }					t_node;
 
 typedef struct		s_ant
@@ -49,6 +50,7 @@ typedef struct		s_env
 	t_node			*nodes;
 	t_ant			*ants;
 	t_path			*paths;
+	int				**matrice;
 	int				start;
 	int				end;
 	int				nb_ants;
@@ -58,6 +60,7 @@ typedef struct		s_env
 
 void				algo(t_env *env);
 int					read_data(t_env *env);
+int					fill_matrice(t_env *env);
 void				print_env(t_env *env);
 int					fill_node(t_env *env, char **tab);
 int					fill_edge(t_env *env, char **tab);
