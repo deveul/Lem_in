@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/05 18:18:02 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/07 17:31:29 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,19 @@ typedef struct		s_path
 	int				len;
 }					t_path;
 
+typedef struct		s_fifo
+{
+	int				index;
+	int				path_index;
+}					t_fifo;
+
 typedef struct		s_env
 {
 	t_node			*nodes;
 	t_ant			*ants;
 	t_path			*paths;
+	t_fifo			*fifo;
 	int				**matrice;
-	int				*fifo;
 	int				fifo_index;
 	int				start;
 	int				start_index;
@@ -59,7 +65,7 @@ typedef struct		s_env
 	int				nb_nodes;
 	int				nb_path;
 	int				nb_fifo;
-	int		delimiter;
+	int				delimiter;
 }					t_env;
 
 void				algo(t_env *env);
@@ -68,5 +74,8 @@ int					fill_matrice(t_env *env);
 void				print_env(t_env *env);
 int					fill_node(t_env *env, char **tab);
 int					fill_edge(t_env *env, char **tab);
+int					*dup_table(int *src, int len);
+int					*expand_table(int *src, int len, int to_add);
+t_path				*add_path(t_path *tocpy, int nb_path, int pathtocpy);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: smakni <smakni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2019/02/05 14:21:27 by vrenaudi         ###   ########.fr        #
+#    Updated: 2019/02/06 16:46:50 by vrenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SRC_NAME	=	lem-in.c \
 				fill.c \
 				read_data.c \
 				algo.c \
-				fill_matrice.c
+				fill_matrice.c \
+				handle_memory.c
 
 OBJ_NAME	=	$(SRC_NAME:.c=.o)
 
