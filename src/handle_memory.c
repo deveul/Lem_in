@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 16:44:36 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/07 17:28:37 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/07 17:51:04 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,12 @@ t_path	*add_path(t_path *tocpy, int nb_path, int pathtocpy)
 	{
 		paths[i].path = dup_table(tocpy[i].path, tocpy[i].len);
 		paths[i].len = tocpy[i].len;
+		paths[i].end_found = tocpy[i].end_found;
 		i++;
 	}
 	paths[nb_path].path = dup_table(tocpy[pathtocpy].path, tocpy[pathtocpy].len);
 	paths[nb_path].len = tocpy[pathtocpy].len;
+	paths[nb_path].end_found = tocpy[pathtocpy].end_found;
 	i = 0;
 	while (i < nb_path)
 	{

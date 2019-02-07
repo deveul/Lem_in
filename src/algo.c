@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 11:33:26 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/07 17:28:39 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/07 17:53:11 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	init_paths(t_env *env)
 	{
 		env->paths[i].path = expand_table(NULL, 0, env->start_index);
 		env->paths[i].len = 1;
+		env->paths[i].end_found = 0;
 		i++;
 	}
 }
@@ -75,8 +76,13 @@ void	remove_elem_fifo(t_env *env)
 		env->fifo[j].index = env->fifo[i].index;
 		env->fifo[j++].path_index = env->fifo[i++].path_index;
 	}
-	env->paths[tmp.path_index].path = expand_table(env->paths[tmp.path_index].path, env->paths[tmp.path_index].len, tmp.index);
-	env->paths[tmp.path_index].len++;
+	if (env->paths[tmp.path_index].end_found == 0)
+	{
+		env->paths[tmp.path_index].path = expand_table(env->paths[tmp.path_index].path, env->paths[tmp.path_index].len, tmp.index);
+		env->paths[tmp.path_index].len++;
+		if (tmp.index == env->end_index)
+			env->paths[tmp.path_index].end_found = 1;
+	}
 	env->nb_fifo--;
 }
 

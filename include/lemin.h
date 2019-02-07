@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/07 17:31:29 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/07 17:53:13 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct		s_path
 {
 	int				*path;
 	int				len;
+	int				end_found;
 }					t_path;
 
 typedef struct		s_fifo
