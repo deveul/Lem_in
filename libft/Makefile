@@ -6,7 +6,7 @@
 #    By: smakni <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/05 09:14:14 by smakni            #+#    #+#              #
-#    Updated: 2019/02/01 19:07:27 by vrenaudi         ###   ########.fr        #
+#    Updated: 2019/02/08 19:23:11 by vrenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,8 @@ SRC_NAME		=	ft_putchar.c \
 					ft_strcat.c \
 					ft_strncat.c \
 					ft_memalloc.c \
+					ft_tablen.c \
+					ft_delete_tab.c \
 					ft_memset.c	\
 					ft_bzero.c \
 					ft_memcpy.c \

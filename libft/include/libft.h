@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:28:24 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/01 19:07:10 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 19:22:42 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+void				ft_delete_tab(char **tab);
 void				*ft_memset(void *b, int c, size_t len);
 void				*ft_memset_from(void *b, size_t start, int c, size_t len);
 void				*ft_bzero(void *s, size_t n);
@@ -102,6 +103,7 @@ int					ft_isnumber(char *c);
 int					ft_isascii(int c);
 int					ft_isalpha(int c);
 int					ft_isalnum(int c);
+int					ft_tablen(char **tab);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 int					ft_isprint(int c);

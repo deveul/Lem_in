@@ -6,11 +6,32 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:57:29 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/08 17:30:50 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 19:17:16 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lemin.h>
+
+void	print_path(t_env *env)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	ft_putendl(">>>>>>>>>>>Paths<<<<<<<<<<<<<<<");
+	while (i < env->nb_path)
+	{
+		ft_printf("path [%d]: ", i);
+		j = 0;
+		while (j < env->paths[i].len)
+		{
+			ft_printf("%-7d", env->paths[i].path[j]);
+			j++;
+		}
+		ft_putendl("");
+		i++;
+	}
+}
 
 void	print_matrice(t_env *env)
 {
@@ -43,8 +64,8 @@ void	print_matrice(t_env *env)
 				ft_printf(" %d", env->matrice[i][j]);
 			j++;
 		}
-		ft_printf ("\t[%04d]", env->rooms[i].index);
-		ft_printf ("\t%-10s ", env->rooms[i].name);
+		ft_printf("\t[%04d]", env->rooms[i].index);
+		ft_printf("\t%-10s ", env->rooms[i].name);
 		if (env->rooms[i].start == 1)
 			ft_printf(">>>>>>>>[starting node]<<<<<<<<");
 		if (env->rooms[i].end == 1)
@@ -55,23 +76,9 @@ void	print_matrice(t_env *env)
 	ft_putendl("");
 }
 
-void		print_env(t_env *env)
+void	print_env(t_env *env)
 {
-	int		i;
-	int		j;
-
-	i = 0;
 	ft_printf("Ants number : %ld\n\n", env->nb_ants);
 	ft_printf("Nodes number : %d\n\n", env->nb_nodes);
-	while (i < env->nb_nodes)
-	{
-		j = 0;
-		while (j < env->rooms[i].nb_edges)
-		{
-			ft_printf("\t [%d]\n", env->rooms[env->rooms[i].connexion[j]].index);
-			j++;
-		}
-		i++;
-	}
 	print_matrice(env);
 }

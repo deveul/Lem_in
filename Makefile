@@ -6,7 +6,7 @@
 #    By: smakni <smakni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2019/02/06 16:46:50 by vrenaudi         ###   ########.fr        #
+#    Updated: 2019/02/08 19:53:57 by vrenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,13 +26,15 @@ LDFLAGS		=	-L libft
 
 LDLIBS		=	-lft
 
-SRC_NAME	=	lem-in.c \
+SRC_NAME	=	lemin.c \
 				print_env.c \
 				fill.c \
 				read_data.c \
 				algo.c \
 				fill_matrice.c \
-				handle_memory.c
+				handle_memory.c \
+				init_algo.c \
+				create_rooms.c
 
 OBJ_NAME	=	$(SRC_NAME:.c=.o)
 
