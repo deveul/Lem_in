@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:57:29 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/08 15:44:39 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 16:01:13 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void		print_env(t_env *env)
 		j = 0;
 		while (j < env->rooms[i].nb_edges)
 		{
-			//ft_printf("\tconnected with node : %s", env->rooms[i].edges[j]);
 			ft_printf("\t [%d]\n", env->rooms[env->rooms[i].connexion[j]].index);
 			j++;
 		}

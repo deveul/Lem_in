@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 11:33:26 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/08 14:50:17 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 16:23:08 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	algo(t_env *env)
 			env->nb_path++;
 		i++;
 	}
+	ft_printf("env->nb_path:%d\n", env->nb_path);
 	env->paths = ft_memalloc(sizeof(t_path) * env->nb_path);
 	env->nb_fifo = env->nb_path;
 	init_paths(env);

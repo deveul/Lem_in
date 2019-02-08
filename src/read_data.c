@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:21:51 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/08 14:40:38 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 16:17:54 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ static int	get_ants_nb(t_env *env, char *line)
 			{
 				env->nb_ants = ft_atoi(line);
 				ft_strdel(&line);
+				if (env->nb_ants <= 0)
+				{
+					ft_printf("Wrong number of ants.\n");
+					return (-1);
+				}
+				else
+					env->ants = ft_memalloc(env->nb_ants * sizeof(t_ant));
 			}
-			if (env->nb_ants <= 0)
-			{
-				ft_printf("Wrong number of ants.\n");
-				return (-1);
-			}
-			else
-				env->ants = ft_memalloc(env->nb_ants * sizeof(t_ant));
 		}
 	}
 	return (0);
@@ -125,6 +125,14 @@ void	create_rooms(t_node *node, t_room **rooms)
 		tmp = tmp->next;
 		i++;
 	}
+	tmp = node;
+	while (node->next)
+	{
+		tmp = node->next;
+		free(node);
+		node = tmp;
+	}
+	free(node);
 }		
 
 int		read_data(t_env *env)

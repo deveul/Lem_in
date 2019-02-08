@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 16:44:36 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/07 17:51:04 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 16:25:09 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ t_path	*add_path(t_path *tocpy, int nb_path, int pathtocpy)
 		free(tocpy[i].path);
 		i++;
 	}
+	free(tocpy);
 	return (paths);
 }

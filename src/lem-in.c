@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/08 13:36:22 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 16:20:34 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,28 @@ static void	free_memory(t_env *env)
 	}
 	free(env->rooms);
 	free(env->ants);
+	i = 0;
+	while (i < env->nb_path)
+	{
+		free(env->paths[i].path);
+		i++;
+	}
+	free(env->paths);
+	i = 0;
+	while (i < env->nb_nodes)
+	{
+		free (env->matrice[i]);
+		i++;
+	}
+	free (env->matrice);
+	free (env->fifo);
 }
 
 void	add_node(t_node **nodes, t_room room)
 {
 	t_node *tmp;
 	t_node *new;
-	
+
 	tmp = *nodes;
 	if (!(new = ft_memalloc(sizeof(t_node))))
 		return ;
