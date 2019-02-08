@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 11:33:26 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/08 11:37:57 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 12:19:44 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,20 @@ void	init_paths(t_env *env)
 void	fill_initial_fifo(t_env *env)
 {
 	int		i;
+	int		path_index;
 
 	i = 0;
+	path_index = 0;
 	ft_printf("nb_path:%d\n", env->nb_path);
-	while (i < env->nb_path)
+	while (i < env->nb_nodes)
 	{
-		env->fifo[i].index = env->rooms[env->start_index].connexion[i];
-		env->fifo[i].path_index = i;
-		env->rooms[env->rooms[env->start_index].connexion[i]].check = 1;
+		if (env->matrice[env->start_index][i] == 1)
+		{
+			env->fifo[path_index].index = i;
+			env->fifo[path_index].path_index = path_index;
+			env->rooms[i].check = 1;
+			path_index++;
+		}
 		i++;
 	}
 }
@@ -92,7 +98,14 @@ void	algo(t_env *env)
 	t_fifo	tmp;
 	int		nb_path_needed;
 
-	env->nb_path = env->rooms[env->start_index].nb_edges;
+	i = 0;
+	while (i < env->nb_nodes)
+	{
+		if (env->matrice[env->start_index][i] == 1)
+			env->nb_path++;
+		i++;
+	}
+	ft_printf("nb_path:%d\n", env->nb_path);
 	env->paths = ft_memalloc(sizeof(t_path) * env->nb_path);
 	env->nb_fifo = env->nb_path;
 	init_paths(env);

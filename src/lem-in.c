@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/08 11:35:31 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 12:06:11 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static void init_env(t_env *env)
 	env->rooms = NULL;
 	env->nb_ants = -1;
 	env->nb_nodes = 0;
+	env->nb_path = 0;
 	env->start = 0;
 	env->end = 0;
 	env->delimiter = 0;

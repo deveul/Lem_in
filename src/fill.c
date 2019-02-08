@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:13:09 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/08 11:36:08 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 12:00:07 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,13 @@ static	void	check_start_end(t_env *env, t_room *tmp)
 	{
 		tmp->start = 1;
 		env->start = 2;
+		env->start_index = env->nb_nodes;
 	}
 	if (env->end == 1)
 	{
 		tmp->end = 1;
 		env->end = 2;
+		env->end_index = env->nb_nodes;
 	}
 }
 
