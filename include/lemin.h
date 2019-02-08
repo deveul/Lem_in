@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/08 16:26:34 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 17:31:30 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,10 @@ typedef struct		s_env
 	int				start_index;
 	int				end;
 	int				end_index;
-	int				nb_ants;
+	long			nb_ants;
 	int				nb_nodes;
+	int				nb_edges;
+	int				nb_path_ok;
 	int				nb_path;
 	int				nb_fifo;
 	int				delimiter;

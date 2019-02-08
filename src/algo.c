@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 11:33:26 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/08 16:23:08 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 17:16:21 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ void	remove_elem_fifo(t_env *env)
 		env->paths[tmp.path_index].path = expand_table(env->paths[tmp.path_index].path, env->paths[tmp.path_index].len, tmp.index);
 		env->paths[tmp.path_index].len++;
 		if (tmp.index == env->end_index)
+		{
 			env->paths[tmp.path_index].end_found = 1;
+			env->nb_path_ok++;
+		}
 	}
 	env->nb_fifo--;
 }

@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/08 16:20:34 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 17:19:07 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,12 @@ static void init_env(t_env *env)
 	env->nb_ants = -1;
 	env->nb_nodes = 0;
 	env->nb_path = 0;
+	env->nb_path_ok = 0;
+	env->nb_edges = 0;
 	env->start = 0;
 	env->end = 0;
+	env->start_index = -1;
+	env->end_index = -1;
 	env->delimiter = 0;
 }
 
@@ -84,8 +88,15 @@ int		main(void)
 		ft_printf("ERROR\n");
 		return (-1);
 	}
+	if (env.nb_edges == 0)
+	{
+		ft_putendl("no connexion");
+		return (-1);
+	}
 	print_env(&env);
 	algo(&env);
+	if (env.nb_path_ok == 0)
+		ft_putendl("No passaran");
 	free_memory(&env);
 	return (0);
 }

@@ -6,29 +6,29 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:13:09 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/08 16:09:32 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 17:27:12 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lemin.h>
-/*
-static int	check_unicity(t_env *env, char *name)
-{
-	int		i;
 
-	i = 0;
-	while (i < env->nb_nodes)
+static int	check_unicity(t_node *nodes, char *name)
+{
+	t_node	*tmp;
+
+	tmp = nodes;
+	while (tmp)
 	{
-		if (ft_strequ(name, env->rooms[i].name))
+		if (ft_strequ(name, tmp->room.name))
 		{
 			ft_printf("Duplicate room\n");
 			return (-1);
 		}
-		i++;
+		tmp = tmp->next;
 	}
 	return (0);
 }
-*/
+
 static	void	check_start_end(t_env *env, t_room *tmp)
 {
 	if (env->start == 1)
@@ -50,8 +50,8 @@ int			fill_room(t_env *env, char **tab)
 	t_room tmp;
 
 	tmp = (t_room){};
-//	if (check_unicity(env, tab[0]) == -1)
-//		return (-1);
+	if (check_unicity(env->nodes, tab[0]) == -1)
+		return (-1);
 	tmp.name = ft_strdup(tab[0]);
 	if (ft_isnumber(tab[1]) == -1 || ft_isnumber(tab[2]) == -1)
 	{
@@ -73,10 +73,8 @@ int			fill_matrice(t_env *env, char **tab)
 {
 	int		i;
 	int		j;
-	int		trigger;
 
 	i = 0;
-	trigger = 0;
 	if (env->rooms == NULL)
 		create_rooms(env->nodes, &env->rooms);
 	while (i < env->nb_nodes)
@@ -90,13 +88,12 @@ int			fill_matrice(t_env *env, char **tab)
 				{
 					env->matrice[i][j] = 1;
 					env->matrice[j][i] = 1;
+					return (0);
 				}
 				j++;
 			}
 		}
 		i++;
 	}
-	if (trigger != 1)
-		return (-1);
-	return (0);
+	return (-1);
 }

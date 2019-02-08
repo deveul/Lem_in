@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:57:29 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/08 16:01:13 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 17:30:50 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	print_matrice(t_env *env)
 
 	i = 0;
 	j = 0;
+	return ;
 	while (i < env->nb_nodes)
 	{
 		j = 0;
@@ -60,7 +61,7 @@ void		print_env(t_env *env)
 	int		j;
 
 	i = 0;
-	ft_printf("Ants number : %d\n\n", env->nb_ants);
+	ft_printf("Ants number : %ld\n\n", env->nb_ants);
 	ft_printf("Nodes number : %d\n\n", env->nb_nodes);
 	while (i < env->nb_nodes)
 	{

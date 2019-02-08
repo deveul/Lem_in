@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:21:51 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/08 16:17:54 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 17:31:34 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,14 @@ static int	get_ants_nb(t_env *env, char *line)
 					return (-1);
 				}
 				else
-					env->ants = ft_memalloc(env->nb_ants * sizeof(t_ant));
+					if (!(env->ants = ft_memalloc(env->nb_ants * sizeof(t_ant))))
+						return (-1);
 			}
+		}
+		else
+		{
+			ft_printf("Empty spaces, what are we waiting for ?\n");
+			return (-1);
 		}
 	}
 	return (0);
@@ -71,6 +77,16 @@ static void	delete_tab(char **tab)
 	free(tab);
 }
 
+static int	tablen(char **tab)
+{
+	int		i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
+}
+
 static int	analyze_node_edge(t_env *env, char *line)
 {
 	char **tab;
@@ -86,18 +102,43 @@ static int	analyze_node_edge(t_env *env, char *line)
 		if (env->delimiter == 1)
 			return (-1);
 		tab = ft_strsplit(line, ' ');
+		if (tablen(tab) != 3)
+		{
+			ft_printf("too many coordinates\n");
+			return (-1);
+		}
 		if (fill_room(env, tab) == -1)
 			return (-1);
 	}
 	else if (ft_strchr(line, '-'))
 	{
+		if (env->start_index == -1 || env->end_index == -1)
+		{
+			ft_printf("Missing end or start\n");
+			return (-1);
+		}
+		if (env->start_index == env->end_index && env->start_index != -1)
+		{
+			ft_printf("Same end and start fdp\n");
+			return (-1);
+		}
 		if (env->delimiter == 0)
 		{
 			create_matrice(env);
 			env->delimiter = 1;
 		}
 		tab = ft_strsplit(line, '-');
-		fill_matrice(env, tab);
+		if (tablen(tab) != 2)
+		{
+			ft_printf("edge should be : room1-romm2\n");
+			return (-1);
+		}
+		if (fill_matrice(env, tab) == -1)
+		{
+			ft_printf("Ground control to Major Tom\n");
+			return (-1);
+		}
+		env->nb_edges++;
 	}
 	delete_tab(tab);
 	return (0);
@@ -144,7 +185,7 @@ int		read_data(t_env *env)
 		return (-1);
 	while (get_next_line(0, &line) > 0)
 	{
-		if (line[0] == '#')
+		if (line && line[0] == '#')
 		{
 			if (handle_start_end_com(env, line) == -1)
 			{
