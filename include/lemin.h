@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/07 17:53:13 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 11:37:59 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <ft_printf.h>
 # include <get_next_line.h>
 
-typedef struct		s_node
+typedef struct		s_room
 {
 	char	*name;
 	int		x;
@@ -29,6 +29,12 @@ typedef struct		s_node
 	int		end;
 	int		check;
 	int		index;
+}					t_room;
+
+typedef struct		s_node
+{
+	t_room			room;
+	struct	s_node 	*next;
 }					t_node;
 
 typedef struct		s_ant
@@ -53,6 +59,7 @@ typedef struct		s_fifo
 typedef struct		s_env
 {
 	t_node			*nodes;
+	t_room			*rooms;
 	t_ant			*ants;
 	t_path			*paths;
 	t_fifo			*fifo;
@@ -69,11 +76,13 @@ typedef struct		s_env
 	int				delimiter;
 }					t_env;
 
+void				add_node(t_node **nodes, t_room room);
+void				create_rooms(t_node *node, t_room **rooms);
 void				algo(t_env *env);
 int					read_data(t_env *env);
 int					fill_matrice(t_env *env);
 void				print_env(t_env *env);
-int					fill_node(t_env *env, char **tab);
+int					fill_room(t_env *env, char **tab);
 int					fill_edge(t_env *env, char **tab);
 int					*dup_table(int *src, int len);
 int					*expand_table(int *src, int len, int to_add);

@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:21:51 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/07 17:39:29 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/05 19:31:04 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static int	analyze_node_edge(t_env *env, char *line)
 		if (env->delimiter == 1)
 			return (-1);
 		tab = ft_strsplit(line, ' ');
-		if (fill_node(env, tab) == -1)
+		if (fill_room(env, tab) == -1)
 			return (-1);
 		delete_tab(tab);
 	}
@@ -99,6 +99,30 @@ static int	analyze_node_edge(t_env *env, char *line)
 	}
 	return (0);
 }
+
+void	create_rooms(t_node *node, t_room **rooms)
+{
+	t_node *tmp;
+	int i;
+
+	tmp = node;
+	i = 0;
+	while (tmp != NULL)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	if (!(*rooms = ft_memalloc(sizeof(t_room) * i)))
+		return ;
+	tmp = node;
+	i = 0;
+	while (tmp != NULL)
+	{
+		(*rooms)[i] = tmp->room;
+		tmp = tmp->next;
+		i++;
+	}
+}		
 
 int		read_data(t_env *env)
 {

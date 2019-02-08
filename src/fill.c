@@ -6,12 +6,12 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:13:09 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/07 17:36:38 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 11:36:08 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lemin.h>
-
+/*
 static int	check_unicity(t_env *env, char *name)
 {
 	int		i;
@@ -19,7 +19,7 @@ static int	check_unicity(t_env *env, char *name)
 	i = 0;
 	while (i < env->nb_nodes)
 	{
-		if (ft_strequ(name, env->nodes[i].name))
+		if (ft_strequ(name, env->rooms[i].name))
 		{
 			ft_printf("Duplicate room\n");
 			return (-1);
@@ -28,40 +28,43 @@ static int	check_unicity(t_env *env, char *name)
 	}
 	return (0);
 }
-
-static	void	check_start_end(t_env *env)
+*/
+static	void	check_start_end(t_env *env, t_room *tmp)
 {
 	if (env->start == 1)
 	{
-		env->nodes[env->nb_nodes].start = 1;
-		env->start_index = env->nb_nodes;
+		tmp->start = 1;
 		env->start = 2;
 	}
 	if (env->end == 1)
 	{
-		env->nodes[env->nb_nodes].end = 1;
-		env->end_index = env->nb_nodes;
+		tmp->end = 1;
 		env->end = 2;
 	}
 }
 
-int			fill_node(t_env *env, char **tab)
+int			fill_room(t_env *env, char **tab)
 {
-	if (check_unicity(env, tab[0]) == -1)
-		return (-1);
-	env->nodes[env->nb_nodes].name = ft_strdup(tab[0]);
+	t_room tmp;
+
+	tmp = (t_room){};
+//	if (check_unicity(env, tab[0]) == -1)
+//		return (-1);
+	tmp.name = ft_strdup(tab[0]);
 	if (ft_isnumber(tab[1]) == -1 || ft_isnumber(tab[2]) == -1)
 	{
 		ft_printf("Wrong coordinates\n");
 		return (-1);
 	}	
-	check_start_end(env);
-	env->nodes[env->nb_nodes].index = env->nb_nodes;
-	env->nodes[env->nb_nodes].x = ft_atoi(tab[1]);
-	env->nodes[env->nb_nodes].y = ft_atoi(tab[2]);
-	env->nodes[env->nb_nodes].check = 0;
-	env->nodes[env->nb_nodes].edges = ft_memalloc(2000 * sizeof(char *));
-	env->nodes[env->nb_nodes++].connexion = ft_memalloc(2000 * sizeof(int));
+	check_start_end(env, &tmp);
+	tmp.index = env->nb_nodes;
+	tmp.x = ft_atoi(tab[1]);
+	tmp.y = ft_atoi(tab[2]);
+	tmp.check = 0;
+	tmp.edges = ft_memalloc(100 * sizeof(char *));
+	tmp.connexion = ft_memalloc(100 * sizeof(int));
+	add_node(&env->nodes, tmp);
+	env->nb_nodes++;
 	return (0);
 }
 
@@ -70,9 +73,9 @@ static	int	check_edge(t_env *env, char *new_edge, int index)
 	int i;
 
 	i = 0;
-	while (i < env->nodes[index].nb_edges)
+	while (i < env->rooms[index].nb_edges)
 	{
-		if (ft_strequ(env->nodes[index].edges[i], new_edge))
+		if (ft_strequ(env->rooms[index].edges[i], new_edge))
 			return (-1);
 		i++;
 	}
@@ -87,21 +90,23 @@ int			fill_edge(t_env *env, char **tab)
 
 	i = 0;
 	trigger = 0;
+	if (env->rooms == NULL)
+		create_rooms(env->nodes, &env->rooms);
 	while (i < env->nb_nodes)
 	{
-		if (ft_strequ(tab[0], env->nodes[i].name)
+		if (ft_strequ(tab[0], env->rooms[i].name)
 				&& check_edge(env, tab[1], i) == 0)
 		{
 			j = 0;
 			while (j < env->nb_nodes)
 			{
-				if (ft_strequ(tab[1], env->nodes[j].name)
+				if (ft_strequ(tab[1], env->rooms[j].name)
 						&& check_edge(env, tab[0], j) == 0)
 				{
-					env->nodes[i].edges[env->nodes[i].nb_edges] = ft_strdup(tab[1]);
-					env->nodes[i].connexion[env->nodes[i].nb_edges++] = j;
-					env->nodes[j].edges[env->nodes[j].nb_edges] = ft_strdup(tab[0]);
-					env->nodes[j].connexion[env->nodes[j].nb_edges++] = i;
+					env->rooms[i].edges[env->rooms[i].nb_edges] = ft_strdup(tab[1]);
+					env->rooms[i].connexion[env->rooms[i].nb_edges++] = j;
+					env->rooms[j].edges[env->rooms[j].nb_edges] = ft_strdup(tab[0]);
+					env->rooms[j].connexion[env->rooms[j].nb_edges++] = i;
 					trigger++;
 				}
 				j++;

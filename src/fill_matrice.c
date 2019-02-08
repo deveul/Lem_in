@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 14:01:30 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/05 17:45:41 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/05 18:41:39 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void	check_connexion(t_env *env, int i, int j)
 
 	k = 0;
 	env->matrice[i][j] = 0;
-	while (k < env->nodes[i].nb_edges)
+	while (k < env->rooms[i].nb_edges)
 	{
-		if (env->nodes[i].connexion[k] == j)
+		if (env->rooms[i].connexion[k] == j)
 			env->matrice[i][j] = 1;
 		k++;
 	}

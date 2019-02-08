@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/05 17:43:27 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 11:35:31 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,41 @@ static void	free_memory(t_env *env)
 	while (i < env->nb_nodes)
 	{
 		j = 0;
-		while (j < env->nodes[i].nb_edges)
-			ft_strdel(&env->nodes[i].edges[j++]);
-		free (env->nodes[i].edges);
-		free (env->nodes[i].connexion);
-		free (env->nodes[i].name);
+		while (j < env->rooms[i].nb_edges)
+			ft_strdel(&env->rooms[i].edges[j++]);
+		free (env->rooms[i].edges);
+		free (env->rooms[i].connexion);
+		free (env->rooms[i].name);
 		i++;
 	}
-	free(env->nodes);
+	free(env->rooms);
 	free(env->ants);
+}
+
+void	add_node(t_node **nodes, t_room room)
+{
+	t_node *tmp;
+	t_node *new;
+	
+	tmp = *nodes;
+	if (!(new = ft_memalloc(sizeof(t_node))))
+		return ;
+	new->room = room;
+	new->next = NULL;
+	if (*nodes == NULL)
+	{
+		*nodes = new;
+		return ;
+	}
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = new;
 }
 
 static void init_env(t_env *env)
 {
-	env->nodes = ft_memalloc(20 * sizeof(t_node));
-	env->nodes->nb_edges = 0;
+	env->nodes = NULL;
+	env->rooms = NULL;
 	env->nb_ants = -1;
 	env->nb_nodes = 0;
 	env->start = 0;
