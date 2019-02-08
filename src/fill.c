@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:13:09 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/08 12:00:07 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 13:30:57 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ int			fill_room(t_env *env, char **tab)
 	tmp.x = ft_atoi(tab[1]);
 	tmp.y = ft_atoi(tab[2]);
 	tmp.check = 0;
-	tmp.edges = ft_memalloc(100 * sizeof(char *));
+//	tmp.edges = ft_memalloc(100 * sizeof(char *));
 	tmp.connexion = ft_memalloc(100 * sizeof(int));
 	add_node(&env->nodes, tmp);
 	env->nb_nodes++;
 	return (0);
 }
-
+/*
 static	int	check_edge(t_env *env, char *new_edge, int index)
 {
 	int i;
@@ -83,8 +83,8 @@ static	int	check_edge(t_env *env, char *new_edge, int index)
 	}
 	return (0);
 }	
-
-int			fill_edge(t_env *env, char **tab)
+*/
+int			fill_matrice(t_env *env, char **tab)
 {
 	int		i;
 	int		j;
@@ -96,20 +96,22 @@ int			fill_edge(t_env *env, char **tab)
 		create_rooms(env->nodes, &env->rooms);
 	while (i < env->nb_nodes)
 	{
-		if (ft_strequ(tab[0], env->rooms[i].name)
-				&& check_edge(env, tab[1], i) == 0)
+		if (ft_strequ(tab[0], env->rooms[i].name))
+//				&& check_edge(env, tab[1], i) == 0)
 		{
 			j = 0;
 			while (j < env->nb_nodes)
 			{
-				if (ft_strequ(tab[1], env->rooms[j].name)
-						&& check_edge(env, tab[0], j) == 0)
+				if (ft_strequ(tab[1], env->rooms[j].name))
+		//				&& check_edge(env, tab[0], j) == 0)
 				{
-					env->rooms[i].edges[env->rooms[i].nb_edges] = ft_strdup(tab[1]);
+					env->matrice[i][j] = 1;
+					env->matrice[j][i] = 1;
+				/*	env->rooms[i].edges[env->rooms[i].nb_edges] = ft_strdup(tab[1]);
 					env->rooms[i].connexion[env->rooms[i].nb_edges++] = j;
 					env->rooms[j].edges[env->rooms[j].nb_edges] = ft_strdup(tab[0]);
 					env->rooms[j].connexion[env->rooms[j].nb_edges++] = i;
-					trigger++;
+					trigger++;*/
 				}
 				j++;
 			}

@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:21:51 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/05 19:31:04 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/08 14:40:38 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,28 +75,31 @@ static int	analyze_node_edge(t_env *env, char *line)
 {
 	char **tab;
 
+	tab = NULL;
 	if (line[0] == 'L')
 	{
 		ft_printf("Wrong name for node\n");
 		return (-1);
 	}
-	if (ft_strchr(line, ' '))
+	else if (ft_strchr(line, ' '))
 	{
 		if (env->delimiter == 1)
 			return (-1);
 		tab = ft_strsplit(line, ' ');
 		if (fill_room(env, tab) == -1)
 			return (-1);
-		delete_tab(tab);
 	}
-	if (ft_strchr(line, '-'))
+	else if (ft_strchr(line, '-'))
 	{
-		env->delimiter = 1;
+		if (env->delimiter == 0)
+		{
+			create_matrice(env);
+			env->delimiter = 1;
+		}
 		tab = ft_strsplit(line, '-');
-		if (fill_edge(env, tab) == -1)
-			return (-1);
-		delete_tab(tab);
+		fill_matrice(env, tab);
 	}
+	delete_tab(tab);
 	return (0);
 }
 
@@ -140,7 +143,6 @@ int		read_data(t_env *env)
 				ft_strdel(&line);
 				return (-1);
 			}
-			ft_strdel(&line);
 		}
 		else
 		{
@@ -149,8 +151,8 @@ int		read_data(t_env *env)
 				ft_strdel(&line);
 				return (-1);
 			}
-			ft_strdel(&line);
 		}
+		ft_strdel(&line);
 	}
 	return (0);
 }

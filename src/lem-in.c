@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/08 12:06:11 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 13:36:22 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,10 @@
 static void	free_memory(t_env *env)
 {
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
 	while (i < env->nb_nodes)
 	{
-		j = 0;
-		while (j < env->rooms[i].nb_edges)
-			ft_strdel(&env->rooms[i].edges[j++]);
-		free (env->rooms[i].edges);
 		free (env->rooms[i].connexion);
 		free (env->rooms[i].name);
 		i++;
@@ -75,7 +69,6 @@ int		main(void)
 		ft_printf("ERROR\n");
 		return (-1);
 	}
-	fill_matrice(&env);
 	print_env(&env);
 	algo(&env);
 	free_memory(&env);

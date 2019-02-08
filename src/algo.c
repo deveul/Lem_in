@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 11:33:26 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/08 12:19:44 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 14:50:17 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ void	print_path(t_env *env)
 	int		j;
 
 	i = 0;
+	ft_putendl(">>>>>>>>>>>Paths<<<<<<<<<<<<<<<");
 	while (i < env->nb_path)
 	{
 		ft_printf("path [%d]: ", i);
 		j = 0;
 		while (j < env->paths[i].len)
 		{
-			ft_printf("%d\t", env->paths[i].path[j]);
+			ft_printf("%-7d", env->paths[i].path[j]);
 			j++;
 		}
 		ft_putendl("");
@@ -54,7 +55,6 @@ void	fill_initial_fifo(t_env *env)
 
 	i = 0;
 	path_index = 0;
-	ft_printf("nb_path:%d\n", env->nb_path);
 	while (i < env->nb_nodes)
 	{
 		if (env->matrice[env->start_index][i] == 1)
@@ -105,13 +105,11 @@ void	algo(t_env *env)
 			env->nb_path++;
 		i++;
 	}
-	ft_printf("nb_path:%d\n", env->nb_path);
 	env->paths = ft_memalloc(sizeof(t_path) * env->nb_path);
 	env->nb_fifo = env->nb_path;
 	init_paths(env);
 	env->fifo = ft_memalloc(sizeof(t_fifo) * env->nb_nodes);
 	fill_initial_fifo(env);
-	ft_printf("nb_fifo:%d\n", env->nb_fifo);
 	while (env->nb_fifo != 0)
 	{
 		tmp = env->fifo[0];
