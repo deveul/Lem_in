@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:57:29 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/08 14:50:15 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/08 15:36:02 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	print_matrice(t_env *env)
 				ft_printf(" %d", env->matrice[i][j]);
 			j++;
 		}
-		ft_printf ("\tname : %-10s ", env->rooms[i].name);
-		ft_printf ("| index : %d", env->rooms[i].index);
+		ft_printf ("\t[%.4d]", env->rooms[i].index);
+		ft_printf ("%-10s ", env->rooms[i].name);
 		if (env->rooms[i].start == 1)
 			ft_printf("\tstarting node");
 		if (env->rooms[i].end == 1)
