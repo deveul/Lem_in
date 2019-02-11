@@ -64,9 +64,9 @@ void	print_matrice(t_env *env)
 		while (j < env->nb_nodes)
 		{
 			if (j != env->nb_nodes - 1)
-				ft_printf("----");
+				ft_printf("-------");
 			else
-				ft_printf("--");
+				ft_printf("-----");
 			j++;
 		}
 		ft_putendl("");
@@ -74,11 +74,11 @@ void	print_matrice(t_env *env)
 		while (j < env->nb_nodes)
 		{
 			if (j == 0)
-				ft_printf("%d |", env->matrice[i][j]);
+				ft_printf("%4d |", env->matrice[i][j]);
 			else if (j < env->nb_nodes - 1)
-				ft_printf(" %d |", env->matrice[i][j]);
+				ft_printf(" %4d |", env->matrice[i][j]);
 			else
-				ft_printf(" %d", env->matrice[i][j]);
+				ft_printf(" %4d", env->matrice[i][j]);
 			j++;
 		}
 		ft_printf("\t[%04d]", env->rooms[i].index);

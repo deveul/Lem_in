@@ -122,7 +122,6 @@ int				main(void)
 	}
 	print_env(&env);
 	dijkstra(env.matrice, env.nb_nodes, env.start_index, env.end_index);
-	return (0);
 	if (algo(&env) == -1)
 		return (-1);
 	if (env.nb_path_ok == 0)

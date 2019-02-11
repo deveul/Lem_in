@@ -12,54 +12,31 @@
 
 #include <lemin.h>
 
-void	aff_matrice(int len, int matrice[len][len])
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (i < len)
-	{
-		j = 0;
-		while (j < len)
-		{
-			ft_printf("%4d|", matrice[i][j++]);
-		}
-		ft_printf("\n");
-		i++;
-	}
-	ft_printf("\n");
-}
-
-void	aff_data(int *pred, int *distance, int i)
+static void	aff_data(int *pred, int *distance, int i)
 {
 	ft_printf("distance[%d] = %4d | ", i, distance[i]);
-	ft_printf("pred[%d] = %4d\n", i, pred[i]);
+	ft_printf("pred[%d] = %d\n", i, pred[i]);
 }
-void     dijkstra(int **matrice,int n,int startnode, int endnode)
+void     dijkstra(int **matrice,int n, int startnode, int endnode)
 {
-	int cost[n][n],distance[n],pred[n];
-	int visited[n],count,mindistance,nextnode,i,j;
+	int distance[n];
+	int pred[n];
+	int visited[n];
+	int count;
+	int	mindistance;
+	int nextnode;
+	int i;
+	int j;
 	
-	endnode= 0;
-	//pred[] stores the predecessor of each node
-	//count gives the number of nodes seen so far
-	//create the cost matrix
-	for(i=0;i<n;i++)
-		for(j=0;j<n;j++)
-			if(matrice[i][j]==0)
-				cost[i][j]=9999;
-			else
-				cost[i][j]=matrice[i][j];	
-	aff_matrice(n, cost);
-	//initialize pred[],distance[] and visited[]
-	for(i=0;i<n;i++)
+	//endnode = 0;
+	i = 0;
+	while (i < n)
 	{	
-		distance[i]=cost[startnode][i];
-		pred[i]=startnode;
-		visited[i]=0;
+		distance[i] = matrice[startnode][i];
+		pred[i] = startnode;
+		visited[i] = 0;
 		aff_data(pred, distance, i);
+		i++;
 	}
 	distance[startnode] = 0;
 	visited[startnode] = 1;
@@ -67,15 +44,22 @@ void     dijkstra(int **matrice,int n,int startnode, int endnode)
 	while(count < n - 1)
 	{
 		ft_printf("\n----------------[%d]--------------------\n", count);
-		mindistance = 9999;
+		ft_printf("-------------------------------------\n");
+		i = 0;
+		while (i < n)
+			aff_data(pred, distance, i++);
+		ft_printf("-------------------------------------\n");
+		ft_printf(">>>>>>>>>>>>>>>CHECK_1<<<<<<<<<<<<<<<<<<\n");
 		//nextnode gives the node at minimum distance
+		mindistance = 9999;
 		i = 0;
 		while (i < n)
 		{
-			ft_printf("visited[%d] = %d\n", i ,visited[i]);
-			ft_printf("%d < %d\n", distance[i], mindistance);
-			if(distance[i] < mindistance && !visited[i])
+			ft_printf("visited[%d] = %d | ", i ,visited[i]);
+			ft_printf("distance[%d] = %d < mindistance = %d\n", i, distance[i], mindistance);
+			if (distance[i] < mindistance && !visited[i])
 			{
+				ft_printf("MIN\n");
 				//ft_printf("nextnode = %d\n", i);
 				//aff_data(pred, distance, i);
 				mindistance=distance[i];
@@ -83,44 +67,44 @@ void     dijkstra(int **matrice,int n,int startnode, int endnode)
 			}
 			i++;
 		}
-		ft_printf("\n-------------------------------------\n");
-		for(i=0;i<n;i++)
-			aff_data(pred, distance, i);
-		ft_printf("\n-------------------------------------\n");
+		visited[nextnode] = 1;
+		ft_printf(">>>>>>>>>>>>>>>CHECK_2<<<<<<<<<<<<<<<<<<\n");
 		//check if a better path exists through nextnode			
-		visited[nextnode]=1;
 		i = 0;
 		while (i < n)
 		{
-			if(!visited[i])
+			if (!visited[i])
 			{
-				ft_printf(">>visited[%d] = %d\n", i, visited[i]);
-				ft_printf("%d + %d < %d\n", mindistance, cost[nextnode][i], distance[i]);
-				if(mindistance+cost[nextnode][i]<distance[i])
+				ft_printf("visited[%d] = %d | ", i, visited[i]);
+				ft_printf("mindistance = %d + matrice[%d][%d] = %d < distance[%d] = %d\n", 
+							mindistance, nextnode, i, matrice[nextnode][i], i, distance[i]);
+				if (mindistance + matrice[nextnode][i] < distance[i])
 				{
-					distance[i]=mindistance+cost[nextnode][i];
-					pred[i]=nextnode;
+					ft_printf("YES\n");
+					distance[i] = mindistance + matrice[nextnode][i];
+					pred[i] = nextnode;
 				}
 			}
 			i++;
 		}
-		distance[i]=mindistance+cost[nextnode][i];
-		pred[i]=nextnode;
 		count++;
 	}
  
 	//print the path and distance of each node
-	for(i=0;i<n;i++)
-		if(i!=startnode)
+	i = 0;
+	while (i < n)
+	{
+		if (i == endnode)
 		{
 			printf("\nDistance of node%d=%d",i,distance[i]);
 			printf("\nPath=%d",i);
-			
 			j=i;
-			do
+			while ( j != startnode)
 			{
-				j=pred[j];
+				j = pred[j];
 				printf("<-%d",j);
-			}while(j!=startnode);
+			}
+		}
+		i++;
 	}
 }
