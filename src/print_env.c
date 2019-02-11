@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:57:29 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/08 19:17:16 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/11 11:22:09 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,24 @@ void	print_path(t_env *env)
 			j++;
 		}
 		ft_putendl("");
+		i++;
+	}
+	i = 0;
+	ft_putendl("");
+	ft_putendl(">>>>>>>>>>>Valid Paths<<<<<<<<<<<<<<<");
+	while (i < env->nb_path)
+	{
+		if (env->paths[i].end_found == 1)
+		{
+			ft_printf("path [%d]: ", i);
+			j = 0;
+			while (j < env->paths[i].len)
+			{
+				ft_printf("%-7d", env->paths[i].path[j]);
+				j++;
+			}
+			ft_putendl("");
+		}
 		i++;
 	}
 }
