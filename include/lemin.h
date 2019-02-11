@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/11 11:21:21 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/11 17:55:52 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 typedef struct		s_room
 {
 	char	*name;
+	int		father;
 	int		x;
 	int		y;
 	int		start;
@@ -93,5 +94,6 @@ int					handle_start_end_com(t_env *env, char *line);
 int					analyze_node(t_env *env, char *line);
 int					analyze_edge(t_env *env, char *line);
 int					analyze_node_edge(t_env *env, char *line);
+void				dijkstra(int **matrice, int n, int startnode, int endnode);
 
 #endif

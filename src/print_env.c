@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:57:29 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/11 11:22:09 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/11 15:58:05 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	print_matrice(t_env *env)
 
 	i = 0;
 	j = 0;
-	return ;
 	while (i < env->nb_nodes)
 	{
 		j = 0;

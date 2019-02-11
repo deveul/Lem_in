@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem-in.c                                           :+:      :+:    :+:   */
+/*   lemin.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/08 20:10:25 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/11 18:15:43 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ int				main(void)
 		return (-1);
 	}
 	print_env(&env);
+	dijkstra(env.matrice, env.nb_nodes, env.start_index, env.end_index);
+	return (0);
 	if (algo(&env) == -1)
 		return (-1);
 	if (env.nb_path_ok == 0)
