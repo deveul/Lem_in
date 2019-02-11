@@ -21,7 +21,7 @@ void	print_path(t_env *env)
 	ft_putendl(">>>>>>>>>>>Paths<<<<<<<<<<<<<<<");
 	while (i < env->nb_path)
 	{
-		ft_printf("path [%d]: ", i);
+		ft_printf("Path [%4d]: ", i);
 		j = 0;
 		while (j < env->paths[i].len)
 		{
@@ -38,7 +38,7 @@ void	print_path(t_env *env)
 	{
 		if (env->paths[i].end_found == 1)
 		{
-			ft_printf("path [%d]: ", i);
+			ft_printf("Path_bfs[%4d]: ", i);
 			j = 0;
 			while (j < env->paths[i].len)
 			{
