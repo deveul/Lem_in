@@ -130,6 +130,8 @@ int				main(void)
 			nb_path++;
 		i++;
 	}
+	if (algo(&env) == -1)
+		return (-1);
 	while (nb_path-- > 0)
 	{
 		//print_env(&env);
@@ -137,8 +139,6 @@ int				main(void)
 			break ;
 	}
 	//return (0);
-	if (algo(&env) == -1)
-		return (-1);
 	if (env.nb_path_ok == 0)
 		ft_putendl("No passaran");
 	free_memory(&env);
