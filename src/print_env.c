@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:57:29 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/11 11:22:09 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/11 16:22:58 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ void	print_path(t_env *env)
 			j = 0;
 			while (j < env->paths[i].len)
 			{
-				ft_printf("%-7d", env->paths[i].path[j]);
+				if (j < env->paths[i]. len - 1)
+					ft_printf("%s-", env->rooms[env->paths[i].path[j]].name);
+				else
+					ft_printf("%s", env->rooms[env->paths[i].path[j]].name);
 				j++;
 			}
 			ft_putendl("");
