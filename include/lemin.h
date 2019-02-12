@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/11 15:53:00 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/12 10:43:36 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,9 @@ void				create_rooms(t_node *node, t_room **rooms, int nb_nodes);
 void				fill_initial_fifo(t_env *env);
 void				print_env(t_env *env);
 void				print_path(t_env *env);
+int					analyze_node(t_env *env, char *line);
+int					analyze_edge(t_env *env, char *line);
+int					analyze_node_edge(t_env *env, char *line);
+int					dijkstra(t_env *env, int n, int startnode, int endnode);
 
 #endif

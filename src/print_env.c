@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:57:29 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/11 16:22:58 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/12 10:43:01 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	print_path(t_env *env)
 	int		i;
 	int		j;
 
-	i = 0;
+/*	i = 0;
 	ft_putendl(">>>>>>>>>>>Paths<<<<<<<<<<<<<<<");
 	while (i < env->nb_path)
 	{
-		ft_printf("path [%d]: ", i);
+		ft_printf("Path [%4d]: ", i);
 		j = 0;
 		while (j < env->paths[i].len)
 		{
@@ -30,7 +30,7 @@ void	print_path(t_env *env)
 		}
 		ft_putendl("");
 		i++;
-	}
+	}*/
 	i = 0;
 	ft_putendl("");
 	ft_putendl(">>>>>>>>>>>Valid Paths<<<<<<<<<<<<<<<");
@@ -38,7 +38,7 @@ void	print_path(t_env *env)
 	{
 		if (env->paths[i].end_found == 1)
 		{
-			ft_printf("path [%d]: ", i);
+			ft_printf("Path_bfs[%4d]: ", i);
 			j = 0;
 			while (j < env->paths[i].len)
 			{
@@ -61,16 +61,15 @@ void	print_matrice(t_env *env)
 
 	i = 0;
 	j = 0;
-	return ;
 	while (i < env->nb_nodes)
 	{
 		j = 0;
 		while (j < env->nb_nodes)
 		{
 			if (j != env->nb_nodes - 1)
-				ft_printf("----");
+				ft_printf("-------");
 			else
-				ft_printf("--");
+				ft_printf("-----");
 			j++;
 		}
 		ft_putendl("");
@@ -78,11 +77,11 @@ void	print_matrice(t_env *env)
 		while (j < env->nb_nodes)
 		{
 			if (j == 0)
-				ft_printf("%d |", env->matrice[i][j]);
+				ft_printf("%4d |", env->matrice[i][j]);
 			else if (j < env->nb_nodes - 1)
-				ft_printf(" %d |", env->matrice[i][j]);
+				ft_printf(" %4d |", env->matrice[i][j]);
 			else
-				ft_printf(" %d", env->matrice[i][j]);
+				ft_printf(" %4d", env->matrice[i][j]);
 			j++;
 		}
 		ft_printf("\t[%04d]", env->rooms[i].index);

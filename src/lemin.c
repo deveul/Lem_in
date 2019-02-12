@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem-in.c                                           :+:      :+:    :+:   */
+/*   lemin.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/08 20:10:25 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/11 18:15:43 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,12 @@ static void		init_env(t_env *env)
 int				main(void)
 {
 	t_env	env;
+	int		nb_path;
+	int		i;
 
 	init_env(&env);
+	i = 0;
+	nb_path = 0;
 	if (read_data(&env) == -1 || env.start == 0 || env.end == 0)
 	{
 		ft_printf("ERROR\n");
@@ -120,9 +124,21 @@ int				main(void)
 		ft_putendl("no connexion");
 		return (-1);
 	}
-	print_env(&env);
+	while (env.matrice[env.end_index][i])
+	{
+		if (env.matrice[env.end_index][i] == 1)
+			nb_path++;
+		i++;
+	}
 	if (algo(&env) == -1)
 		return (-1);
+	while (nb_path-- > 0)
+	{
+		//print_env(&env);
+		if (dijkstra(&env, env.nb_nodes, env.start_index, env.end_index) == -1)
+			break ;
+	}
+	//return (0);
 	if (env.nb_path_ok == 0)
 		ft_putendl("No passaran");
 	free_memory(&env);

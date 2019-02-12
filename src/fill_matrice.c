@@ -15,7 +15,9 @@
 int		create_matrice(t_env *env)
 {
 	int		i;
+	int 	j;
 
+	j = 0;
 	i = 0;
 	if (!(env->matrice = ft_memalloc(sizeof(int*) * env->nb_nodes)))
 		return (-1);
@@ -23,6 +25,9 @@ int		create_matrice(t_env *env)
 	{
 		if (!(env->matrice[i] = ft_memalloc(sizeof(int) * env->nb_nodes)))
 			return (-1);
+		j = 0;
+		while (j < env->nb_nodes)
+			env->matrice[i][j++] = 9999;
 		i++;
 	}
 	return (1);
