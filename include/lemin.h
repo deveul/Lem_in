@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/11 17:55:52 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/12 15:47:59 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,6 @@ int					handle_start_end_com(t_env *env, char *line);
 int					analyze_node(t_env *env, char *line);
 int					analyze_edge(t_env *env, char *line);
 int					analyze_node_edge(t_env *env, char *line);
-int					dijkstra(t_env *env, int n, int startnode, int endnode);
+int					dijkstra(t_env *env, int n, int startnode, int endnode, int index);
 
 #endif

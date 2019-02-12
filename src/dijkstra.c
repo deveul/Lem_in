@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:46:39 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/11 20:26:03 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/12 16:31:40 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	aff_data(int *pred, int *distance, int i)
 	ft_printf("pred[%d] = %d\n", i, pred[i]);
 }
 */
-int     dijkstra(t_env *env,int n, int startnode, int endnode)
+int     dijkstra(t_env *env,int n, int startnode, int endnode, int index)
 {
 	int distance[n];
 	int pred[n];
@@ -28,9 +28,8 @@ int     dijkstra(t_env *env,int n, int startnode, int endnode)
 	int nextnode;
 	int i;
 	int j;
-	int *path;
+	int x;
 	
-	//endnode = 0;
 	i = 0;
 	while (i < n)
 	{	
@@ -91,40 +90,42 @@ int     dijkstra(t_env *env,int n, int startnode, int endnode)
 		}
 		count++;
 	}
- 
 	//print the path and distance of each node
 	i = 0;
-	int len = 0;
+	x = 0;
 	while (i < n)
 	{
 		if (i == endnode)
 		{
-			printf("\nDistance of node %d = %d", i ,distance[i]);
-			if ((len = distance[i]) == 9999)
-				return (-1);
-			if (!(path = ft_memalloc(sizeof(int) * len)))
-				return (-1) ;
-			printf("\nPath_Dijkstra : ");
-			path[len] = i;
+			env->paths[index].path = ft_memalloc(sizeof(int) * distance[i]);
+			env->paths[index].len = distance[i];
+			x = env->paths[index].len;
+			ft_printf("\nDistance of node %d = %d", i ,distance[i]);
+			ft_printf("\nPath_Dijkstra : ");
+			ft_printf("%4d", i);
+			env->paths[index].path[x--] = i;
 			j=i;
-			i = len;
 			while ( j != startnode)
 			{
 				j = pred[j];
-				path[--i] = j;
-				//printf("\t%4d",j);
+				env->paths[index].path[x--] = j;
+				ft_printf("\t%4d",j);
 			}
-			break ;
 		}
 		i++;
 	}
 	i = 0;
-	while (i <= len)
+	while (i <= env->paths[index].len)
 	{
-		printf("%-7d",path[i]);
-		if (i + 1 <= len)
-			env->matrice[path[i]][path[i + 1]] = 9999;
+		ft_printf("\nSAVED_PATH[%d] = %s ", index, env->rooms[env->paths[index].path[i]].name);
 		i++;
 	}
+	if (index + 1 <= env->paths[0].len)
+	{
+		env->matrice[env->paths[0].path[index]][env->paths[0].path[index + 1]] = 9999;
+	}
+	if (index == env->paths[0].len)
+			return (-1);
+	print_env(env);
 	return (0);
 }
