@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:46:39 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/12 16:31:40 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/12 17:50:53 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,35 +97,44 @@ int     dijkstra(t_env *env,int n, int startnode, int endnode, int index)
 	{
 		if (i == endnode)
 		{
-			env->paths[index].path = ft_memalloc(sizeof(int) * distance[i]);
+			if (distance[i] == 9999)
+				break ;
+			env->paths[index].path = ft_memalloc(sizeof(int) * (distance[i] + 1));
 			env->paths[index].len = distance[i];
 			x = env->paths[index].len;
 			ft_printf("\nDistance of node %d = %d", i ,distance[i]);
 			ft_printf("\nPath_Dijkstra : ");
 			ft_printf("%4d", i);
-			env->paths[index].path[x--] = i;
+			env->paths[index].path[x] = i;
+			x--;
 			j=i;
 			while ( j != startnode)
 			{
 				j = pred[j];
-				env->paths[index].path[x--] = j;
+				env->paths[index].path[x] = j;
+				x--;
 				ft_printf("\t%4d",j);
 			}
 		}
 		i++;
 	}
-	i = 0;
-	while (i <= env->paths[index].len)
+	if (distance[i] != 9999)
 	{
-		ft_printf("\nSAVED_PATH[%d] = %s ", index, env->rooms[env->paths[index].path[i]].name);
-		i++;
+		i = 0;
+		ft_putendl("");
+		while (i <= env->paths[index].len)
+		{
+			ft_printf("%s-", env->rooms[env->paths[index].path[i]].name);
+			i++;
+		}
+		ft_putendl("");
 	}
-	if (index + 1 <= env->paths[0].len)
+	if (index < env->paths[0].len)
 	{
 		env->matrice[env->paths[0].path[index]][env->paths[0].path[index + 1]] = 9999;
 	}
 	if (index == env->paths[0].len)
 			return (-1);
-	print_env(env);
+	//print_env(env);
 	return (0);
 }

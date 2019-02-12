@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/12 16:31:38 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/12 17:05:45 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,15 +124,15 @@ int				main(void)
 		ft_putendl("no connexion");
 		return (-1);
 	}
-	while (env.matrice[env.end_index][i])
+	while (i < env.nb_nodes)
 	{
 		if (env.matrice[env.end_index][i] == 1)
 			nb_path++;
 		i++;
 	}
-	print_env(&env);
-	if (algo(&env) == -1)
-		return (-1);
+//	print_env(&env);
+//	if (algo(&env) == -1)
+//		return (-1);
 	env.paths = ft_memalloc(sizeof(t_path) * 10);
 	i = 0;
 	while (dijkstra(&env, env.nb_nodes, env.start_index, env.end_index, i) != -1)
