@@ -18,7 +18,7 @@ static void	aff_data(int *pred, int *distance, int i)
 	ft_printf("pred[%d] = %d\n", i, pred[i]);
 }
 */
-void     dijkstra(int **matrice,int n, int startnode, int endnode)
+int     dijkstra(t_env *env,int n, int startnode, int endnode)
 {
 	int distance[n];
 	int pred[n];
@@ -34,7 +34,7 @@ void     dijkstra(int **matrice,int n, int startnode, int endnode)
 	i = 0;
 	while (i < n)
 	{	
-		distance[i] = matrice[startnode][i];
+		distance[i] = env->matrice[startnode][i];
 		pred[i] = startnode;
 		visited[i] = 0;
 //		aff_data(pred, distance, i);
@@ -64,7 +64,7 @@ void     dijkstra(int **matrice,int n, int startnode, int endnode)
 //				ft_printf("MIN\n");
 				//ft_printf("nextnode = %d\n", i);
 				//aff_data(pred, distance, i);
-				mindistance=distance[i];
+				mindistance = distance[i];
 				nextnode=i;
 			}
 			i++;
@@ -80,10 +80,10 @@ void     dijkstra(int **matrice,int n, int startnode, int endnode)
 //				ft_printf("visited[%d] = %d | ", i, visited[i]);
 //				ft_printf("mindistance = %d + matrice[%d][%d] = %d < distance[%d] = %d\n", 
 //							mindistance, nextnode, i, matrice[nextnode][i], i, distance[i]);
-				if (mindistance + matrice[nextnode][i] < distance[i])
+				if (mindistance + env->matrice[nextnode][i] < distance[i])
 				{
 //					ft_printf("YES\n");
-					distance[i] = mindistance + matrice[nextnode][i];
+					distance[i] = mindistance + env->matrice[nextnode][i];
 					pred[i] = nextnode;
 				}
 			}
@@ -100,9 +100,10 @@ void     dijkstra(int **matrice,int n, int startnode, int endnode)
 		if (i == endnode)
 		{
 			printf("\nDistance of node %d = %d", i ,distance[i]);
-			len = distance[i];
+			if ((len = distance[i]) == 9999)
+				return (-1);
 			if (!(path = ft_memalloc(sizeof(int) * len)))
-				return ;
+				return (-1) ;
 			printf("\nPath_Dijkstra : ");
 			path[len] = i;
 			j=i;
@@ -119,5 +120,11 @@ void     dijkstra(int **matrice,int n, int startnode, int endnode)
 	}
 	i = 0;
 	while (i <= len)
-		printf("%-7d",path[i++]);
+	{
+		printf("%-7d",path[i]);
+		if (i + 1 <= len)
+			env->matrice[path[i]][path[i + 1]] = 9999;
+		i++;
+	}
+	return (0);
 }

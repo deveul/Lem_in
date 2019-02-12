@@ -17,7 +17,7 @@ void	print_path(t_env *env)
 	int		i;
 	int		j;
 
-	i = 0;
+/*	i = 0;
 	ft_putendl(">>>>>>>>>>>Paths<<<<<<<<<<<<<<<");
 	while (i < env->nb_path)
 	{
@@ -30,7 +30,7 @@ void	print_path(t_env *env)
 		}
 		ft_putendl("");
 		i++;
-	}
+	}*/
 	i = 0;
 	ft_putendl("");
 	ft_putendl(">>>>>>>>>>>Valid Paths<<<<<<<<<<<<<<<");

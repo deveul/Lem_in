@@ -108,8 +108,12 @@ static void		init_env(t_env *env)
 int				main(void)
 {
 	t_env	env;
+	int		nb_path;
+	int		i;
 
 	init_env(&env);
+	i = 0;
+	nb_path = 0;
 	if (read_data(&env) == -1 || env.start == 0 || env.end == 0)
 	{
 		ft_printf("ERROR\n");
@@ -120,9 +124,19 @@ int				main(void)
 		ft_putendl("no connexion");
 		return (-1);
 	}
-	//print_env(&env);
-	dijkstra(env.matrice, env.nb_nodes, env.start_index, env.end_index);
-//	return (0);
+	while (env.matrice[env.end_index][i])
+	{
+		if (env.matrice[env.end_index][i] == 1)
+			nb_path++;
+		i++;
+	}
+	while (nb_path-- > 0)
+	{
+		//print_env(&env);
+		if (dijkstra(&env, env.nb_nodes, env.start_index, env.end_index) == -1)
+			break ;
+	}
+	//return (0);
 	if (algo(&env) == -1)
 		return (-1);
 	if (env.nb_path_ok == 0)
