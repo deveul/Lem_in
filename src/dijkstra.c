@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:46:39 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/11 20:26:03 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/12 11:11:22 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,12 @@ int     dijkstra(t_env *env,int n, int startnode, int endnode)
 	{
 		if (i == endnode)
 		{
-			printf("\nDistance of node %d = %d", i ,distance[i]);
+			ft_printf("\nDistance of node %d = %d", i ,distance[i]);
 			if ((len = distance[i]) == 9999)
 				return (-1);
 			if (!(path = ft_memalloc(sizeof(int) * len)))
 				return (-1) ;
-			printf("\nPath_Dijkstra : ");
+			ft_printf("\nPath_Dijkstra : ");
 			path[len] = i;
 			j=i;
 			i = len;
@@ -121,8 +121,11 @@ int     dijkstra(t_env *env,int n, int startnode, int endnode)
 	i = 0;
 	while (i <= len)
 	{
-		printf("%-7d",path[i]);
-		if (i + 1 <= len)
+		if (i != len)
+			ft_printf("%s-",env->rooms[path[i]].name);
+		else
+			ft_printf("%s",env->rooms[path[i]].name);
+		if (i < len)
 			env->matrice[path[i]][path[i + 1]] = 9999;
 		i++;
 	}

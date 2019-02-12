@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/11 18:15:43 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/12 11:11:23 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,8 +130,8 @@ int				main(void)
 			nb_path++;
 		i++;
 	}
-	if (algo(&env) == -1)
-		return (-1);
+	//if (algo(&env) == -1)
+	//	return (-1);
 	while (nb_path-- > 0)
 	{
 		//print_env(&env);
