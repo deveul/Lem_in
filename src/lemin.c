@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/12 11:11:23 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/12 18:11:30 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,21 +124,24 @@ int				main(void)
 		ft_putendl("no connexion");
 		return (-1);
 	}
-	while (env.matrice[env.end_index][i])
+	while (i < env.nb_nodes)
 	{
 		if (env.matrice[env.end_index][i] == 1)
 			nb_path++;
 		i++;
 	}
-	//if (algo(&env) == -1)
-	//	return (-1);
-	while (nb_path-- > 0)
+//	print_env(&env);
+//	if (algo(&env) == -1)
+//		return (-1);
+	env.paths = ft_memalloc(sizeof(t_path) * 10);
+	i = 0;
+	while (dijkstra(&env, env.nb_nodes, env.start_index, env.end_index, i) != -1)
 	{
-		//print_env(&env);
-		if (dijkstra(&env, env.nb_nodes, env.start_index, env.end_index) == -1)
-			break ;
+		if (i > 0)
+			env.matrice[env.paths[0].path[i - 1]][env.paths[0].path[i]] = 1;
+		i++;
 	}
-	//return (0);
+	return (0);
 	if (env.nb_path_ok == 0)
 		ft_putendl("No passaran");
 	free_memory(&env);
