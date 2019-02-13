@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:46:39 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/13 09:39:12 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/13 09:57:13 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void aff_data_3(int *dij.distance, int *dij.visited, int i, int mindij.di
 							mindij.distance, dij.nextnode, i, env->matrice[dij.nextnode][i], i, dij.distance[i]);
 }
 */
-static	void	save_path(t_env *env, int index, t_dij *dij)
+static int save_path(t_env *env, int index, t_dij *dij)
 {
 	int j;
 	int i;
@@ -77,6 +77,7 @@ static	void	save_path(t_env *env, int index, t_dij *dij)
 		}
 		i++;
 	}
+	return (i);
 }
 
 static	void	update_matrice(t_dij *dij, t_env *env, int index, int i)
@@ -163,7 +164,7 @@ int     	dijkstra(t_env *env,int n, int index)
 		}
 		count++;
 	}
-	save_path(env, index, &dij);
+	i = save_path(env, index, &dij);
 	update_matrice(&dij, env, index, i);
 	if (index == env->paths[0].len)
 		return (-1);
