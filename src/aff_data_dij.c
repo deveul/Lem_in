@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 11:41:53 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/13 14:12:35 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/13 18:30:33 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	aff_data_1(t_dij *dij, int n, int count)
 		i++;
    }
    ft_printf("-------------------------------------\n");
-   ft_printf(">>>>>>>>>>>>>>>CHECK_1<<<<<<<<<<<<<<<<<<\n");
-
 }
 
 void 	aff_data_2(t_dij *dij, int i)

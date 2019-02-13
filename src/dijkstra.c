@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:46:39 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/13 17:51:58 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/13 19:15:11 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,13 @@ static void	search_nextnode(t_dij *dij, int n)
 {
 	int i;
 
+	ft_printf("\n>>>>>>>>>>>>>>>CHECK_1<<<<<<<<<<<<<<<<<<\n");
 	//dij.nextnode gives the node at minimum dij.distance
 	dij->min = 9999;
 	i = 0;
 	while (i < n)
 	{
-//		aff_data_2(dij, i);
+		aff_data_2(dij, i);
 		if (dij->distance[i] < dij->min && !dij->visited[i])
 		{
 			dij->min = dij->distance[i];
@@ -102,17 +103,17 @@ void	check_path_nextnode(t_env *env, t_dij *dij, int n)
 {
 	int i;
 
-	//ft_printf(">>>>>>>>>>>>>>>CHECK_2<<<<<<<<<<<<<<<<<<\n");
+	ft_printf("\n>>>>>>>>>>>>>>>CHECK_2<<<<<<<<<<<<<<<<<<\n");
 	/*check if a better path exists through dij.nextnode*/
 	i = 0;
 	while (i < n)
 	{
 		if (!dij->visited[i])
 		{
-			//aff_data_3(dij, i, env);
+			aff_data_3(dij, i, env);
 			if (dij->min + env->matrice[dij->nextnode][i] < dij->distance[i])
 			{
-//				ft_printf("YES\n");
+				ft_printf("YES\n");
 				dij->distance[i] = dij->min + env->matrice[dij->nextnode][i];
 				dij->pred[i] = dij->nextnode;
 			}
@@ -139,11 +140,13 @@ int			dijkstra(t_env *env, int n, int index)
 	count = 1;
 	while (count < n - 1)
 	{
-//		aff_data_1(&dij, n, count);
+		aff_data_1(&dij, n, count);
 		search_nextnode(&dij, n);
 		check_path_nextnode(env, &dij, n);
 		count++;
 	}
+	ft_printf("\n>>>>>>>>>>>>>>>>>END<<<<<<<<<<<<<<<<<<<\n");
+	aff_data_1(&dij, n, count);
 	if ((i = save_path(env, index, &dij)) != -1)
 	{
 		update_matrice(env, index);
