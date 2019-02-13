@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/13 14:01:31 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/13 17:52:12 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ typedef struct		s_room
 
 typedef struct		s_node
 {
-	struct	s_node 	*next;
 	t_room			room;
+	struct	s_node 	*next;
 }					t_node;
 
 typedef struct		s_ant
@@ -46,6 +46,12 @@ typedef struct		s_path
 	int				end_found;
 	int				len;
 }					t_path;
+
+typedef struct		s_res
+{
+	t_path			path;
+	struct	s_res	*next;
+}					t_res;
 
 typedef struct		s_dij
 {
@@ -80,6 +86,9 @@ typedef struct		s_env
 	t_ant			*ants;
 	t_fifo			*fifo;
 	t_node			*nodes;
+	t_res			*results;
+	t_path			first_path;
+	t_path			*paths_ok;
 	t_path			*paths;
 	t_room			*rooms;
 }					t_env;
@@ -98,6 +107,7 @@ int					handle_start_end_com(t_env *env, char *line);
 int					init_paths(t_env *env);
 t_path				*add_path(t_path *tocpy, int nb_path, int pathtocpy);
 void				add_node(t_node **nodes, t_room room);
+void				add_result(t_res **results, t_path path);
 void				create_rooms(t_node *node, t_room **rooms, int nb_nodes);
 void				fill_initial_fifo(t_env *env);
 void				print_env(t_env *env);
@@ -109,6 +119,7 @@ int					dijkstra(t_env *env, int n, int index);
 void				aff_data_1(t_dij *dij, int n, int count);
 void				aff_data_2(t_dij *dij, int i);
 void				aff_data_3(t_dij *dij, int i, t_env *env);
+void				create_path_tab(t_res *res, t_path **paths_ok, int nb_paths);
 
 
 #endif

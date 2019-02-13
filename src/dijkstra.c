@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:46:39 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/13 15:51:53 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/13 17:51:58 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	save_path(t_env *env, int index, t_dij *dij)
 {
+	t_path tmp;
 	int j;
 	int i;
 	int x;
@@ -27,19 +28,21 @@ static int	save_path(t_env *env, int index, t_dij *dij)
 		{
 			if (dij->distance[i] == 9999)
 				break ;
-			env->paths[index].path = ft_memalloc(sizeof(int) * (dij->distance[i] + 1));
-			env->paths[index].len = dij->distance[i];
-			x = env->paths[index].len;
-			ft_printf("\n%d >> %d = %d", env->start_index, i, dij->distance[i]);
-			env->paths[index].path[x] = i;
+			tmp.path = ft_memalloc(sizeof(int) * (dij->distance[i] + 1));
+			tmp.len = dij->distance[i];
+			x = tmp.len;
+			tmp.path[x] = i;
 			x--;
 			j = i;
 			while (j != env->start_index)
 			{
 				j = dij->pred[j];
-				env->paths[index].path[x] = j;
+				tmp.path[x] = j;
 				x--;
 			}
+			add_result(&env->results, tmp);
+			if (index == 0)
+				env->first_path = tmp;
 			return (i);
 		}
 		i++;
@@ -47,21 +50,10 @@ static int	save_path(t_env *env, int index, t_dij *dij)
 	return (-1);
 }
 
-static void	update_matrice(t_dij *dij, t_env *env, int index, int i)
+static void	update_matrice(t_env *env, int index)
 {
-	if (dij->distance[i] != 9999)
-	{
-		i = 0;
-		ft_putendl("");
-		while (i <= env->paths[index].len)
-		{
-			ft_printf("%s-", env->rooms[env->paths[index].path[i]].name);
-			i++;
-		}
-		ft_putendl("");
-	}
-	if (index < env->paths[0].len)
-		env->matrice[env->paths[0].path[index]][env->paths[0].path[index + 1]] = 9999;
+	if (index < env->first_path.len)
+		env->matrice[env->first_path.path[index]][env->first_path.path[index + 1]] = 9999;
 }
 
 static void	init_dijkstra(t_dij *dij, t_env *env)
@@ -154,7 +146,7 @@ int			dijkstra(t_env *env, int n, int index)
 	}
 	if ((i = save_path(env, index, &dij)) != -1)
 	{
-		update_matrice(&dij, env, index, i);
+		update_matrice(env, index);
 		env->nb_path_ok++;
 		free_dij(&dij);
 	}
@@ -163,7 +155,7 @@ int			dijkstra(t_env *env, int n, int index)
 		free_dij(&dij);
 		return (-1);
 	}
-	if (index == env->paths[0].len)
+	if (index == env->first_path.len)
 		return (-1);
 	return (0);
 }

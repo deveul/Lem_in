@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/13 15:54:48 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/13 17:52:00 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@ static void		free_memory(t_env *env)
 	}
 	free(env->rooms);
 	free(env->ants);
-	i = 0;
-	while (i < env->nb_path_ok)
-	{
-		free(env->paths[i].path);
-		i++;
-	}
-	free(env->paths);
 	i = 0;
 	while (i < env->nb_nodes)
 	{
@@ -55,6 +48,26 @@ void			add_node(t_node **nodes, t_room room)
 	if (*nodes == NULL)
 	{
 		*nodes = new;
+		return ;
+	}
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = new;
+}
+
+void		add_result(t_res **results, t_path path)
+{
+	t_res	*tmp;
+	t_res	*new;
+
+	tmp = *results;
+	if (!(new = ft_memalloc(sizeof(t_res))))
+		return ;
+	new->path = path;
+	new->next = NULL;
+	if (*results == NULL)
+	{
+		*results = new;
 		return ;
 	}
 	while (tmp->next != NULL)
@@ -89,9 +102,35 @@ static int		read_data(t_env *env)
 	return (0);
 }
 
+void		create_path_tab(t_res *res, t_path **paths_ok, int nb_paths)
+{
+	t_res *tmp;
+	int i;
+
+	i = 0;
+	tmp = res;
+	if (!(*paths_ok = ft_memalloc(sizeof(t_path) * nb_paths)))
+		return ;
+	while (tmp != NULL)
+	{
+		(*paths_ok)[i] = tmp->path;
+		tmp = tmp->next;
+		i++;
+	}
+	tmp = res;
+	while (res->next)
+	{
+		tmp = res->next;
+		free(res);
+		res = tmp;
+	}
+	free(res);
+}
+
 static void		init_env(t_env *env)
 {
 	env->nodes = NULL;
+	env->results = NULL;
 	env->rooms = NULL;
 	env->matrice = NULL;
 	env->nb_ants = -1;
@@ -125,6 +164,7 @@ int				main(void)
 {
 	t_env	env;
 	int		i;
+	int 	j;
 	int		start_nb;
 	int		end_nb;
 
@@ -142,14 +182,6 @@ int				main(void)
 		ft_putendl("no connexion");
 		return (-1);
 	}
-	while (i < env.nb_nodes)
-	{
-		if (env.matrice[env.end_index][i] == 1)
-			env.nb_path++;
-		i++;
-	}
-	//	print_env(&env);
-	env.paths = ft_memalloc(sizeof(t_path) * 10);
 	get_connexion_start_end(&env, &start_nb, &end_nb);
 	i = 0;
 	if (start_nb > 1 && end_nb > 1)
@@ -157,12 +189,25 @@ int				main(void)
 		while (dijkstra(&env, env.nb_nodes, i) != -1)
 		{
 			if (i > 0)
-				env.matrice[env.paths[0].path[i - 1]][env.paths[0].path[i]] = 1;
+				env.matrice[env.first_path.path[i - 1]][env.first_path.path[i]] = 1;
 			i++;
 		}
 	}
 	else
 		dijkstra(&env, env.nb_nodes, i);
+	create_path_tab(env.results, &env.paths_ok, env.nb_path_ok);
+	i = 0;
+	while (i < env.nb_path_ok)
+	{
+		j = 0;
+		while (j <= env.paths_ok[i].len)
+		{
+			ft_printf("path[%d][%d] = %d\n", i, j, env.paths_ok[i].path[j]);
+			j++;
+		}
+		i++;
+		ft_putendl("");
+	}
 	if (env.nb_path_ok == 0)
 		ft_putendl("No passaran");
 	free_memory(&env);

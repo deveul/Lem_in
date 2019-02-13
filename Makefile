@@ -6,7 +6,7 @@
 #    By: smakni <smakni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2019/02/13 13:59:02 by smakni           ###   ########.fr        #
+#    Updated: 2019/02/13 17:51:25 by smakni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,11 +29,11 @@ LDLIBS		=	-lft
 SRC_NAME	=	lemin.c \
 				print_env.c \
 				fill.c \
+				bfs.c \
+				init_bfs.c \
 				read_data.c \
-				algo.c \
 				fill_matrice.c \
 				handle_memory.c \
-				init_algo.c \
 				create_rooms.c \
 				dijkstra.c \
 				aff_data_dij.c
