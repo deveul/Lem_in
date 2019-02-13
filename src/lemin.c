@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/13 09:08:37 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/13 11:39:47 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,31 @@ static void		init_env(t_env *env)
 	env->delimiter = 0;
 }
 
+void			get_connexion_start_end(t_env *env, int *start_nb, int *end_nb)
+{
+	int		i;
+
+	i = 0;
+	while (i < env->nb_nodes)
+	{
+		if (env->matrice[env->start_index][i] == 1)
+			(*start_nb)++;
+		if (env->matrice[env->end_index][i] == 1)
+			(*end_nb)++;
+		i++;
+	}
+}
+
 int				main(void)
 {
 	t_env	env;
 	int		nb_path;
 	int		i;
+	int		start_nb;
+	int		end_nb;
 
+	start_nb = 0;
+	end_nb = 0;
 	init_env(&env);
 	i = 0;
 	nb_path = 0;
@@ -130,15 +149,21 @@ int				main(void)
 			nb_path++;
 		i++;
 	}
-//	print_env(&env);
+	//	print_env(&env);
 	env.paths = ft_memalloc(sizeof(t_path) * 10);
+	get_connexion_start_end(&env, &start_nb, &end_nb);
 	i = 0;
-	while (dijkstra(&env, env.nb_nodes, i) != -1)
+	if (start_nb > 1 && end_nb > 1)
 	{
-		if (i > 0)
-			env.matrice[env.paths[0].path[i - 1]][env.paths[0].path[i]] = 1;
-		i++;
+		while (dijkstra(&env, env.nb_nodes, i) != -1)
+		{
+			if (i > 0)
+				env.matrice[env.paths[0].path[i - 1]][env.paths[0].path[i]] = 1;
+			i++;
+		}
 	}
+	else
+		dijkstra(&env, env.nb_nodes, i);
 	return (0);
 	if (env.nb_path_ok == 0)
 		ft_putendl("No passaran");

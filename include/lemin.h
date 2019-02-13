@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/13 09:34:18 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/13 11:13:40 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef struct		s_room
 	int				end;
 	int				index;
 	int				start;
-	int				x;
-	int				y;
+//	int				x;
+//	int				y;
 }					t_room;
 
 typedef struct		s_node

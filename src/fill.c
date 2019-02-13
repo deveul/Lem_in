@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:13:09 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/08 20:07:27 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/13 11:30:16 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ static	void	check_start_end(t_env *env, t_room *tmp)
 static void		init_t_room(t_room *tmp)
 {
 	tmp->name = NULL;
-	tmp->x = 0;
-	tmp->y = 0;
+	//tmp->x = 0;
+	//tmp->y = 0;
 	tmp->start = 0;
 	tmp->end = 0;
 	tmp->check = 0;
@@ -71,8 +71,8 @@ int				fill_room(t_env *env, char **tab)
 	}
 	check_start_end(env, &tmp);
 	tmp.index = env->nb_nodes;
-	tmp.x = ft_atoi(tab[1]);
-	tmp.y = ft_atoi(tab[2]);
+//	tmp.x = ft_atoi(tab[1]);
+//	tmp.y = ft_atoi(tab[2]);
 	tmp.check = 0;
 	add_node(&env->nodes, tmp);
 	env->nb_nodes++;
