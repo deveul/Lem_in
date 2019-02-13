@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/12 18:13:37 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/13 09:34:18 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,15 @@ typedef struct		s_path
 	int				end_found;
 	int				len;
 }					t_path;
+
+typedef struct		s_dij
+{
+	int				*distance;
+	int				*pred;
+	int				*visited;
+	int				min;
+	int				nextnode;
+}					t_dij;
 
 typedef struct		s_fifo
 {
@@ -96,6 +105,6 @@ void				print_path(t_env *env);
 int					analyze_node(t_env *env, char *line);
 int					analyze_edge(t_env *env, char *line);
 int					analyze_node_edge(t_env *env, char *line);
-int					dijkstra(t_env *env, int n, int startnode, int endnode, int index);
+int					dijkstra(t_env *env, int n, int index);
 
 #endif
