@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/13 11:39:47 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/13 15:54:48 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void		free_memory(t_env *env)
 	free(env->rooms);
 	free(env->ants);
 	i = 0;
-	while (i < env->nb_path)
+	while (i < env->nb_path_ok)
 	{
 		free(env->paths[i].path);
 		i++;
@@ -37,8 +37,9 @@ static void		free_memory(t_env *env)
 		free(env->matrice[i]);
 		i++;
 	}
+	i = 0;
 	free(env->matrice);
-	free(env->fifo);
+	//free(env->fifo);
 }
 
 void			add_node(t_node **nodes, t_room room)
@@ -123,7 +124,6 @@ void			get_connexion_start_end(t_env *env, int *start_nb, int *end_nb)
 int				main(void)
 {
 	t_env	env;
-	int		nb_path;
 	int		i;
 	int		start_nb;
 	int		end_nb;
@@ -132,7 +132,6 @@ int				main(void)
 	end_nb = 0;
 	init_env(&env);
 	i = 0;
-	nb_path = 0;
 	if (read_data(&env) == -1 || env.start == 0 || env.end == 0)
 	{
 		ft_printf("ERROR\n");
@@ -146,7 +145,7 @@ int				main(void)
 	while (i < env.nb_nodes)
 	{
 		if (env.matrice[env.end_index][i] == 1)
-			nb_path++;
+			env.nb_path++;
 		i++;
 	}
 	//	print_env(&env);
@@ -164,7 +163,6 @@ int				main(void)
 	}
 	else
 		dijkstra(&env, env.nb_nodes, i);
-	return (0);
 	if (env.nb_path_ok == 0)
 		ft_putendl("No passaran");
 	free_memory(&env);
