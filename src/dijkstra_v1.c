@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:46:39 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/14 14:30:04 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/14 15:07:23 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	save_path(t_env *env, int index, t_dij *dij)
 			if (dij->distance[i] == 9999)
 				break ;
 			tmp.path = ft_memalloc(sizeof(int) * (dij->distance[i] + 1));
-			tmp.len = dij->distance[i] + 1;
+			tmp.len = dij->distance[i];
 			x = tmp.len;
 			tmp.path[x] = i;
 			x--;
@@ -52,6 +52,8 @@ static int	save_path(t_env *env, int index, t_dij *dij)
 
 static void	update_matrice(t_env *env, int index)
 {
+	if (index > 0)
+		env->matrice[env->first_path.path[index - 1]][env->first_path.path[index]] = 1;
 	if (index < env->first_path.len)
 		env->matrice[env->first_path.path[index]][env->first_path.path[index + 1]] = 9999;
 }

@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/14 14:43:59 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/14 15:09:22 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,11 +190,7 @@ int				main(void)
 	if (env.start_nb > 1 && env.end_nb > 1)
 	{
 		while (i < env.start_nb + env.end_nb)
-		{	
-			dijkstra(&env, env.nb_nodes, i);		
-	//		print_env(&env);
-			i++;
-		}
+			dijkstra(&env, env.nb_nodes, i++);		
 	}
 	else
 		dijkstra(&env, env.nb_nodes, i);
