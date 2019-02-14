@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/14 14:32:56 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/14 17:08:07 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct		s_path
 	int				*path;
 	int				end_found;
 	int				len;
+	int				dup;
 }					t_path;
 
 typedef struct		s_res
@@ -75,6 +76,8 @@ typedef struct		s_env
 	int				end;
 	int				end_index;
 	int				fifo_index;
+	int				nb_dup;
+	int				nb_no_dup;
 	int				nb_edges;
 	int				nb_fifo;
 	int				nb_nodes;
@@ -93,11 +96,13 @@ typedef struct		s_env
 	t_res			*results;
 	t_path			first_path;
 	t_path			*paths_ok;
+	t_path			*paths_no_dup;
 	t_path			*paths;
 	t_room			*rooms;
 }					t_env;
 
 int					*dup_table(int *src, int len);
+int					del_dup_paths(t_env *env);
 int					*expand_table(int *src, int len, int to_add);
 int					algo(t_env *env);
 int					analyze_edge(t_env *env, char *line);

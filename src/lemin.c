@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/14 15:09:22 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/14 16:48:58 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ static void		init_env(t_env *env)
 	env->start_index = -1;
 	env->end_index = -1;
 	env->delimiter = 0;
+	env->nb_dup = 0;
 }
 
 void			get_connexion_start_end(t_env *env)
@@ -210,6 +211,7 @@ int				main(void)
 	}
 	if (env.nb_path_ok == 0)
 		ft_putendl("No passaran");
+	del_dup_paths(&env);
 	free_memory(&env);
 	return (0);
 }

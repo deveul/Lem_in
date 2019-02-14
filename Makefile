@@ -6,7 +6,7 @@
 #    By: smakni <smakni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2019/02/13 17:51:25 by smakni           ###   ########.fr        #
+#    Updated: 2019/02/14 16:48:55 by vrenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ SRC_NAME	=	lemin.c \
 				handle_memory.c \
 				create_rooms.c \
 				dijkstra.c \
-				aff_data_dij.c
+				aff_data_dij.c \
+				del_dup_paths.c
 
 OBJ_NAME	=	$(SRC_NAME:.c=.o)
 
