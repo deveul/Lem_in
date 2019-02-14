@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 16:30:51 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/14 17:08:05 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/14 18:55:12 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,13 @@ void	print_no_dup(t_env *env)
 	{
 		j = 0;
 		ft_printf("len = %d\n", env->paths_no_dup[i].len);
-		while (j <= env->paths_no_dup[i].len)
+		if (env->paths_no_dup[i].len > 0)
 		{
-			ft_printf("path[%d][%d] = %s\n", i, j, env->rooms[env->paths_no_dup[i].path[j]].name);
-			j++;
+			while (j <= env->paths_no_dup[i].len)
+			{
+				ft_printf("path_final[%d][%d] = %s\n", i, j, env->rooms[env->paths_no_dup[i].path[j]].name);
+				j++;
+			}
 		}
 		i++;
 		ft_putendl("");
