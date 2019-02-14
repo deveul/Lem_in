@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/13 17:52:12 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/14 14:32:56 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,10 @@ typedef struct		s_env
 	int				start;
 	int				start_index;
 	long			nb_ants;
+	int				start_nb;
+	int				end_nb;
+	int				*start_links;
+	int				*end_links;
 	t_ant			*ants;
 	t_fifo			*fifo;
 	t_node			*nodes;

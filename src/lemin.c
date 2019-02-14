@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/13 17:52:00 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/14 14:43:59 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,23 +139,29 @@ static void		init_env(t_env *env)
 	env->nb_path_ok = 0;
 	env->nb_edges = 0;
 	env->start = 0;
+	env->start_nb = 0;
 	env->end = 0;
+	env->end_nb = 0;
 	env->start_index = -1;
 	env->end_index = -1;
 	env->delimiter = 0;
 }
 
-void			get_connexion_start_end(t_env *env, int *start_nb, int *end_nb)
+void			get_connexion_start_end(t_env *env)
 {
 	int		i;
 
 	i = 0;
+	if (!(env->start_links = ft_memalloc(sizeof(int) * env->nb_nodes)))
+		return ;
+	if (!(env->end_links = ft_memalloc(sizeof(int) * env->nb_nodes)))
+		return ;
 	while (i < env->nb_nodes)
 	{
 		if (env->matrice[env->start_index][i] == 1)
-			(*start_nb)++;
+			env->start_links[env->start_nb++] = i;
 		if (env->matrice[env->end_index][i] == 1)
-			(*end_nb)++;
+			env->end_links[env->end_nb++] = i;
 		i++;
 	}
 }
@@ -165,11 +171,7 @@ int				main(void)
 	t_env	env;
 	int		i;
 	int 	j;
-	int		start_nb;
-	int		end_nb;
 
-	start_nb = 0;
-	end_nb = 0;
 	init_env(&env);
 	i = 0;
 	if (read_data(&env) == -1 || env.start == 0 || env.end == 0)
@@ -182,14 +184,15 @@ int				main(void)
 		ft_putendl("no connexion");
 		return (-1);
 	}
-	get_connexion_start_end(&env, &start_nb, &end_nb);
+	//print_env(&env);
+	get_connexion_start_end(&env);
 	i = 0;
-	if (start_nb > 1 && end_nb > 1)
+	if (env.start_nb > 1 && env.end_nb > 1)
 	{
-		while (dijkstra(&env, env.nb_nodes, i) != -1)
-		{
-			if (i > 0)
-				env.matrice[env.first_path.path[i - 1]][env.first_path.path[i]] = 1;
+		while (i < env.start_nb + env.end_nb)
+		{	
+			dijkstra(&env, env.nb_nodes, i);		
+	//		print_env(&env);
 			i++;
 		}
 	}
@@ -200,9 +203,10 @@ int				main(void)
 	while (i < env.nb_path_ok)
 	{
 		j = 0;
+		ft_printf("len = %d\n", env.paths_ok[i].len);
 		while (j <= env.paths_ok[i].len)
 		{
-			ft_printf("path[%d][%d] = %d\n", i, j, env.paths_ok[i].path[j]);
+			ft_printf("path[%d][%d] = %s\n", i, j, env.rooms[env.paths_ok[i].path[j]].name);
 			j++;
 		}
 		i++;

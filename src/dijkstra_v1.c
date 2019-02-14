@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:46:39 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/14 14:43:14 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/14 14:30:04 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static int	save_path(t_env *env, int index, t_dij *dij)
 		if (i == env->end_index)
 		{
 			if (dij->distance[i] == 9999)
-				return (0);
+				break ;
 			tmp.path = ft_memalloc(sizeof(int) * (dij->distance[i] + 1));
-			tmp.len = dij->distance[i];
+			tmp.len = dij->distance[i] + 1;
 			x = tmp.len;
 			tmp.path[x] = i;
 			x--;
@@ -43,7 +43,7 @@ static int	save_path(t_env *env, int index, t_dij *dij)
 			add_result(&env->results, tmp);
 			if (index == 0)
 				env->first_path = tmp;
-			return (0);
+			return (i);
 		}
 		i++;
 	}
@@ -52,35 +52,8 @@ static int	save_path(t_env *env, int index, t_dij *dij)
 
 static void	update_matrice(t_env *env, int index)
 {
-	if (index < env->start_nb + env->end_nb)
-	{
-		if (index < env->start_nb)
-		{
-			if (index > 0)
-			{
-				env->matrice[env->start_index][env->start_links[index - 1]] = 1;
-				env->matrice[env->start_links[index - 1]][env->start_index] = 1;
-			}
-			env->matrice[env->start_index][env->start_links[index]] = 9999;
-			env->matrice[env->start_links[index]][env->start_index] = 9999;
-		}
-		else if (index - env->start_nb < env->end_nb)
-		{
-			index -= env->start_nb;
-			if (index == 0)
-			{	
-				env->matrice[env->start_index][env->start_links[env->start_nb -1 ]] = 1;
-				env->matrice[env->start_links[env->start_nb -1 ]][env->start_index] = 1;
-			}
-			if (index > 0)
-			{
-				env->matrice[env->end_index][env->end_links[index - 1]] = 1;
-				env->matrice[env->end_links[index - 1]][env->end_index]= 1;
-			}
-			env->matrice[env->end_index][env->end_links[index]] = 9999;
-			env->matrice[env->end_links[index]][env->end_index] = 9999;
-		}
-	}
+	if (index < env->first_path.len)
+		env->matrice[env->first_path.path[index]][env->first_path.path[index + 1]] = 9999;
 }
 
 static void	init_dijkstra(t_dij *dij, t_env *env)
@@ -110,11 +83,12 @@ static void	search_nextnode(t_dij *dij, int n)
 	int i;
 
 	//ft_printf("\n>>>>>>>>>>>>>>>CHECK_1<<<<<<<<<<<<<<<<<<\n");
+	//dij.nextnode gives the node at minimum dij.distance
 	dij->min = 9999;
 	i = 0;
 	while (i < n)
 	{
-//		aff_data_2(dij, i);
+		//aff_data_2(dij, i);
 		if (dij->distance[i] < dij->min && !dij->visited[i])
 		{
 			dij->min = dij->distance[i];
@@ -125,32 +99,27 @@ static void	search_nextnode(t_dij *dij, int n)
 	dij->visited[dij->nextnode] = 1;
 }
 
-static int	check_path_nextnode(t_env *env, t_dij *dij, int n)
+void	check_path_nextnode(t_env *env, t_dij *dij, int n)
 {
 	int i;
 
-	//ft_printf("\n>>>>>>>>>>>>>>>CHECK_2<<<<<<<<<<<<<<<<<<\n");
+//	ft_printf("\n>>>>>>>>>>>>>>>CHECK_2<<<<<<<<<<<<<<<<<<\n");
+	/*check if a better path exists through dij.nextnode*/
 	i = 0;
 	while (i < n)
-	{			
-	//	aff_data_3(dij, i, env);
+	{
 		if (!dij->visited[i])
 		{
+//			aff_data_3(dij, i, env);
 			if (dij->min + env->matrice[dij->nextnode][i] < dij->distance[i])
 			{
-	//			ft_printf("YES\n");
+				//ft_printf("YES\n");
 				dij->distance[i] = dij->min + env->matrice[dij->nextnode][i];
 				dij->pred[i] = dij->nextnode;
-				if (i == env->end_index)
-				{
-					ft_printf("END_[%d] = %s\n", i, env->rooms[i].name);
-					break ;
-				}
 			}
 		}
 		i++;
 	}
-	return (i);
 }
 
 static void free_dij(t_dij *dij)
@@ -173,13 +142,12 @@ int			dijkstra(t_env *env, int n, int index)
 	{
 //		aff_data_1(&dij, n, count);
 		search_nextnode(&dij, n);
-		if (check_path_nextnode(env, &dij, n) == env->end_index)
-			break ;
+		check_path_nextnode(env, &dij, n);
 		count++;
 	}
 //	ft_printf("\n>>>>>>>>>>>>>>>>>END<<<<<<<<<<<<<<<<<<<\n");
 //	aff_data_1(&dij, n, count);
-	if (save_path(env, index, &dij) != -1)
+	if ((i = save_path(env, index, &dij)) != -1)
 	{
 		update_matrice(env, index);
 		env->nb_path_ok++;
