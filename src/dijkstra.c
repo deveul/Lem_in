@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:46:39 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/14 14:43:14 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/14 17:34:14 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	save_path(t_env *env, int index, t_dij *dij)
 	{
 		if (i == env->end_index)
 		{
-			if (dij->distance[i] == 9999)
+			if (dij->distance[i] == 9999 || dij->distance[i] == 0)
 				return (0);
 			tmp.path = ft_memalloc(sizeof(int) * (dij->distance[i] + 1));
 			tmp.len = dij->distance[i];
@@ -48,39 +48,6 @@ static int	save_path(t_env *env, int index, t_dij *dij)
 		i++;
 	}
 	return (-1);
-}
-
-static void	update_matrice(t_env *env, int index)
-{
-	if (index < env->start_nb + env->end_nb)
-	{
-		if (index < env->start_nb)
-		{
-			if (index > 0)
-			{
-				env->matrice[env->start_index][env->start_links[index - 1]] = 1;
-				env->matrice[env->start_links[index - 1]][env->start_index] = 1;
-			}
-			env->matrice[env->start_index][env->start_links[index]] = 9999;
-			env->matrice[env->start_links[index]][env->start_index] = 9999;
-		}
-		else if (index - env->start_nb < env->end_nb)
-		{
-			index -= env->start_nb;
-			if (index == 0)
-			{	
-				env->matrice[env->start_index][env->start_links[env->start_nb -1 ]] = 1;
-				env->matrice[env->start_links[env->start_nb -1 ]][env->start_index] = 1;
-			}
-			if (index > 0)
-			{
-				env->matrice[env->end_index][env->end_links[index - 1]] = 1;
-				env->matrice[env->end_links[index - 1]][env->end_index]= 1;
-			}
-			env->matrice[env->end_index][env->end_links[index]] = 9999;
-			env->matrice[env->end_links[index]][env->end_index] = 9999;
-		}
-	}
 }
 
 static void	init_dijkstra(t_dij *dij, t_env *env)
