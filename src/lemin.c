@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/14 16:48:58 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/14 17:58:45 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,13 +185,15 @@ int				main(void)
 		ft_putendl("no connexion");
 		return (-1);
 	}
-	//print_env(&env);
 	get_connexion_start_end(&env);
 	i = 0;
 	if (env.start_nb > 1 && env.end_nb > 1)
 	{
-		while (i < env.start_nb + env.end_nb)
+		while (i <= env.start_nb + env.end_nb)
+		{
+	//		print_env(&env);
 			dijkstra(&env, env.nb_nodes, i++);		
+		}
 	}
 	else
 		dijkstra(&env, env.nb_nodes, i);
@@ -201,10 +203,13 @@ int				main(void)
 	{
 		j = 0;
 		ft_printf("len = %d\n", env.paths_ok[i].len);
-		while (j <= env.paths_ok[i].len)
+		if (env.paths_ok[i].len > 0)
 		{
-			ft_printf("path[%d][%d] = %s\n", i, j, env.rooms[env.paths_ok[i].path[j]].name);
-			j++;
+			while (j <= env.paths_ok[i].len)
+			{
+				ft_printf("path[%d][%d] = %s\n", i, j, env.rooms[env.paths_ok[i].path[j]].name);
+				j++;
+			}
 		}
 		i++;
 		ft_putendl("");

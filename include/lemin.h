@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/14 17:08:07 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/14 17:57:58 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ void				aff_data_1(t_dij *dij, int n, int count);
 void				aff_data_2(t_dij *dij, int i);
 void				aff_data_3(t_dij *dij, int i, t_env *env);
 void				create_path_tab(t_res *res, t_path **paths_ok, int nb_paths);
+void				update_matrice(t_env *env, int index);
 
 
 #endif
