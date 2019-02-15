@@ -6,18 +6,19 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 12:10:03 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/15 16:39:58 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/15 19:12:04 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lemin.h>
 
-void		print_combi(t_env *env)
+void		print_combi_ini(t_env *env)
 {
 	int		i;
 	int		j;
 
 	i = 0;
+	ft_putendl(">>>>>>>>>>>>>>>Initial combinations<<<<<<<<<<<<<<<<");
 	while (i < env->nb_no_dup)
 	{
 		ft_putendl("--------------");
@@ -33,12 +34,96 @@ void		print_combi(t_env *env)
 		i++;
 	}
 }
-/*
+void		print_combi(t_env *env)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	ft_putendl(">>>>>>>>>>>>>>>Final combinations<<<<<<<<<<<<<<<<");
+	while (i < env->nb_f_c)
+	{
+		ft_putendl("--------------");
+		j = 0;
+		while (j < env->final_combi[i].nb_combi)
+		{
+			ft_printf("%d-", env->final_combi[i].index_array[j]);
+			j++;
+		}
+		ft_putendl("");
+		ft_printf("Nb path in combi : %d\n", env->final_combi[i].nb_combi);
+		ft_putendl("--------------");
+		i++;
+	}
+}
+
+void		count_dup(t_env *env)
+{
+	int		i;
+	int		j;
+	int		k;
+	int		eq;
+
+	i = 0;
+	env->nb_c_dup = 0;
+	while (i < env->nb_no_dup)
+	{
+		j = i + 1;
+		while (j < env->nb_no_dup)
+		{
+			if (env->combi[i].nb_combi == env->combi[j].nb_combi)
+			{
+				k = 0;
+				eq = 0;
+				while (k < env->combi[i].nb_combi)
+				{
+					if (env->combi[i].index_array[k] == env->combi[j].index_array[k])
+						eq++;
+					if (eq == env->combi[j].nb_combi && env->combi[j].dup == 0)
+					{
+						env->nb_c_dup++;
+						env->combi[j].dup = 1;
+					}
+					k++;
+				}
+			}
+			j++;
+		}
+		i++;
+	}
+	env->nb_f_c = env->nb_no_dup - env->nb_c_dup;
+}
+
 void		del_dup_combi(t_env *env)
 {
+	int		i;
+	int		j;
 
+	i = 0;
+	while (i < env->nb_no_dup)
+	{
+		ft_sort_int_tab(env->combi[i].index_array, env->combi[i].nb_combi);
+		env->combi[i].dup = 0;
+		i++;
+	}
+	count_dup(env);
+	if (!(env->final_combi = ft_memalloc(env->nb_f_c * sizeof(t_combinations))))
+	{
+		ft_printf("env->nb_f_c:%d\n", env->nb_f_c);
+		ft_printf("malloc_error\n");
+		return ;
+	}
+	i = 0;
+	j = 0;
+	while (i < env->nb_no_dup && j < env->nb_f_c)
+	{
+		if (env->combi[i].dup == 0)
+			env->final_combi[j++] = env->combi[i++];
+		else
+			i++;
+	}
 }
-*/
+
 void		init_combi(t_env *env, int i)
 {
 	env->combi[i].index_array = ft_memalloc(env->nb_no_dup * sizeof(int));
@@ -116,6 +201,7 @@ void		fill_combinations(t_env *env)
 		check_combi(env, i);
 		i++;
 	}
-//	del_dup_combi(env);
+	print_combi_ini(env);
+	del_dup_combi(env);
 	print_combi(env);
 }

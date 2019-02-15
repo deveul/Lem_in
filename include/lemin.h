@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/15 16:40:39 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/15 19:12:09 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct		s_combinations
 {
 	int				*index_array;
 	int				nb_combi;
+	int				dup;
 }					t_combinations;
 
 typedef struct		s_env
@@ -84,6 +85,8 @@ typedef struct		s_env
 	int				fifo_index;
 	int				nb_dup;
 	int				nb_no_dup;
+	int				nb_c_dup;
+	int				nb_f_c;
 	int				nb_edges;
 	int				nb_fifo;
 	int				nb_nodes;
@@ -106,6 +109,7 @@ typedef struct		s_env
 	t_path			*paths;
 	t_room			*rooms;
 	t_combinations	*combi;
+	t_combinations	*final_combi;
 }					t_env;
 
 int					*dup_table(int *src, int len);

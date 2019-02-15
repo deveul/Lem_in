@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 16:30:51 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/14 18:55:12 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/15 18:41:35 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int		compare_paths(t_path p1, t_path p2)
 	int		i;
 
 	i = 1;
+	if (p1.len == 1)
+		return (1);
 	while (i < p1.len)
 	{
 		if (p1.path[i] == p2.path[i])

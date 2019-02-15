@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:46:39 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/14 17:34:14 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/15 19:00:19 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	save_path(t_env *env, int index, t_dij *dij)
 		if (i == env->end_index)
 		{
 			if (dij->distance[i] == 9999 || dij->distance[i] == 0)
-				return (0);
+				return (-1);
 			tmp.path = ft_memalloc(sizeof(int) * (dij->distance[i] + 1));
 			tmp.len = dij->distance[i];
 			x = tmp.len;
@@ -147,16 +147,9 @@ int			dijkstra(t_env *env, int n, int index)
 //	ft_printf("\n>>>>>>>>>>>>>>>>>END<<<<<<<<<<<<<<<<<<<\n");
 //	aff_data_1(&dij, n, count);
 	if (save_path(env, index, &dij) != -1)
-	{
-		update_matrice(env, index);
 		env->nb_path_ok++;
-		free_dij(&dij);
-	}
-	else
-	{
-		free_dij(&dij);
-		return (-1);
-	}
+	update_matrice(env, index);
+	free_dij(&dij);
 	if (index == env->first_path.len)
 		return (-1);
 	return (0);
