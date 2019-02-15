@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/14 17:57:58 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/15 15:19:55 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,12 @@ typedef struct		s_fifo
 	int				path_index;
 }					t_fifo;
 
+typedef struct		s_combinations
+{
+	int				*index_array;
+	int				nb_combi;
+}					t_combinations;
+
 typedef struct		s_env
 {
 	int				**matrice;
@@ -99,6 +105,7 @@ typedef struct		s_env
 	t_path			*paths_no_dup;
 	t_path			*paths;
 	t_room			*rooms;
+	t_combinations	*combi;
 }					t_env;
 
 int					*dup_table(int *src, int len);
@@ -130,6 +137,7 @@ void				aff_data_2(t_dij *dij, int i);
 void				aff_data_3(t_dij *dij, int i, t_env *env);
 void				create_path_tab(t_res *res, t_path **paths_ok, int nb_paths);
 void				update_matrice(t_env *env, int index);
+void				fill_combinations(t_env *env);
 
 
 #endif

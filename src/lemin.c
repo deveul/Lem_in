@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/14 17:58:45 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/15 16:12:01 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,7 @@ int				main(void)
 	if (env.nb_path_ok == 0)
 		ft_putendl("No passaran");
 	del_dup_paths(&env);
+	fill_combinations(&env);
 	free_memory(&env);
 	return (0);
 }
