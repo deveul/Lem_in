@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 12:10:03 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/15 19:12:04 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/15 19:18:44 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ void		fill_combinations(t_env *env)
 		check_combi(env, i);
 		i++;
 	}
-	print_combi_ini(env);
+//	print_combi_ini(env);
 	del_dup_combi(env);
 	print_combi(env);
 }
