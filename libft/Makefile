@@ -6,7 +6,7 @@
 #    By: smakni <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/05 09:14:14 by smakni            #+#    #+#              #
-#    Updated: 2019/02/08 19:23:11 by vrenaudi         ###   ########.fr        #
+#    Updated: 2019/02/15 17:36:23 by vrenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ OBJ_PATH_P		=	obj_p
 SRC_NAME		=	ft_putchar.c \
 					ft_putstr.c \
 					ft_putnbr.c \
+					ft_sort_int_tab.c \
 					ft_strlen.c	\
 		   			ft_strdup.c \
 					ft_strcmp.c \

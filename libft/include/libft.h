@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:28:24 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/08 19:22:42 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/15 17:35:45 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void				ft_putchar3(wchar_t c);
 void				ft_putchar4(wchar_t c);
 void				ft_putstr(char const *s);
 void				ft_putnbr(int n);
+void				ft_sort_int_tab(int *tab, int size);
 void				ft_strclr(char *s);
 void				ft_striter(char *s, void (*f)(char *));
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
