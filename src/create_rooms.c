@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_rooms.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 19:53:12 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/08 19:53:40 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/16 15:41:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		create_rooms(t_node *node, t_room **rooms, int nb_nodes)
 	i = 0;
 	tmp = node;
 	if (!(*rooms = ft_memalloc(sizeof(t_room) * nb_nodes)))
-		return ;
+		exit (-1);
 	while (tmp != NULL)
 	{
 		(*rooms)[i] = tmp->room;

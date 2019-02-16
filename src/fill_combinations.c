@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 12:10:03 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/16 13:58:15 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/16 14:41:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void		del_dup_combi(t_env *env)
 	{
 		ft_printf("env->nb_f_c:%d\n", env->nb_f_c);
 		ft_printf("malloc_error\n");
-		return ;
+		exit (-1);
 	}
 	i = 0;
 	j = 0;
@@ -126,7 +126,8 @@ void		del_dup_combi(t_env *env)
 
 void		init_combi(t_env *env, int i)
 {
-	env->combi[i].index_array = ft_memalloc(env->nb_path * sizeof(int));
+	if (!(env->combi[i].index_array = ft_memalloc(env->nb_path * sizeof(int))))
+		exit (-1);
 	env->combi[i].index_array[0] = i;
 	env->combi[i].nb_combi = 1;
 }
@@ -195,7 +196,8 @@ void		fill_combinations(t_env *env)
 	int		i;
 
 	i = 0;
-	env->combi = ft_memalloc(env->nb_path * sizeof(t_combinations));
+	if (!(env->combi = ft_memalloc(env->nb_path * sizeof(t_combinations))))
+		exit (-1);
 	while (i < env->nb_path)
 	{
 		check_combi(env, i);

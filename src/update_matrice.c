@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_matrice.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 16:40:58 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/14 17:45:07 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/16 15:03:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static	void	update_start(t_env *env, int index)
 	{
 		if (i != index)
 		{
-			env->matrice[env->start_index][env->start_links[i]] = 9999;
-			env->matrice[env->start_links[i]][env->start_index] = 9999;
+			env->matrice[env->start_index][env->start_links[i]] = INFINITE;
+			env->matrice[env->start_links[i]][env->start_index] = INFINITE;
 		}
 		else
 		{
@@ -42,8 +42,8 @@ static	void	update_end(t_env *env, int index)
 	{
 		if (i != index - env->start_nb)
 		{
-			env->matrice[env->end_index][env->end_links[i]] = 9999;
-			env->matrice[env->end_links[i]][env->end_index] = 9999;
+			env->matrice[env->end_index][env->end_links[i]] = INFINITE;
+			env->matrice[env->end_links[i]][env->end_index] = INFINITE;
 		}
 		else
 		{

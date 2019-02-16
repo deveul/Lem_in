@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/16 14:01:48 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/16 15:32:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,15 @@ static void		free_memory(t_env *env)
 		free(env->matrice[i]);
 		i++;
 	}
-	i = 0;
 	free(env->matrice);
-	//free(env->fifo);
+	i = 0;
+	while (i < env->nb_f_c)
+		free(env->combi[i++].index_array);
+	free(env->combi);
+	free(env->final_combi);
+	free(env->start_links);
+	free(env->end_links);
+	free(env->paths);
 }
 
 void			add_node(t_node **nodes, t_room room)
@@ -42,7 +48,7 @@ void			add_node(t_node **nodes, t_room room)
 
 	tmp = *nodes;
 	if (!(new = ft_memalloc(sizeof(t_node))))
-		return ;
+		exit (-1);
 	new->room = room;
 	new->next = NULL;
 	if (*nodes == NULL)
@@ -62,7 +68,7 @@ void		add_result(t_res **results, t_path path)
 
 	tmp = *results;
 	if (!(new = ft_memalloc(sizeof(t_res))))
-		return ;
+		exit (-1);
 	new->path = path;
 	new->next = NULL;
 	if (*results == NULL)
@@ -110,7 +116,7 @@ void		create_path_tab(t_res *res, t_path **paths, int nb_paths)
 	i = 0;
 	tmp = res;
 	if (!(*paths = ft_memalloc(sizeof(t_path) * nb_paths)))
-		return ;
+		exit (-1);
 	while (tmp != NULL)
 	{
 		(*paths)[i] = tmp->path;
@@ -188,13 +194,8 @@ int				main(void)
 	ft_printf("\n>>>>>>>>>>>>>>>>>SEARCH_PATH<<<<<<<<<<<<<<<<<<<<\n\n");
 	i = 0;
 	if (env.start_nb > 1 && env.end_nb > 1)
-	{
 		while (i <= env.start_nb + env.end_nb)
-		{
-			//print_env(&env);
-			dijkstra(&env, env.nb_nodes, i++);		
-		}
-	}
+			dijkstra(&env, env.nb_nodes, i++);
 	else
 		dijkstra(&env, env.nb_nodes, i);
 	create_path_tab(env.results, &env.paths, env.nb_path);

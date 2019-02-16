@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2019/02/16 13:04:11 by marvin           ###   ########.fr        #
+#    Updated: 2019/02/16 15:11:47 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,11 +57,11 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 
 sanitize: 
 		make -C libft
-		$(CC) -fsanitize=address -g3 $(LDFLAGS) $(LDLIBS) $(OBJ) -o lem-in
+		$(CC) -fsanitize=address -g3  -o lem-in $(OBJ) $(LDFLAGS) $(LDLIBS)
 
 resanitize: fclean $(OBJ) 
 		make -C libft
-		$(CC) -fsanitize=address -g3 $(LDFLAGS) $(LDLIBS) $(OBJ) -o lem-in
+		$(CC) -fsanitize=address -g3  -o lem-in $(OBJ) $(LDFLAGS) $(LDLIBS)
 
 clean:
 	rm -fv $(OBJ)

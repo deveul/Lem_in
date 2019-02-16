@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:46:39 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/16 13:21:22 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/16 15:17:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ static void free_dij(t_dij *dij)
 	free(dij->visited);
 	free(dij->distance);
 	free(dij->pred);
+	//free(dij);
 }
 
 int			dijkstra(t_env *env, int n, int index)

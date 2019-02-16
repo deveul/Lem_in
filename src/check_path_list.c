@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 16:30:51 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/16 13:57:41 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/16 15:25:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ int	save_path(t_env *env, t_dij *dij)
 		if (i == env->end_index)
 		{
 			if (dij->distance[i] == INFINITE || dij->distance[i] == 0)
-				return (-1);
-			tmp.path = ft_memalloc(sizeof(int) * (dij->distance[i] + 1));
+				break ;
+			if (!(tmp.path = ft_memalloc(sizeof(int) * (dij->distance[i] + 1))))
+				exit (-1);
 			tmp.len = dij->distance[i];
 			x = tmp.len;
 			tmp.path[x] = i;
@@ -75,11 +76,13 @@ int	save_path(t_env *env, t_dij *dij)
 				x--;
 			}
 			if (check_path_list(env, tmp) == -1)
-				return (-1);
+				break ;
 			add_result(&env->results, tmp);
+			//free (tmp.path);
 			return (0);
 		}
 		i++;
 	}
+	//free(tmp.path);
 	return (-1);
 }
