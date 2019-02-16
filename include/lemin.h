@@ -45,7 +45,7 @@ typedef struct		s_ant
 typedef struct		s_path
 {
 	int				*path;
-	int				end_found;
+	int				check;
 	int				len;
 	int				dup;
 }					t_path;

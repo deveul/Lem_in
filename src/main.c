@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/16 16:24:32 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/16 16:50:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,31 +86,6 @@ static int		read_data(t_env *env)
 		ft_strdel(&line);
 	}
 	return (0);
-}
-
-void		create_path_tab(t_res *res, t_path **paths, int nb_paths)
-{
-	t_res *tmp;
-	int i;
-
-	i = 0;
-	tmp = res;
-	if (!(*paths = ft_memalloc(sizeof(t_path) * nb_paths)))
-		exit (-1);
-	while (tmp != NULL)
-	{
-		(*paths)[i] = tmp->path;
-		tmp = tmp->next;
-		i++;
-	}
-	tmp = res;
-	while (res->next)
-	{
-		tmp = res->next;
-		free(res);
-		res = tmp;
-	}
-	free(res);
 }
 
 static void		init_env(t_env *env)

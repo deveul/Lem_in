@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:57:29 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/16 16:19:04 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/16 16:35:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_path(t_env *env)
 		ft_putendl("");
 		ft_printf("Path[%2d]: ", i);
 		j = 0;
-		while (j < env->paths[i].len)
+		while (j <= env->paths[i].len)
 		{
 			ft_printf("%-5d", env->paths[i].path[j]);
 			j++;
