@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smakni <smakni@student.42.fr>              +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2019/02/15 14:55:48 by vrenaudi         ###   ########.fr        #
+#    Updated: 2019/02/16 03:40:36 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ LDFLAGS		=	-L libft
 
 LDLIBS		=	-lft
 
-SRC_NAME	=	lemin.c \
+SRC_NAME	=	main.c \
 				print_env.c \
 				fill.c \
 				bfs.c \
@@ -51,7 +51,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) 
 		make -C libft
-		$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) $(OBJ) -o $@
+		$(CC) $(CFLAGS) -o $@ $(OBJ) $(LDFLAGS) $(LDLIBS)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
