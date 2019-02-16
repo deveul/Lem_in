@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lemin.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/15 19:00:21 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/16 02:59:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,7 @@ int				main(void)
 	int 	j;
 
 	init_env(&env);
+	ft_printf(">>>>>>>>>>>>>>>>>ANALYSE_DATA<<<<<<<<<<<<<<<<<<<<\n");
 	i = 0;
 	if (read_data(&env) == -1 || env.start == 0 || env.end == 0)
 	{
@@ -186,12 +187,13 @@ int				main(void)
 		return (-1);
 	}
 	get_connexion_start_end(&env);
+	ft_printf("\n>>>>>>>>>>>>>>>>>SEARCH_PATH<<<<<<<<<<<<<<<<<<<<\n\n");
 	i = 0;
 	if (env.start_nb > 1 && env.end_nb > 1)
 	{
 		while (i <= env.start_nb + env.end_nb)
 		{
-	//		print_env(&env);
+			//print_env(&env);
 			dijkstra(&env, env.nb_nodes, i++);		
 		}
 	}
@@ -214,9 +216,10 @@ int				main(void)
 		i++;
 		ft_putendl("");
 	}
+	ft_printf(">>>>>>>>>>>>>>>>>END_SEARCH<<<<<<<<<<<<<<<<<<<<\n\n");
 	if (env.nb_path_ok == 0)
 		ft_putendl("No passaran");
-	del_dup_paths(&env);
+//	del_dup_paths(&env);
 	fill_combinations(&env);
 	free_memory(&env);
 	return (0);

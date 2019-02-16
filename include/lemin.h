@@ -17,6 +17,8 @@
 # include <ft_printf.h>
 # include <get_next_line.h>
 
+#define	INFINITE	9999
+
 typedef struct		s_room
 {
 	char			*name;
@@ -142,6 +144,7 @@ void				aff_data_3(t_dij *dij, int i, t_env *env);
 void				create_path_tab(t_res *res, t_path **paths_ok, int nb_paths);
 void				update_matrice(t_env *env, int index);
 void				fill_combinations(t_env *env);
+int					compare_paths(t_path p1, t_path p2);
 
 
 #endif

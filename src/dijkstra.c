@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   dijkstra.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:46:39 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/15 19:00:19 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/16 03:42:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lemin.h>
-
+	
 static int	save_path(t_env *env, int index, t_dij *dij)
 {
-	t_path tmp;
-	int j;
-	int i;
-	int x;
+	t_path 	tmp;
+	t_res	*tmp_res;
+	int 	j;
+	int 	i;
+	int 	x;
 
 	i = 0;
 	x = 0;
@@ -26,7 +27,7 @@ static int	save_path(t_env *env, int index, t_dij *dij)
 	{
 		if (i == env->end_index)
 		{
-			if (dij->distance[i] == 9999 || dij->distance[i] == 0)
+			if (dij->distance[i] == INFINITE || dij->distance[i] == 0)
 				return (-1);
 			tmp.path = ft_memalloc(sizeof(int) * (dij->distance[i] + 1));
 			tmp.len = dij->distance[i];
@@ -39,6 +40,17 @@ static int	save_path(t_env *env, int index, t_dij *dij)
 				j = dij->pred[j];
 				tmp.path[x] = j;
 				x--;
+			}
+			if (env->nb_path_ok > 0)
+			{
+				tmp_res = env->results;
+				while (tmp_res != NULL)
+				{
+					if (tmp.len == tmp_res->path.len 
+						&& compare_paths(tmp, tmp_res->path) == 1)
+						return (-1);	
+					tmp_res = tmp_res->next;
+				}
 			}
 			add_result(&env->results, tmp);
 			if (index == 0)
@@ -55,11 +67,11 @@ static void	init_dijkstra(t_dij *dij, t_env *env)
 	int i;
 
 	if (!(dij->distance = ft_memalloc(sizeof(int) * env->nb_nodes)))
-		return ;
+		exit (-1);
 	if (!(dij->visited = ft_memalloc(sizeof(int) * env->nb_nodes)))
-		return ;
+		exit (-1);
 	if (!(dij->pred = ft_memalloc(sizeof(int) * env->nb_nodes)))
-		return ;
+		exit (-1);
 	i = 0;
 	while (i < env->nb_nodes)
 	{
@@ -77,7 +89,7 @@ static void	search_nextnode(t_dij *dij, int n)
 	int i;
 
 	//ft_printf("\n>>>>>>>>>>>>>>>CHECK_1<<<<<<<<<<<<<<<<<<\n");
-	dij->min = 9999;
+	dij->min = INFINITE;
 	i = 0;
 	while (i < n)
 	{
@@ -110,7 +122,7 @@ static int	check_path_nextnode(t_env *env, t_dij *dij, int n)
 				dij->pred[i] = dij->nextnode;
 				if (i == env->end_index)
 				{
-					ft_printf("END_[%d] = %s\n", i, env->rooms[i].name);
+					//ft_printf("END_[%d] = %s\n", i, env->rooms[i].name);
 					break ;
 				}
 			}
@@ -131,9 +143,7 @@ int			dijkstra(t_env *env, int n, int index)
 {
 	t_dij	dij;
 	int		count;
-	int		i;
 
-	i = 0;
 	init_dijkstra(&dij, env);
 	count = 1;
 	while (count < n - 1)
