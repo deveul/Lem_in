@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/16 02:59:16 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/16 14:01:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,18 +102,18 @@ static int		read_data(t_env *env)
 	return (0);
 }
 
-void		create_path_tab(t_res *res, t_path **paths_ok, int nb_paths)
+void		create_path_tab(t_res *res, t_path **paths, int nb_paths)
 {
 	t_res *tmp;
 	int i;
 
 	i = 0;
 	tmp = res;
-	if (!(*paths_ok = ft_memalloc(sizeof(t_path) * nb_paths)))
+	if (!(*paths = ft_memalloc(sizeof(t_path) * nb_paths)))
 		return ;
 	while (tmp != NULL)
 	{
-		(*paths_ok)[i] = tmp->path;
+		(*paths)[i] = tmp->path;
 		tmp = tmp->next;
 		i++;
 	}
@@ -136,7 +136,6 @@ static void		init_env(t_env *env)
 	env->nb_ants = -1;
 	env->nb_nodes = 0;
 	env->nb_path = 0;
-	env->nb_path_ok = 0;
 	env->nb_edges = 0;
 	env->start = 0;
 	env->start_nb = 0;
@@ -145,7 +144,6 @@ static void		init_env(t_env *env)
 	env->start_index = -1;
 	env->end_index = -1;
 	env->delimiter = 0;
-	env->nb_dup = 0;
 }
 
 void			get_connexion_start_end(t_env *env)
@@ -199,17 +197,17 @@ int				main(void)
 	}
 	else
 		dijkstra(&env, env.nb_nodes, i);
-	create_path_tab(env.results, &env.paths_ok, env.nb_path_ok);
+	create_path_tab(env.results, &env.paths, env.nb_path);
 	i = 0;
-	while (i < env.nb_path_ok)
+	while (i < env.nb_path)
 	{
 		j = 0;
-		ft_printf("len = %d\n", env.paths_ok[i].len);
-		if (env.paths_ok[i].len > 0)
+		ft_printf("len = %d\n", env.paths[i].len);
+		if (env.paths[i].len > 0)
 		{
-			while (j <= env.paths_ok[i].len)
+			while (j <= env.paths[i].len)
 			{
-				ft_printf("path[%d][%d] = %s\n", i, j, env.rooms[env.paths_ok[i].path[j]].name);
+				ft_printf("path[%d][%d] = %s\n", i, j, env.rooms[env.paths[i].path[j]].name);
 				j++;
 			}
 		}
@@ -217,7 +215,7 @@ int				main(void)
 		ft_putendl("");
 	}
 	ft_printf(">>>>>>>>>>>>>>>>>END_SEARCH<<<<<<<<<<<<<<<<<<<<\n\n");
-	if (env.nb_path_ok == 0)
+	if (env.nb_path == 0)
 		ft_putendl("No passaran");
 //	del_dup_paths(&env);
 	fill_combinations(&env);
