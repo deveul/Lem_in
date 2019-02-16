@@ -65,12 +65,6 @@ typedef struct		s_dij
 	int				nextnode;
 }					t_dij;
 
-typedef struct		s_fifo
-{
-	int				index;
-	int				path_index;
-}					t_fifo;
-
 typedef struct		s_combinations
 {
 	int				*index_array;
@@ -84,16 +78,12 @@ typedef struct		s_env
 	int				delimiter;
 	int				end;
 	int				end_index;
-	int				fifo_index;
-	int				nb_dup;
-	int				nb_no_dup;
 	int				nb_c_dup;
 	int				nb_f_c;
 	int				nb_edges;
 	int				nb_fifo;
 	int				nb_nodes;
 	int				nb_path;
-	int				nb_path_ok;
 	int				start;
 	int				start_index;
 	long			nb_ants;
@@ -102,12 +92,8 @@ typedef struct		s_env
 	int				*start_links;
 	int				*end_links;
 	t_ant			*ants;
-	t_fifo			*fifo;
 	t_node			*nodes;
 	t_res			*results;
-	t_path			first_path;
-	t_path			*paths_ok;
-	t_path			*paths_no_dup;
 	t_path			*paths;
 	t_room			*rooms;
 	t_combinations	*combi;
@@ -115,7 +101,6 @@ typedef struct		s_env
 }					t_env;
 
 int					*dup_table(int *src, int len);
-int					del_dup_paths(t_env *env);
 int					*expand_table(int *src, int len, int to_add);
 int					algo(t_env *env);
 int					analyze_edge(t_env *env, char *line);
@@ -131,7 +116,6 @@ t_path				*add_path(t_path *tocpy, int nb_path, int pathtocpy);
 void				add_node(t_node **nodes, t_room room);
 void				add_result(t_res **results, t_path path);
 void				create_rooms(t_node *node, t_room **rooms, int nb_nodes);
-void				fill_initial_fifo(t_env *env);
 void				print_env(t_env *env);
 void				print_path(t_env *env);
 int					analyze_node(t_env *env, char *line);
@@ -144,7 +128,6 @@ void				aff_data_3(t_dij *dij, int i, t_env *env);
 void				create_path_tab(t_res *res, t_path **paths_ok, int nb_paths);
 void				update_matrice(t_env *env, int index);
 void				fill_combinations(t_env *env);
-int					compare_paths(t_path p1, t_path p2);
-
+int					save_path(t_env *env, t_dij *dij);
 
 #endif

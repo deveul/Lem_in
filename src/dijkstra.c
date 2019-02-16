@@ -6,61 +6,11 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:46:39 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/16 03:42:31 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/16 13:21:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lemin.h>
-	
-static int	save_path(t_env *env, int index, t_dij *dij)
-{
-	t_path 	tmp;
-	t_res	*tmp_res;
-	int 	j;
-	int 	i;
-	int 	x;
-
-	i = 0;
-	x = 0;
-	j = 0;
-	while (i < env->nb_nodes)
-	{
-		if (i == env->end_index)
-		{
-			if (dij->distance[i] == INFINITE || dij->distance[i] == 0)
-				return (-1);
-			tmp.path = ft_memalloc(sizeof(int) * (dij->distance[i] + 1));
-			tmp.len = dij->distance[i];
-			x = tmp.len;
-			tmp.path[x] = i;
-			x--;
-			j = i;
-			while (j != env->start_index)
-			{
-				j = dij->pred[j];
-				tmp.path[x] = j;
-				x--;
-			}
-			if (env->nb_path_ok > 0)
-			{
-				tmp_res = env->results;
-				while (tmp_res != NULL)
-				{
-					if (tmp.len == tmp_res->path.len 
-						&& compare_paths(tmp, tmp_res->path) == 1)
-						return (-1);	
-					tmp_res = tmp_res->next;
-				}
-			}
-			add_result(&env->results, tmp);
-			if (index == 0)
-				env->first_path = tmp;
-			return (0);
-		}
-		i++;
-	}
-	return (-1);
-}
 
 static void	init_dijkstra(t_dij *dij, t_env *env)
 {
@@ -156,12 +106,10 @@ int			dijkstra(t_env *env, int n, int index)
 	}
 //	ft_printf("\n>>>>>>>>>>>>>>>>>END<<<<<<<<<<<<<<<<<<<\n");
 //	aff_data_1(&dij, n, count);
-	if (save_path(env, index, &dij) != -1)
-		env->nb_path_ok++;
+	if (save_path(env, &dij) != -1)
+		env->nb_path++;
 	update_matrice(env, index);
 	free_dij(&dij);
-	if (index == env->first_path.len)
-		return (-1);
 	return (0);
 }
 

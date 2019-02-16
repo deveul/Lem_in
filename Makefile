@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2019/02/16 03:40:36 by marvin           ###   ########.fr        #
+#    Updated: 2019/02/16 13:04:11 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,15 +29,13 @@ LDLIBS		=	-lft
 SRC_NAME	=	main.c \
 				print_env.c \
 				fill.c \
-				bfs.c \
-				init_bfs.c \
 				read_data.c \
 				fill_matrice.c \
 				handle_memory.c \
 				create_rooms.c \
 				dijkstra.c \
 				aff_data_dij.c \
-				del_dup_paths.c \
+				check_path_list.c \
 				update_matrice.c \
 				fill_combinations.c
 

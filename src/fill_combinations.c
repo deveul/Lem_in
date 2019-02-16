@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 12:10:03 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/16 02:51:53 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/16 13:58:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		print_combi_ini(t_env *env)
 
 	i = 0;
 	ft_putendl(">>>>>>>>>>>>>>>Initial combinations<<<<<<<<<<<<<<<<");
-	while (i < env->nb_no_dup)
+	while (i < env->nb_path)
 	{
 		ft_putendl("--------------");
 		j = 0;
@@ -40,7 +40,7 @@ void		print_combi(t_env *env)
 	int		j;
 
 	i = 0;
-	ft_putendl(">>>>>>>>>>>>>>>Final combinations<<<<<<<<<<<<<<<<");
+	ft_putendl(">>>>>>>>>>>>>>>FINAL_COMBINATIONS<<<<<<<<<<<<<<<<");
 	while (i < env->nb_f_c)
 	{
 		ft_putendl("--------------");
@@ -66,10 +66,10 @@ void		count_dup(t_env *env)
 
 	i = 0;
 	env->nb_c_dup = 0;
-	while (i < env->nb_path_ok)
+	while (i < env->nb_path)
 	{
 		j = i + 1;
-		while (j < env->nb_path_ok)
+		while (j < env->nb_path)
 		{
 			if (env->combi[i].nb_combi == env->combi[j].nb_combi)
 			{
@@ -91,7 +91,7 @@ void		count_dup(t_env *env)
 		}
 		i++;
 	}
-	env->nb_f_c = env->nb_path_ok - env->nb_c_dup;
+	env->nb_f_c = env->nb_path - env->nb_c_dup;
 }
 
 void		del_dup_combi(t_env *env)
@@ -100,7 +100,7 @@ void		del_dup_combi(t_env *env)
 	int		j;
 
 	i = 0;
-	while (i < env->nb_path_ok)
+	while (i < env->nb_path)
 	{
 		ft_sort_int_tab(env->combi[i].index_array, env->combi[i].nb_combi);
 		env->combi[i].dup = 0;
@@ -115,7 +115,7 @@ void		del_dup_combi(t_env *env)
 	}
 	i = 0;
 	j = 0;
-	while (i < env->nb_path_ok && j < env->nb_f_c)
+	while (i < env->nb_path && j < env->nb_f_c)
 	{
 		if (env->combi[i].dup == 0)
 			env->final_combi[j++] = env->combi[i++];
@@ -126,7 +126,7 @@ void		del_dup_combi(t_env *env)
 
 void		init_combi(t_env *env, int i)
 {
-	env->combi[i].index_array = ft_memalloc(env->nb_path_ok * sizeof(int));
+	env->combi[i].index_array = ft_memalloc(env->nb_path * sizeof(int));
 	env->combi[i].index_array[0] = i;
 	env->combi[i].nb_combi = 1;
 }
@@ -168,15 +168,15 @@ void		check_combi(t_env *env, int i)
 	k = 0;
 	add = 1;
 	init_combi(env, i);
-	while (k < env->nb_path_ok)
+	while (k < env->nb_path)
 	{
 		if (i != k)
-			if (confront_two_paths(env->paths_ok[i], env->paths_ok[k]) == 0)
+			if (confront_two_paths(env->paths[i], env->paths[k]) == 0)
 			{
 				l = 1;
 				while (l < env->combi[i].nb_combi)
 				{
-					if (confront_two_paths(env->paths_ok[env->combi[i].index_array[l]], env->paths_ok[k]) == -1)
+					if (confront_two_paths(env->paths[env->combi[i].index_array[l]], env->paths[k]) == -1)
 						break ;
 					l++;
 				}
@@ -195,8 +195,8 @@ void		fill_combinations(t_env *env)
 	int		i;
 
 	i = 0;
-	env->combi = ft_memalloc(env->nb_path_ok * sizeof(t_combinations));
-	while (i < env->nb_path_ok)
+	env->combi = ft_memalloc(env->nb_path * sizeof(t_combinations));
+	while (i < env->nb_path)
 	{
 		check_combi(env, i);
 		i++;
