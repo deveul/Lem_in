@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 12:10:03 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/16 14:41:53 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/16 16:28:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@ void		print_combi(t_env *env)
 	{
 		ft_putendl("--------------");
 		j = 0;
+		ft_printf("Combi[%2d]: ", i);
 		while (j < env->final_combi[i].nb_combi)
 		{
-			ft_printf("%d-", env->final_combi[i].index_array[j]);
+			ft_printf("%-3d", env->final_combi[i].index_array[j]);
 			j++;
 		}
 		ft_putendl("");

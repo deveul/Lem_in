@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/16 15:32:46 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/16 16:24:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,26 +54,6 @@ void			add_node(t_node **nodes, t_room room)
 	if (*nodes == NULL)
 	{
 		*nodes = new;
-		return ;
-	}
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	tmp->next = new;
-}
-
-void		add_result(t_res **results, t_path path)
-{
-	t_res	*tmp;
-	t_res	*new;
-
-	tmp = *results;
-	if (!(new = ft_memalloc(sizeof(t_res))))
-		exit (-1);
-	new->path = path;
-	new->next = NULL;
-	if (*results == NULL)
-	{
-		*results = new;
 		return ;
 	}
 	while (tmp->next != NULL)
@@ -175,7 +155,6 @@ int				main(void)
 {
 	t_env	env;
 	int		i;
-	int 	j;
 
 	init_env(&env);
 	ft_printf(">>>>>>>>>>>>>>>>>ANALYSE_DATA<<<<<<<<<<<<<<<<<<<<\n");
@@ -199,26 +178,10 @@ int				main(void)
 	else
 		dijkstra(&env, env.nb_nodes, i);
 	create_path_tab(env.results, &env.paths, env.nb_path);
-	i = 0;
-	while (i < env.nb_path)
-	{
-		j = 0;
-		ft_printf("len = %d\n", env.paths[i].len);
-		if (env.paths[i].len > 0)
-		{
-			while (j <= env.paths[i].len)
-			{
-				ft_printf("path[%d][%d] = %s\n", i, j, env.rooms[env.paths[i].path[j]].name);
-				j++;
-			}
-		}
-		i++;
-		ft_putendl("");
-	}
 	ft_printf(">>>>>>>>>>>>>>>>>END_SEARCH<<<<<<<<<<<<<<<<<<<<\n\n");
+	print_path(&env);
 	if (env.nb_path == 0)
 		ft_putendl("No passaran");
-//	del_dup_paths(&env);
 	fill_combinations(&env);
 	free_memory(&env);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 16:30:51 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/16 15:25:56 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/16 16:23:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,26 @@ static int	check_path_list(t_env *env, t_path tmp)
 	return (0);
 }
 
+void		add_result(t_res **results, t_path path)
+{
+	t_res	*tmp;
+	t_res	*new;
+
+	tmp = *results;
+	if (!(new = ft_memalloc(sizeof(t_res))))
+		exit (-1);
+	new->path = path;
+	new->next = NULL;
+	if (*results == NULL)
+	{
+		*results = new;
+		return ;
+	}
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = new;
+}
+
 int	save_path(t_env *env, t_dij *dij)
 {
 	t_path 	tmp;
@@ -78,11 +98,9 @@ int	save_path(t_env *env, t_dij *dij)
 			if (check_path_list(env, tmp) == -1)
 				break ;
 			add_result(&env->results, tmp);
-			//free (tmp.path);
 			return (0);
 		}
 		i++;
 	}
-	//free(tmp.path);
 	return (-1);
 }

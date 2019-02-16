@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:57:29 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/13 17:52:44 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/16 16:19:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,37 +21,18 @@ void	print_path(t_env *env)
 	ft_putendl(">>>>>>>>>>>Paths<<<<<<<<<<<<<<<");
 	while (i < env->nb_path)
 	{
-		ft_printf("Path [%4d]: ", i);
+		ft_putendl("");
+		ft_printf("Path[%2d]: ", i);
 		j = 0;
 		while (j < env->paths[i].len)
 		{
-			ft_printf("%-7d", env->paths[i].path[j]);
+			ft_printf("%-5d", env->paths[i].path[j]);
 			j++;
 		}
 		ft_putendl("");
 		i++;
 	}
-	i = 0;
 	ft_putendl("");
-	ft_putendl(">>>>>>>>>>>Valid Paths<<<<<<<<<<<<<<<");
-	while (i < env->nb_path)
-	{
-		if (env->paths[i].end_found == 1)
-		{
-			ft_printf("Path_bfs[%4d]: ", i);
-			j = 0;
-			while (j < env->paths[i].len)
-			{
-				if (j < env->paths[i]. len - 1)
-					ft_printf("%s-", env->rooms[env->paths[i].path[j]].name);
-				else
-					ft_printf("%s", env->rooms[env->paths[i].path[j]].name);
-				j++;
-			}
-			ft_putendl("");
-		}
-		i++;
-	}
 }
 
 void	print_matrice(t_env *env)
