@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/18 14:06:22 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/18 21:07:45 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,11 +126,15 @@ void			get_connexion_start_end(t_env *env)
 	}
 }
 
-int				main(void)
+int				main(int argc, char **argv)
 {
 	t_env	env;
 	int		i;
 
+	if (argc != 2)
+	{
+		ft_printf("./lem-in < maps nb_of_combi_chosen (biggest possible chosen if too big)\n");
+	}
 	init_env(&env);
 	ft_printf(">>>>>>>>>>>>>>>>>ANALYSE_DATA<<<<<<<<<<<<<<<<<<<<\n");
 	i = 0;
@@ -158,7 +162,10 @@ int				main(void)
 	if (env.nb_path == 0)
 		ft_putendl("No passaran");
 	fill_combinations(&env);
-	dispatch_ants(&env);
+	env.combi_chosen = ft_atoi(argv[1]);
+	if (env.combi_chosen > env.nb_f_c - 1)
+		env.combi_chosen = env.nb_f_c - 1;
+	dispatch_ants(&env, env.combi_chosen);
 	free_memory(&env);
 	return (0);
 }
