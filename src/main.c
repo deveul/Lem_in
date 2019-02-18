@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/18 21:07:45 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/18 21:22:35 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ int				main(int argc, char **argv)
 	if (argc != 2)
 	{
 		ft_printf("./lem-in < maps nb_of_combi_chosen (biggest possible chosen if too big)\n");
+		return (-1);
 	}
 	init_env(&env);
 	ft_printf(">>>>>>>>>>>>>>>>>ANALYSE_DATA<<<<<<<<<<<<<<<<<<<<\n");
