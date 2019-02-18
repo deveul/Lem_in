@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/16 16:50:35 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/18 14:06:22 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ int				main(void)
 	if (env.nb_path == 0)
 		ft_putendl("No passaran");
 	fill_combinations(&env);
+	dispatch_ants(&env);
 	free_memory(&env);
 	return (0);
 }

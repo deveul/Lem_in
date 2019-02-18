@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/15 19:12:09 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/18 18:57:43 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ typedef struct		s_room
 	int				check;
 	int				end;
 	int				index;
+	int				room_content;
 	int				start;
-//	int				x;
-//	int				y;
 }					t_room;
 
 typedef struct		s_node
@@ -38,8 +37,6 @@ typedef struct		s_node
 
 typedef struct		s_ant
 {
-	char			*current_node;
-	int				nb;
 }					t_ant;
 
 typedef struct		s_path
@@ -68,6 +65,7 @@ typedef struct		s_dij
 typedef struct		s_combinations
 {
 	int				*index_array;
+	int				*ants_by_index;
 	int				nb_combi;
 	int				dup;
 }					t_combinations;
@@ -89,6 +87,7 @@ typedef struct		s_env
 	long			nb_ants;
 	int				start_nb;
 	int				end_nb;
+	int				combi_chosen;
 	int				*start_links;
 	int				*end_links;
 	t_ant			*ants;
@@ -128,6 +127,7 @@ void				aff_data_3(t_dij *dij, int i, t_env *env);
 void				create_path_tab(t_res *res, t_path **paths_ok, int nb_paths);
 void				update_matrice(t_env *env, int index);
 void				fill_combinations(t_env *env);
+void				dispatch_ants(t_env *env);
 int					save_path(t_env *env, t_dij *dij);
 
 #endif

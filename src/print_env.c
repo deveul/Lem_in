@@ -6,11 +6,34 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:57:29 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/16 16:35:28 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/18 18:52:33 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lemin.h>
+
+void	print_path_with_name(t_env *env)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	ft_putendl(">>>>>>>>>>>Paths with name<<<<<<<<<<<<<<<");
+	while (i < env->nb_path)
+	{
+		ft_putendl("");
+		ft_printf("Path[%2d]: ", i);
+		j = 0;
+		while (j <= env->paths[i].len)
+		{
+			ft_printf("%-10s", env->rooms[env->paths[i].path[j]].name);
+			j++;
+		}
+		ft_putendl("");
+		i++;
+	}
+	ft_putendl("");
+}
 
 void	print_path(t_env *env)
 {
@@ -33,6 +56,7 @@ void	print_path(t_env *env)
 		i++;
 	}
 	ft_putendl("");
+	print_path_with_name(env);
 }
 
 void	print_matrice(t_env *env)
