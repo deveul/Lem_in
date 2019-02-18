@@ -49,12 +49,10 @@ t_path	*add_path(t_path *tocpy, int nb_path, int ptocpy)
 	{
 		paths[i].path = dup_table(tocpy[i].path, tocpy[i].len);
 		paths[i].len = tocpy[i].len;
-		paths[i].end_found = tocpy[i].end_found;
 		i++;
 	}
 	paths[nb_path].path = dup_table(tocpy[ptocpy].path, tocpy[ptocpy].len);
 	paths[nb_path].len = tocpy[ptocpy].len;
-	paths[nb_path].end_found = tocpy[ptocpy].end_found;
 	i = 0;
 	while (i < nb_path)
 	{
