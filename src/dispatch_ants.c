@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 14:00:23 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/18 18:58:37 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/18 19:06:29 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,12 @@ void		move_ants(t_env *env)
 	int		nb_ants;
 	int		ants_in;
 	int		nb_path;
+	int		line_printed;
 
 	nb_ants = env->nb_ants;
 	nb_path = env->final_combi[env->combi_chosen].nb_combi;
 	ants_in = 1;
+	line_printed = 0;
 	while (nb_ants > 0)
 	{
 		i = 0;
@@ -100,9 +102,10 @@ void		move_ants(t_env *env)
 			}
 			i++;
 		}
+		line_printed++;
 		ft_putendl("");
-		//		nb_ants--;
 	}
+	ft_printf("line printed:%d\n", line_printed);
 }
 
 void		dispatch_ants(t_env *env)
@@ -113,6 +116,7 @@ void		dispatch_ants(t_env *env)
 	int		ants_by_turn;
 	int		nb_turn;
 
+	//return ;
 	env->combi_chosen = 0;
 	env->final_combi[env->combi_chosen].ants_by_index = ft_memalloc(sizeof(int) * env->final_combi[env->combi_chosen].nb_combi);
 	index_long = get_turn_lenght(env, &len);
