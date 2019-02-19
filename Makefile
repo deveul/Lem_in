@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2019/02/19 15:06:19 by vrenaudi         ###   ########.fr        #
+#    Updated: 2019/02/19 16:39:29 by vrenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ SRC_NAME	=	main.c \
 				update_matrice.c \
 				fill_combinations.c \
 				dispatch_ants.c \
-				move_ants.c
+				move_ants.c \
+				choose_combinations.c
 
 OBJ_NAME	=	$(SRC_NAME:.c=.o)
 

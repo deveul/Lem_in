@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 15:04:12 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/19 15:35:35 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/19 17:14:20 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void		move_to_last_room(t_env *env, int *tmp, int j)
 {
 	if (env->rooms[tmp[j - 1]].room_content != 0)
 	{
-//		ft_printf("L%d-%s ", env->rooms[tmp[j - 1]].room_content, env->rooms[env->end_index].name);
+		ft_printf("L%d-%s ", env->rooms[tmp[j - 1]].room_content,
+				env->rooms[env->end_index].name);
 		env->rooms[tmp[j - 1]].room_content = 0;
 		env->nb_ants--;
 	}
@@ -24,7 +25,8 @@ void		move_to_last_room(t_env *env, int *tmp, int j)
 
 void		move_in_graph(t_env *env, int *tmp, int j)
 {
-//	ft_printf("L%d-%s ", env->rooms[tmp[j - 1]].room_content, env->rooms[tmp[j]].name);
+	ft_printf("L%d-%s ", env->rooms[tmp[j - 1]].room_content,
+			env->rooms[tmp[j]].name);
 	env->rooms[tmp[j]].room_content = env->rooms[tmp[j - 1]].room_content;
 	env->rooms[tmp[j - 1]].room_content = 0;
 }
@@ -34,9 +36,9 @@ void		move_from_start(t_env *env, int *ants_in, int j, int i)
 	int		*tmp;
 
 	tmp = env->paths[env->final_combi[env->c_c].index_array[i]].path;
-	if (env->paths[env->final_combi[env->c_c].index_array[i]].ants_launched < env->final_combi[env->c_c].ants_by_index[i])
+	if (env->paths[env->final_combi[env->c_c].index_array[i]].len - env->len_min < env->nb_line)
 	{
-//		ft_printf("L%d-%s ", (*ants_in), env->rooms[tmp[1]].name);
+		ft_printf("L%d-%s ", (*ants_in), env->rooms[tmp[1]].name);
 		env->rooms[tmp[j]].room_content = (*ants_in)++;
 		env->paths[env->final_combi[env->c_c].index_array[i]].ants_launched++;
 	}
@@ -70,7 +72,8 @@ void		move_ants(t_env *env, t_ants ants)
 				}
 		}
 		line_printed++;
-//		ft_putendl("");
+		env->nb_line--;
+		ft_putendl("");
 	}
 	ft_printf("line printed:%d\n", line_printed);
 }
