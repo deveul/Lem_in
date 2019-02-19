@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/18 20:06:06 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/19 15:05:13 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,6 @@ typedef struct		s_node
 	struct	s_node 	*next;
 }					t_node;
 
-typedef struct		s_ant
-{
-}					t_ant;
-
 typedef struct		s_path
 {
 	int				*path;
@@ -53,6 +49,14 @@ typedef struct		s_res
 	t_path			path;
 	struct	s_res	*next;
 }					t_res;
+
+typedef struct		s_ants
+{
+	int				nb_ants;
+	int				nb_path;
+	int				by_turn;
+	int				same_ants_nb;
+}					t_ants;
 
 typedef struct		s_dij
 {
@@ -88,10 +92,9 @@ typedef struct		s_env
 	long			nb_ants;
 	int				start_nb;
 	int				end_nb;
-	int				combi_chosen;
+	int				c_c;
 	int				*start_links;
 	int				*end_links;
-	t_ant			*ants;
 	t_node			*nodes;
 	t_res			*results;
 	t_path			*paths;
@@ -128,7 +131,8 @@ void				aff_data_3(t_dij *dij, int i, t_env *env);
 void				create_path_tab(t_res *res, t_path **paths_ok, int nb_paths);
 void				update_matrice(t_env *env, int index);
 void				fill_combinations(t_env *env);
-void				dispatch_ants(t_env *env, int nb);
+void				dispatch_ants(t_env *env);
+void				move_ants(t_env *env, t_ants ants);
 int					save_path(t_env *env, t_dij *dij);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:21:51 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/16 14:22:04 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/19 11:35:21 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int	get_ants_nb(t_env *env, char *line)
 				env->nb_ants = ft_atoi(line);
 				ft_strdel(&line);
 				if (env->nb_ants <= 0 && ft_printf("Wrong number of ants.\n"))
-					exit (-1);
-				if (!(env->ants = ft_memalloc(env->nb_ants * sizeof(t_ant))))
 					exit (-1);
 			}
 			else
