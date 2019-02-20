@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 12:10:03 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/20 12:17:50 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/20 18:29:25 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ void		print_combi_ini(t_env *env)
 	{
 		ft_putendl("--------------");
 		j = 0;
-		while (j < env->combi[i].nb_combi)
+		while (j < env->combi[i].nb_path)
 		{
 			ft_printf("%d-", env->combi[i].index_array[j]);
 			j++;
 		}
 		ft_putendl("");
-		ft_printf("Nb path in combi : %d\n", env->combi[i].nb_combi);
+		ft_printf("Nb path in combi : %d\n", env->combi[i].nb_path);
 		ft_putendl("--------------");
 		i++;
 	}
@@ -46,13 +46,13 @@ void		print_combi(t_env *env)
 		ft_putendl("--------------");
 		j = 0;
 		ft_printf("Combi[%2d]: ", i);
-		while (j < env->final_combi[i].nb_combi)
+		while (j < env->final_combi[i].nb_path)
 		{
 			ft_printf("%-3d", env->final_combi[i].index_array[j]);
 			j++;
 		}
 		ft_putendl("");
-		ft_printf("Nb path in combi : %d\n", env->final_combi[i].nb_combi);
+		ft_printf("Nb path in combi : %d\n", env->final_combi[i].nb_path);
 		ft_putendl("--------------");
 		i++;
 	}
@@ -64,25 +64,26 @@ void		count_dup(t_env *env)
 	int		j;
 	int		k;
 	int		eq;
+	int		c_dup;
 
 	i = 0;
-	env->nb_c_dup = 0;
+	c_dup = 0;
 	while (i < env->nb_path)
 	{
 		j = i + 1;
 		while (j < env->nb_path)
 		{
-			if (env->combi[i].nb_combi == env->combi[j].nb_combi)
+			if (env->combi[i].nb_path == env->combi[j].nb_path)
 			{
 				k = 0;
 				eq = 0;
-				while (k < env->combi[i].nb_combi)
+				while (k < env->combi[i].nb_path)
 				{
 					if (env->combi[i].index_array[k] == env->combi[j].index_array[k])
 						eq++;
-					if (eq == env->combi[j].nb_combi && env->combi[j].dup == 0)
+					if (eq == env->combi[j].nb_path && env->combi[j].dup == 0)
 					{
-						env->nb_c_dup++;
+						c_dup++;
 						env->combi[j].dup = 1;
 					}
 					k++;
@@ -92,7 +93,7 @@ void		count_dup(t_env *env)
 		}
 		i++;
 	}
-	env->nb_f_c = env->nb_path - env->nb_c_dup;
+	env->nb_f_c = env->nb_path - c_dup;
 }
 
 void		del_dup_combi(t_env *env)
@@ -103,17 +104,13 @@ void		del_dup_combi(t_env *env)
 	i = 0;
 	while (i < env->nb_path)
 	{
-		ft_sort_int_tab(env->combi[i].index_array, env->combi[i].nb_combi);
+		ft_sort_int_tab(env->combi[i].index_array, env->combi[i].nb_path);
 		env->combi[i].dup = 0;
 		i++;
 	}
 	count_dup(env);
 	if (!(env->final_combi = ft_memalloc(env->nb_f_c * sizeof(t_combinations))))
-	{
-		ft_printf("env->nb_f_c:%d\n", env->nb_f_c);
-		ft_printf("malloc_error\n");
 		exit (-1);
-	}
 	i = 0;
 	j = 0;
 	while (i < env->nb_path && j < env->nb_f_c)
@@ -125,6 +122,17 @@ void		del_dup_combi(t_env *env)
 	}
 }
 
+<<<<<<< HEAD
+=======
+void		init_combi(t_env *env, int i)
+{
+	if (!(env->combi[i].index_array = ft_memalloc(env->nb_path * sizeof(int))))
+		exit (-1);
+	env->combi[i].index_array[0] = i;
+	env->combi[i].nb_path = 1;
+}
+
+>>>>>>> 1d2cf476f0870ed5965fd8353987be01e905c3b7
 int			search_node_in_path(int node, t_path p)
 {
 	int		i;
@@ -176,7 +184,7 @@ void		check_combi(t_env *env, int i)
 			if (confront_two_paths(env->paths[i], env->paths[k]) == 0)
 			{
 				l = 1;
-				while (l < env->combi[i].nb_combi)
+				while (l < env->combi[i].nb_path)
 				{
 					if (confront_two_paths(env->paths[env->combi[i].index_array[l]], env->paths[k]) == -1)
 					{
@@ -186,10 +194,10 @@ void		check_combi(t_env *env, int i)
 					}
 					l++;
 				}
-				if (l == env->combi[i].nb_combi)
+				if (l == env->combi[i].nb_path)
 				{
 					env->combi[i].index_array[add++] = k;
-					env->combi[i].nb_combi++;
+					env->combi[i].nb_path++;
 				}
 			}
 		k++;
