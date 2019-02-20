@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:21:51 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/19 19:06:44 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/19 11:35:21 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,21 @@ int	handle_start_end_com(t_env *env, char *line)
 {
 	if (ft_strequ(line, "##start"))
 	{
-		if (env->start_index != -1)
+		if (env->start == 2)
 		{
 			ft_printf("Too many ##start\n");
 			return (-1);
 		}
-		env->start_index = -2;
+		env->start = 1;
 	}
 	else if (ft_strequ(line, "##end"))
 	{
-		if (env->end_index != -1)
+		if (env->end == 2)
 		{
 			ft_printf("Too many ##end\n");
 			return (-1);
 		}
-		env->end_index = -2;
+		env->end = 1;
 	}
 	return (0);
 }
@@ -64,7 +64,7 @@ int	analyze_node(t_env *env, char *line)
 {
 	char	**tab;
 
-	if (env->matrice)
+	if (env->delimiter == 1)
 		return (-1);
 	tab = ft_strsplit(line, ' ');
 	if (ft_tablen(tab) != 3)
@@ -101,6 +101,7 @@ int	analyze_edge(t_env *env, char *line)
 		ft_printf("Ground control to Major Tom\n");
 		return (-1);
 	}
+	env->nb_edges++;
 	ft_delete_tab(tab);
 	return (0);
 }

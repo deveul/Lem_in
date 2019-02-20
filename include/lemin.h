@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/20 11:09:16 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/20 14:09:19 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 typedef struct		s_room
 {
 	char			*name;
+	int				check;
 	int				end;
 	int				index;
 	int				room_content;
@@ -37,7 +38,10 @@ typedef struct		s_node
 typedef struct		s_path
 {
 	int				*path;
+	int				check;
 	int				len;
+	int				dup;
+	int				ants_launched;
 }					t_path;
 
 typedef struct		s_res
@@ -45,6 +49,14 @@ typedef struct		s_res
 	t_path			path;
 	struct	s_res	*next;
 }					t_res;
+
+typedef struct		s_ants
+{
+	int				nb_ants;
+	int				nb_path;
+	int				by_turn;
+	int				same_ants_nb;
+}					t_ants;
 
 typedef struct		s_dij
 {
@@ -58,24 +70,30 @@ typedef struct		s_dij
 typedef struct		s_combinations
 {
 	int				*index_array;
-	int				nb_path;
+	int				*ants_by_index;
+	int				nb_combi;
 	int				dup;
 }					t_combinations;
 
 typedef struct		s_env
 {
 	int				**matrice;
+	int				delimiter;
+	int				end;
 	int				end_index;
-	int				start_index;
+	int				nb_c_dup;
 	int				nb_f_c;
-	int				nb_line;
+	int				nb_edges;
+	int				nb_fifo;
 	int				nb_nodes;
 	int				nb_path;
+	int				start;
+	int				start_index;
 	long			nb_ants;
 	int				start_nb;
 	int				end_nb;
 	int				c_c;
-	int				len_min;
+	int				nb_line;
 	int				*start_links;
 	int				*end_links;
 	t_node			*nodes;
@@ -111,12 +129,12 @@ int					dijkstra(t_env *env, int n, int index);
 void				aff_data_1(t_dij *dij, int n, int count);
 void				aff_data_2(t_dij *dij, int i);
 void				aff_data_3(t_dij *dij, int i, t_env *env);
-void				create_path_tab(t_res *res, t_path **paths_ok, int nb_p);
+void				create_path_tab(t_res *res, t_path **paths_ok, int nb_paths);
 void				update_matrice(t_env *env, int index);
 void				fill_combinations(t_env *env);
 void				choose_combinations(t_env *env);
 void				dispatch_ants(t_env *env);
-void				move_ants(t_env *env);
+void				move_ants(t_env *env, t_ants ants);
 int					save_path(t_env *env, t_dij *dij);
 
 #endif
