@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/20 18:29:08 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/20 19:07:15 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void		free_memory(t_env *env)
 	}
 	free(env->matrice);
 	i = 0;
-	while (i < env->nb_path)
+	while (i < env->nb_f_c)
 		free(env->combi[i++].index_array);
 	free(env->combi);
 	free(env->final_combi);
@@ -96,10 +96,14 @@ static void		init_env(t_env *env)
 	env->nb_ants = -1;
 	env->nb_nodes = 0;
 	env->nb_path = 0;
+	env->nb_edges = 0;
+	env->start = 0;
 	env->start_nb = 0;
+	env->end = 0;
 	env->end_nb = 0;
 	env->start_index = -1;
 	env->end_index = -1;
+	env->delimiter = 0;
 }
 
 void			get_connexion_start_end(t_env *env)
@@ -129,12 +133,12 @@ int				main(void)
 	init_env(&env);
 	ft_printf(">>>>>>>>>>>>>>>>>ANALYSE_DATA<<<<<<<<<<<<<<<<<<<<\n");
 	i = 0;
-	if (read_data(&env) == -1 || env.start_index < 0 || env.end_index < 0)
+	if (read_data(&env) == -1 || env.start == 0 || env.end == 0)
 	{
 		ft_printf("ERROR\n");
 		return (-1);
 	}
-	if (!env.matrice)
+	if (env.nb_edges == 0)
 	{
 		ft_putendl("no connexion");
 		return (-1);

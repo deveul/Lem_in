@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 15:04:12 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/20 12:17:52 by smakni           ###   ########.fr       */
+/*   Updated: 2019/02/20 19:08:53 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ void		move_ants(t_env *env, t_ants ants)
 	int		line_printed;
 	int		*tmp;
 
+	ants_in = ants.nb_path;
 	ants_in = 1;
 	line_printed = 0;
 	while (env->nb_ants > 0)
 	{
 		i = -1;
-		while (++i < ants.nb_path)
+		while (++i < env->final_combi[env->c_c].nb_combi)
 		{
 			tmp = env->paths[env->final_combi[env->c_c].index_array[i]].path;
 			j = env->paths[env->final_combi[env->c_c].index_array[i]].len;
@@ -73,4 +74,5 @@ void		move_ants(t_env *env, t_ants ants)
 		ft_putendl("");
 	}
 	ft_printf("line printed:%d\n", line_printed);
+	ft_printf("estimated:%d\n", env->nb_line);
 }

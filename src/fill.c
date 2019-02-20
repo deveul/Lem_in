@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:13:09 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/19 19:19:21 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/18 17:09:44 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,16 @@ static int		check_unicity(t_node *nodes, char *name)
 
 static	void	check_start_end(t_env *env, t_room *tmp)
 {
-	if (env->start_index == -2)
+	if (env->start == 1)
 	{
 		tmp->start = 1;
+		env->start = 2;
 		env->start_index = env->nb_nodes;
 	}
-	if (env->end_index == -2)
+	if (env->end == 1)
 	{
 		tmp->end = 1;
+		env->end = 2;
 		env->end_index = env->nb_nodes;
 	}
 }
@@ -48,6 +50,7 @@ static void		init_t_room(t_room *tmp)
 	tmp->name = NULL;
 	tmp->start = 0;
 	tmp->end = 0;
+	tmp->check = 0;
 	tmp->index = 0;
 }
 
@@ -66,6 +69,7 @@ int				fill_room(t_env *env, char **tab)
 	}
 	check_start_end(env, &tmp);
 	tmp.index = env->nb_nodes;
+	tmp.check = 0;
 	tmp.room_content = 0;
 	add_node(&env->nodes, tmp);
 	env->nb_nodes++;
