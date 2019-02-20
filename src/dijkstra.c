@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:46:39 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/16 15:17:41 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/20 19:23:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int			dijkstra(t_env *env, int n, int index)
 //	aff_data_1(&dij, n, count);
 	if (save_path(env, &dij) != -1)
 		env->nb_path++;
-	update_matrice(env, index);
+	update_matrice_2(env, index);
 	free_dij(&dij);
 	return (0);
 }

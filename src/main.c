@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/20 19:07:15 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/20 19:24:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ static void		init_env(t_env *env)
 	env->start_index = -1;
 	env->end_index = -1;
 	env->delimiter = 0;
+	env->i_e = 0;
+	env->i_s = 0;
 }
 
 void			get_connexion_start_end(t_env *env)
@@ -147,7 +149,7 @@ int				main(void)
 	ft_printf("\n>>>>>>>>>>>>>>>>>SEARCH_PATH<<<<<<<<<<<<<<<<<<<<\n\n");
 	i = 0;
 	if (env.start_nb > 1 && env.end_nb > 1)
-		while (i <= env.start_nb + env.end_nb)
+		while (i <= env.start_nb * env.end_nb)
 			dijkstra(&env, env.nb_nodes, i++);
 	else
 		dijkstra(&env, env.nb_nodes, i);

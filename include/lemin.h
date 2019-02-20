@@ -78,6 +78,8 @@ typedef struct		s_combinations
 typedef struct		s_env
 {
 	int				**matrice;
+	int				i_e;
+	int				i_s;
 	int				delimiter;
 	int				end;
 	int				end_index;
@@ -131,6 +133,7 @@ void				aff_data_2(t_dij *dij, int i);
 void				aff_data_3(t_dij *dij, int i, t_env *env);
 void				create_path_tab(t_res *res, t_path **paths_ok, int nb_paths);
 void				update_matrice(t_env *env, int index);
+void				update_matrice_2(t_env *env, int index);
 void				fill_combinations(t_env *env);
 void				choose_combinations(t_env *env);
 void				dispatch_ants(t_env *env);

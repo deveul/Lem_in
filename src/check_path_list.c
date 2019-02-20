@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 16:30:51 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/16 17:10:25 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/20 19:08:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,36 +73,28 @@ int	save_path(t_env *env, t_dij *dij)
 	int 	i;
 	int 	x;
 
-	i = 0;
+	i = env->end_index;
 	x = 0;
 	j = 0;
-	while (i < env->nb_nodes)
+	if (dij->distance[i] == INFINITE || dij->distance[i] == 0)
+		return (-1);
+	if (!(tmp.path = ft_memalloc(sizeof(int) * (dij->distance[i] + 1))))
+		exit (-1);
+	tmp.len = dij->distance[i];
+	x = tmp.len;
+	tmp.path[x] = i;
+	x--;
+	j = i;
+	while (j != env->start_index)
 	{
-		if (i == env->end_index)
-		{
-			if (dij->distance[i] == INFINITE || dij->distance[i] == 0)
-				break ;
-			if (!(tmp.path = ft_memalloc(sizeof(int) * (dij->distance[i] + 1))))
-				exit (-1);
-			tmp.len = dij->distance[i];
-			x = tmp.len;
-			tmp.path[x] = i;
-			x--;
-			j = i;
-			while (j != env->start_index)
-			{
-				j = dij->pred[j];
-				tmp.path[x] = j;
-				x--;
-			}
-			if (check_path_list(env, tmp) == -1)
-				break ;
-			add_result(&env->results, tmp);
-			return (0);
-		}
-		i++;
+		j = dij->pred[j];
+		tmp.path[x] = j;
+		x--;
 	}
-	return (-1);
+	if (check_path_list(env, tmp) == -1)
+		return (-1);
+	add_result(&env->results, tmp);
+	return (0);
 }
 
 void		create_path_tab(t_res *res, t_path **paths, int nb_paths)

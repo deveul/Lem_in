@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2019/02/20 11:08:49 by vrenaudi         ###   ########.fr        #
+#    Updated: 2019/02/20 19:19:33 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC_NAME	=	main.c \
 				aff_data_dij.c \
 				check_path_list.c \
 				update_matrice.c \
+				update_matrice_2.c \
 				fill_combinations.c \
 				dispatch_ants.c \
 				move_ants.c \
