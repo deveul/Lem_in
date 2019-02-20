@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 12:10:03 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/16 16:28:59 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/20 12:17:50 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,14 +125,6 @@ void		del_dup_combi(t_env *env)
 	}
 }
 
-void		init_combi(t_env *env, int i)
-{
-	if (!(env->combi[i].index_array = ft_memalloc(env->nb_path * sizeof(int))))
-		exit (-1);
-	env->combi[i].index_array[0] = i;
-	env->combi[i].nb_combi = 1;
-}
-
 int			search_node_in_path(int node, t_path p)
 {
 	int		i;
@@ -161,6 +153,14 @@ int			confront_two_paths(t_path p1, t_path p2)
 	return (0);
 }
 
+void		init_combi(t_env *env, int i)
+{
+	if (!(env->combi[i].index_array = ft_memalloc(env->nb_path * sizeof(int))))
+		exit (-1);
+	env->combi[i].index_array[0] = i;
+	env->combi[i].nb_combi = 1;
+}
+
 void		check_combi(t_env *env, int i)
 {
 	int		k;
@@ -179,7 +179,11 @@ void		check_combi(t_env *env, int i)
 				while (l < env->combi[i].nb_combi)
 				{
 					if (confront_two_paths(env->paths[env->combi[i].index_array[l]], env->paths[k]) == -1)
-						break ;
+					{
+						if (env->paths[env->combi[i].index_array[l]].len > env->paths[k].len)
+							env->combi[i].index_array[l] = k;
+						break;
+					}
 					l++;
 				}
 				if (l == env->combi[i].nb_combi)
@@ -204,7 +208,7 @@ void		fill_combinations(t_env *env)
 		check_combi(env, i);
 		i++;
 	}
-//	print_combi_ini(env);
+	print_combi_ini(env);
 	del_dup_combi(env);
 	print_combi(env);
 }
