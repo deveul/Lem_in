@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/19 19:24:21 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/20 11:09:16 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void				aff_data_3(t_dij *dij, int i, t_env *env);
 void				create_path_tab(t_res *res, t_path **paths_ok, int nb_p);
 void				update_matrice(t_env *env, int index);
 void				fill_combinations(t_env *env);
-void				choose_combi(t_env *env);
+void				choose_combinations(t_env *env);
 void				dispatch_ants(t_env *env);
 void				move_ants(t_env *env);
 int					save_path(t_env *env, t_dij *dij);

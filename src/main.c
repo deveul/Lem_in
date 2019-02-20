@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/19 19:06:45 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/20 11:11:06 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,8 +153,7 @@ int				main(void)
 	if (env.nb_path == 0)
 		ft_putendl("No passaran");
 	fill_combinations(&env);
-	choose_combi(&env);
-	ft_printf("c_c:%d\n", env.c_c);
+	choose_combinations(&env);
 	dispatch_ants(&env);
 	free_memory(&env);
 	return (0);

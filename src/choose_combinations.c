@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 11:59:09 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/19 19:15:15 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/20 11:10:39 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@ static int	sum_lenght(t_env *env, int index)
 	return (len);
 }
 
-void		choose_combi(t_env *env)
+void		choose_combinations(t_env *env)
 {
 	int		i;
 	int		nb_line;
 	int		tmp;
 	int		save;
 
-	nb_line = (sum_lenght(env, 0) + env->nb_ants) / env->final_combi[0].nb_path - 1;
+	nb_line = (sum_lenght(env, 0) + env->nb_ants) / env->final_combi[0].nb_combi - 1;
 	save = 0;
 	i = 1;
 	while (i < env->nb_f_c)
 	{
-		tmp = (sum_lenght(env, i) + env->nb_ants) / env->final_combi[i].nb_path - 1;
+		tmp = (sum_lenght(env, i) + env->nb_ants) / env->final_combi[i].nb_combi - 1;
 		if (tmp < nb_line)
 		{
 			nb_line = tmp;
@@ -48,5 +48,4 @@ void		choose_combi(t_env *env)
 		i++;
 	}
 	env->c_c = save;
-	env->nb_line = nb_line;
 }
