@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 14:00:23 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/20 16:15:54 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/21 17:07:36 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,9 @@ void		dispatch_remaining_ants(t_ants ants, int *ants_by_index, int nb_path)
 	int		i;
 	int		j;
 
-	if ((ants.same_ants_nb * nb_path) + ants.by_turn != ants.nb_ants)
+	if ((ants.same_ants_nb * ants.nb_path) + ants.by_turn != ants.nb_ants)
 	{
 		ants_missing = ants.nb_ants - ((ants.same_ants_nb * ants.nb_path) + ants.by_turn);
-		ft_printf("ants_missing:%d\n", ants_missing);
 		if (!(tmp = ft_memalloc(sizeof(int) * nb_path)))
 			exit(-1);
 		i = 0;

@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 15:04:12 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/20 19:08:53 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/21 17:08:48 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		move_to_last_room(t_env *env, int *tmp, int j)
 {
-	if (env->rooms[tmp[j - 1]].room_content != 0)
+	if (env->rooms[tmp[j - 1]].room_content != 0 || tmp[j - 1] == env->start_index)
 	{
 		ft_printf("L%d-%s ", env->rooms[tmp[j - 1]].room_content, env->rooms[env->end_index].name);
 		env->rooms[tmp[j - 1]].room_content = 0;
