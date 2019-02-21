@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 16:30:51 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/20 19:08:56 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/21 12:11:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ int	save_path(t_env *env, t_dij *dij)
 	{
 		j = dij->pred[j];
 		tmp.path[x] = j;
+		if (j != env->end_index || j != env->start_index)
+			env->rooms[j].check = 1;
 		x--;
 	}
 	if (check_path_list(env, tmp) == -1)

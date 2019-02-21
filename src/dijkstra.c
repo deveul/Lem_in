@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:46:39 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/20 19:23:24 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/21 12:22:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	init_dijkstra(t_dij *dij, t_env *env)
 	dij->visited[env->start_index] = 1;
 }
 
-static void	search_nextnode(t_dij *dij, int n)
+static void	search_nextnode(t_dij *dij, t_env *env, int n)
 {
 	int i;
 
@@ -44,7 +44,8 @@ static void	search_nextnode(t_dij *dij, int n)
 	while (i < n)
 	{
 //		aff_data_2(dij, i);
-		if (dij->distance[i] < dij->min && !dij->visited[i])
+		if (dij->distance[i] < dij->min && !dij->visited[i]
+			&& env->rooms[i].check == 0)
 		{
 			dij->min = dij->distance[i];
 			dij->nextnode = i;
@@ -97,10 +98,11 @@ int			dijkstra(t_env *env, int n, int index)
 
 	init_dijkstra(&dij, env);
 	count = 1;
+	(void)index;
 	while (count < n - 1)
 	{
 //		aff_data_1(&dij, n, count);
-		search_nextnode(&dij, n);
+		search_nextnode(&dij, env, n);
 		if (check_path_nextnode(env, &dij, n) == env->end_index)
 			break ;
 		count++;
@@ -109,7 +111,7 @@ int			dijkstra(t_env *env, int n, int index)
 //	aff_data_1(&dij, n, count);
 	if (save_path(env, &dij) != -1)
 		env->nb_path++;
-	update_matrice_2(env, index);
+	//update_matrice_2(env, index);
 	free_dij(&dij);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 19:53:12 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/16 15:41:29 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/21 12:06:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void		create_rooms(t_node *node, t_room **rooms, int nb_nodes)
 	while (tmp != NULL)
 	{
 		(*rooms)[i] = tmp->room;
+		(*rooms)[i].check = 0;
 		tmp = tmp->next;
 		i++;
 	}

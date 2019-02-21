@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/20 19:24:15 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/21 12:14:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int				main(void)
 	ft_printf("\n>>>>>>>>>>>>>>>>>SEARCH_PATH<<<<<<<<<<<<<<<<<<<<\n\n");
 	i = 0;
 	if (env.start_nb > 1 && env.end_nb > 1)
-		while (i <= env.start_nb * env.end_nb)
+		while (i < env.start_nb)
 			dijkstra(&env, env.nb_nodes, i++);
 	else
 		dijkstra(&env, env.nb_nodes, i);
