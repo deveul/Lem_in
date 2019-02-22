@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:46:39 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/21 12:22:08 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/22 19:26:56 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	init_dijkstra(t_dij *dij, t_env *env)
 	i = 0;
 	while (i < env->nb_nodes)
 	{
-		dij->distance[i] = env->matrice[env->start_index][i];
+		dij->distance[i] = env->flow[env->start_index][i];
 		dij->pred[i] = env->start_index;
 		dij->visited[i] = 0;
 		i++;
@@ -39,13 +39,14 @@ static void	search_nextnode(t_dij *dij, t_env *env, int n)
 	int i;
 
 	//ft_printf("\n>>>>>>>>>>>>>>>CHECK_1<<<<<<<<<<<<<<<<<<\n");
+	(void)env;
+	dij->nextnode = 0;
 	dij->min = INFINITE;
 	i = 0;
 	while (i < n)
 	{
 //		aff_data_2(dij, i);
-		if (dij->distance[i] < dij->min && !dij->visited[i]
-			&& env->rooms[i].check == 0)
+		if (dij->distance[i] < dij->min && !dij->visited[i])
 		{
 			dij->min = dij->distance[i];
 			dij->nextnode = i;
@@ -66,10 +67,10 @@ static int	check_path_nextnode(t_env *env, t_dij *dij, int n)
 	//	aff_data_3(dij, i, env);
 		if (!dij->visited[i])
 		{
-			if (dij->min + env->matrice[dij->nextnode][i] < dij->distance[i])
+			if (dij->min + env->flow[dij->nextnode][i] < dij->distance[i])
 			{
 	//			ft_printf("YES\n");
-				dij->distance[i] = dij->min + env->matrice[dij->nextnode][i];
+				dij->distance[i] = dij->min + env->flow[dij->nextnode][i];
 				dij->pred[i] = dij->nextnode;
 				if (i == env->end_index)
 				{
@@ -91,14 +92,13 @@ static void free_dij(t_dij *dij)
 	//free(dij);
 }
 
-int			dijkstra(t_env *env, int n, int index)
+int			dijkstra(t_env *env, int n)
 {
 	t_dij	dij;
 	int		count;
 
 	init_dijkstra(&dij, env);
 	count = 1;
-	(void)index;
 	while (count < n - 1)
 	{
 //		aff_data_1(&dij, n, count);

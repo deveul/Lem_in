@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2019/02/22 10:42:37 by vrenaudi         ###   ########.fr        #
+#    Updated: 2019/02/22 19:51:25 by vrenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		=	lem-in
 
 CC			=	gcc
 
-CFLAGS		+=	-Wall -Werror -Wextra -O3 -flto -march=native -g3
+CFLAGS		+=	-Wall -Werror -Wextra -g3
 
 CPPFLAGS	=	-I include -I libft/include
 				
@@ -41,7 +41,9 @@ SRC_NAME	=	main.c \
 				fill_combinations.c \
 				dispatch_ants.c \
 				move_ants.c \
-				choose_combinations.c
+				choose_combinations.c \
+				algo.c \
+				init_algo.c \
 
 OBJ_NAME	=	$(SRC_NAME:.c=.o)
 

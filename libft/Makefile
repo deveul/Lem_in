@@ -6,7 +6,7 @@
 #    By: smakni <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/05 09:14:14 by smakni            #+#    #+#              #
-#    Updated: 2019/02/22 10:42:48 by vrenaudi         ###   ########.fr        #
+#    Updated: 2019/02/22 20:01:41 by vrenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME			=	libft.a
 
 CC				=	gcc
 
-CFLAGS			+=	-Wall -Werror -Wextra -flto -O3 -march=native -g3
+CFLAGS			+=	-Wall -Werror -Wextra -g3
 
 CPPFLAGS		=	-I include
 

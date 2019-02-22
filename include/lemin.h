@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/21 18:47:56 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/22 20:30:05 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <ft_printf.h>
 # include <get_next_line.h>
 
-#define	INFINITE	127
+#define	INFINITE	99999	
 
 typedef struct		s_room
 {
@@ -42,7 +42,14 @@ typedef struct		s_path
 	int				len;
 	int				dup;
 	int				ants_launched;
+	int				end_found;
 }					t_path;
+
+typedef struct		s_fifo
+{
+	int				index;
+	int				path_index;
+}					t_fifo;
 
 typedef struct		s_res
 {
@@ -77,11 +84,13 @@ typedef struct		s_combinations
 
 typedef struct		s_env
 {
-	char			**matrice;
+	int				**matrice;
+	int				**flow;
 	int				i_e;
 	int				i_s;
 	int				delimiter;
 	int				end;
+	int				end_found;
 	int				end_index;
 	int				nb_c_dup;
 	int				nb_f_c;
@@ -89,6 +98,7 @@ typedef struct		s_env
 	int				nb_fifo;
 	int				nb_nodes;
 	int				nb_path;
+	int				nb_path_ok;
 	int				start;
 	int				start_index;
 	long			nb_ants;
@@ -98,6 +108,7 @@ typedef struct		s_env
 	int				nb_line;
 	int				*start_links;
 	int				*end_links;
+	t_fifo			*fifo;
 	t_node			*nodes;
 	t_res			*results;
 	t_path			*paths;
@@ -118,16 +129,18 @@ int					fill_room(t_env *env, char **tab);
 int					get_ants_nb(t_env *env, char *line);
 int					handle_start_end_com(t_env *env, char *line);
 int					init_paths(t_env *env);
-t_path				*add_path(t_path *tocpy, int nb_path, int pathtocpy);
+int					init_paths_algo(t_env *env);
+t_path				*add_path(t_path *tocpy, int nb_path, int pathtocpy, int len);
 void				add_node(t_node **nodes, t_room room);
 void				add_result(t_res **results, t_path path);
 void				create_rooms(t_node *node, t_room **rooms, int nb_nodes);
 void				print_env(t_env *env);
+void				print_flow(t_env *env);
 void				print_path(t_env *env);
 int					analyze_node(t_env *env, char *line);
 int					analyze_edge(t_env *env, char *line);
 int					analyze_node_edge(t_env *env, char *line);
-int					dijkstra(t_env *env, int n, int index);
+int					dijkstra(t_env *env, int n);
 void				aff_data_1(t_dij *dij, int n, int count);
 void				aff_data_2(t_dij *dij, int i);
 void				aff_data_3(t_dij *dij, int i, t_env *env);
@@ -138,6 +151,10 @@ void				fill_combinations(t_env *env);
 void				choose_combinations(t_env *env);
 void				dispatch_ants(t_env *env);
 void				move_ants(t_env *env, t_ants ants);
+void				edmonds_karp(t_env *env);
 int					save_path(t_env *env, t_dij *dij);
+void				fill_initial_fifo(t_env *env);
+void				fill_initial_fifo_algo(t_env *env);
+void				reset_paths(t_env *env);
 
 #endif
