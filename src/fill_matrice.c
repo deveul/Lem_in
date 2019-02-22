@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 14:01:30 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/16 14:16:27 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/21 18:47:55 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		create_matrice(t_env *env)
 			exit (-1);
 		j = 0;
 		while (j < env->nb_nodes)
-			env->matrice[i][j++] = 9999;
+			env->matrice[i][j++] = INFINITE;
 		i++;
 	}
 	return (1);

@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2019/02/20 19:19:33 by marvin           ###   ########.fr        #
+#    Updated: 2019/02/22 10:42:37 by vrenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		=	lem-in
 
 CC			=	gcc
 
-CFLAGS		+=	-Wall -Werror -Wextra -g3 
+CFLAGS		+=	-Wall -Werror -Wextra -O3 -flto -march=native -g3
 
 CPPFLAGS	=	-I include -I libft/include
 				

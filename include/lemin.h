@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/20 19:09:17 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/21 18:47:56 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <ft_printf.h>
 # include <get_next_line.h>
 
-#define	INFINITE	9999
+#define	INFINITE	127
 
 typedef struct		s_room
 {
@@ -77,7 +77,7 @@ typedef struct		s_combinations
 
 typedef struct		s_env
 {
-	int				**matrice;
+	char			**matrice;
 	int				i_e;
 	int				i_s;
 	int				delimiter;
