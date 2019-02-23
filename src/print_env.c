@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:57:29 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/22 18:57:17 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/23 13:17:52 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_path_with_name(t_env *env)
 		ft_putendl("");
 		ft_printf("Path[%2d]: ", i);
 		j = 0;
-		while (j < env->paths[i].len)
+		while (j <= env->paths[i].len)
 		{
 			ft_printf("%-10s", env->rooms[env->paths[i].path[j]].name);
 			j++;
@@ -47,7 +47,7 @@ void	print_path(t_env *env)
 		ft_putendl("");
 		ft_printf("Path[%2d]: ", i);
 		j = 0;
-		while (j < env->paths[i].len)
+		while (j <= env->paths[i].len)
 		{
 			ft_printf("%-5d", env->paths[i].path[j]);
 			j++;
@@ -141,6 +141,21 @@ void	print_flow(t_env *env)
 		i++;
 	}
 	ft_putendl("");
+}
+
+void	print_data(char **data, int nb_line)
+{
+	int		i;
+
+	i = 0;
+	while (i < nb_line)
+	{
+		ft_putendl(data[i]);
+		ft_strdel(&data[i]);
+		i++;
+	}
+	ft_putendl("");
+	free(data);
 }
 
 void	print_env(t_env *env)

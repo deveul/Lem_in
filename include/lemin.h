@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/22 20:30:05 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/23 13:44:46 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <get_next_line.h>
 
 #define	INFINITE	99999	
+#define NB_LINE		1000
 
 typedef struct		s_room
 {
@@ -40,7 +41,6 @@ typedef struct		s_path
 	int				*path;
 	int				check;
 	int				len;
-	int				dup;
 	int				ants_launched;
 	int				end_found;
 }					t_path;
@@ -84,77 +84,81 @@ typedef struct		s_combinations
 
 typedef struct		s_env
 {
-	int				**matrice;
+	char			**data;
 	int				**flow;
-	int				i_e;
-	int				i_s;
-	int				delimiter;
+	int				**matrice;
+	int				*end_links;
+	int				*start_links;
+	int				c_c;
 	int				end;
 	int				end_found;
 	int				end_index;
-	int				nb_c_dup;
-	int				nb_f_c;
+	int				end_nb;
+	int				i_e;
+	int				i_s;
 	int				nb_edges;
+	int				nb_f_c;
 	int				nb_fifo;
+	int				nb_line;
 	int				nb_nodes;
 	int				nb_path;
 	int				nb_path_ok;
 	int				start;
 	int				start_index;
-	long			nb_ants;
 	int				start_nb;
-	int				end_nb;
-	int				c_c;
-	int				nb_line;
-	int				*start_links;
-	int				*end_links;
-	t_fifo			*fifo;
-	t_node			*nodes;
-	t_res			*results;
-	t_path			*paths;
-	t_room			*rooms;
+	long			nb_ants;
 	t_combinations	*combi;
 	t_combinations	*final_combi;
+	t_fifo			*fifo;
+	t_node			*nodes;
+	t_path			*paths;
+	t_res			*results;
+	t_room			*rooms;
 }					t_env;
 
+char				**increment_size(char **data, char *line, int realloc);
 int					*dup_table(int *src, int len);
 int					*expand_table(int *src, int len, int to_add);
 int					algo(t_env *env);
 int					analyze_edge(t_env *env, char *line);
+int					analyze_edge(t_env *env, char *line);
+int					analyze_graph(t_env *env);
+int					analyze_node(t_env *env, char *line);
 int					analyze_node(t_env *env, char *line);
 int					analyze_node_edge(t_env *env, char *line);
+int					analyze_node_edge(t_env *env, char *line);
 int					create_matrice(t_env *env);
+int					dijkstra(t_env *env, int n);
 int					fill_matrice(t_env *env, char **tab);
 int					fill_room(t_env *env, char **tab);
 int					get_ants_nb(t_env *env, char *line);
 int					handle_start_end_com(t_env *env, char *line);
 int					init_paths(t_env *env);
 int					init_paths_algo(t_env *env);
+int					read_data(t_env *env);
+int					save_path(t_env *env, t_dij *dij);
 t_path				*add_path(t_path *tocpy, int nb_path, int pathtocpy, int len);
+t_path				bfs(t_env *env);
 void				add_node(t_node **nodes, t_room room);
 void				add_result(t_res **results, t_path path);
-void				create_rooms(t_node *node, t_room **rooms, int nb_nodes);
-void				print_env(t_env *env);
-void				print_flow(t_env *env);
-void				print_path(t_env *env);
-int					analyze_node(t_env *env, char *line);
-int					analyze_edge(t_env *env, char *line);
-int					analyze_node_edge(t_env *env, char *line);
-int					dijkstra(t_env *env, int n);
 void				aff_data_1(t_dij *dij, int n, int count);
 void				aff_data_2(t_dij *dij, int i);
 void				aff_data_3(t_dij *dij, int i, t_env *env);
-void				create_path_tab(t_res *res, t_path **paths_ok, int nb_paths);
-void				update_matrice(t_env *env, int index);
-void				update_matrice_2(t_env *env, int index);
-void				fill_combinations(t_env *env);
 void				choose_combinations(t_env *env);
+void				create_path_tab(t_res *res, t_path **paths_ok, int nb_paths);
+void				create_rooms(t_node *node, t_room **rooms, int nb_nodes);
 void				dispatch_ants(t_env *env);
-void				move_ants(t_env *env, t_ants ants);
-void				edmonds_karp(t_env *env);
-int					save_path(t_env *env, t_dij *dij);
+void				fill_combinations(t_env *env);
 void				fill_initial_fifo(t_env *env);
 void				fill_initial_fifo_algo(t_env *env);
-void				reset_paths(t_env *env);
+void				free_memory(t_env *env);
+void				init_flow(t_env *env);
+void				move_ants(t_env *env, t_ants ants);
+void				print_data(char **data, int nb_line);
+void				print_env(t_env *env);
+void				print_flow(t_env *env);
+void				print_path(t_env *env);
+void				update_matrice(t_env *env, int index);
+void				update_matrice_2(t_env *env, int index);
 
 #endif

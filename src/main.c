@@ -6,92 +6,16 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/22 20:23:26 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/23 12:58:41 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lemin.h>
 
-static void		free_memory(t_env *env)
-{
-	int		i;
-
-	i = 0;
-	while (i < env->nb_nodes)
-	{
-		free(env->rooms[i].name);
-		i++;
-	}
-	free(env->rooms);
-	i = 0;
-	while (i < env->nb_nodes)
-	{
-		free(env->matrice[i]);
-		free(env->flow[i]);
-		i++;
-	}
-	free(env->matrice);
-	free(env->flow);
-	i = 0;
-//	while (i < env->nb_f_c)
-//		free(env->combi[i++].index_array);
-//	free(env->combi);
-//	free(&env->final_combi);
-	free(env->start_links);
-	free(env->end_links);
-	free(env->paths);
-}
-
-void			add_node(t_node **nodes, t_room room)
-{
-	t_node *tmp;
-	t_node *new;
-
-	tmp = *nodes;
-	if (!(new = ft_memalloc(sizeof(t_node))))
-		exit (-1);
-	new->room = room;
-	new->next = NULL;
-	if (*nodes == NULL)
-	{
-		*nodes = new;
-		return ;
-	}
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	tmp->next = new;
-}
-
-static int		read_data(t_env *env)
-{
-	char	*line;
-
-	line = NULL;
-	if (get_ants_nb(env, line) == -1)
-		return (-1);
-	while (get_next_line(0, &line) > 0)
-	{
-		if (line && line[0] == '#')
-		{
-			if (handle_start_end_com(env, line) == -1)
-			{
-				ft_strdel(&line);
-				return (-1);
-			}
-		}
-		else if (analyze_node_edge(env, line) == -1)
-		{
-			ft_strdel(&line);
-			return (-1);
-		}
-		ft_strdel(&line);
-	}
-	return (0);
-}
-
 static void		init_env(t_env *env)
 {
 	env->nodes = NULL;
+	env->data = NULL;
 	env->results = NULL;
 	env->rooms = NULL;
 	env->matrice = NULL;
@@ -105,43 +29,11 @@ static void		init_env(t_env *env)
 	env->end_nb = 0;
 	env->start_index = -1;
 	env->end_index = -1;
-	env->delimiter = 0;
 	env->i_e = 0;
 	env->i_s = 0;
 	env->flow = NULL;
 	env->nb_path_ok = 0;
-}
-
-void			get_connexion_start_end(t_env *env)
-{
-	int		i;
-
-	i = 0;
-	if (!(env->start_links = ft_memalloc(sizeof(int) * env->nb_nodes)))
-		return ;
-	if (!(env->end_links = ft_memalloc(sizeof(int) * env->nb_nodes)))
-		return ;
-	while (i < env->nb_nodes)
-	{
-		if (env->matrice[env->start_index][i] == 1)
-			env->start_links[env->start_nb++] = i;
-		if (env->matrice[env->end_index][i] == 1)
-			env->end_links[env->end_nb++] = i;
-		i++;
-	}
-}
-
-void            init_flow(t_env *env)
-{
-	int i;
-
-	i = 0;
-	env->flow = ft_memalloc(sizeof(int *)* env->nb_nodes);
-	while(i < env->nb_nodes)
-	{
-		env->flow[i] = ft_memalloc(sizeof(int) * env->nb_nodes);
-		i++;
-	}
+	env->nb_line = 0;
 }
 
 int				main(void)
@@ -150,46 +42,20 @@ int				main(void)
 	int		i;
 
 	init_env(&env);
-	ft_printf(">>>>>>>>>>>>>>>>>ANALYSE_DATA<<<<<<<<<<<<<<<<<<<<\n");
+//	ft_printf(">>>>>>>>>>>>>>>>>ANALYSE_DATA<<<<<<<<<<<<<<<<<<<<\n");
 	i = 0;
-	if (read_data(&env) == -1 || env.start == 0 || env.end == 0)
+	if (read_data(&env) == -1)
 	{
 		ft_printf("ERROR\n");
 		return (-1);
 	}
-	if (env.nb_edges == 0)
+//	ft_printf("\n>>>>>>>>>>>>>>>>>SEARCH_PATH<<<<<<<<<<<<<<<<<<<<\n\n");
+	if (analyze_graph(&env) == -1)
 	{
-		ft_putendl("no connexion");
-		return (-1);
+		ft_printf("ERROR\n");
+		exit(-1);
 	}
-	get_connexion_start_end(&env);
-	ft_printf("\n>>>>>>>>>>>>>>>>>SEARCH_PATH<<<<<<<<<<<<<<<<<<<<\n\n");
-	i = 0;
-	init_flow(&env);
-	if (env.start_nb >= 1 && env.end_nb >= 1)
-		edmonds_karp(&env);
-	i = 0;
-//	ft_putendl("FINAL FLOW");
-//	print_flow(&env);
-	while (i < env.start_nb)
-	{
-		dijkstra(&env, env.nb_nodes);
-		i++;
-	}
-//	print_flow(&env);
-//	exit (-1);
-//	algo(&env);
-	ft_printf(">>>>>>>>>>>>>>>>>END_SEARCH<<<<<<<<<<<<<<<<<<<<\n\n");
-	if (env.nb_path > 0)
-	{
-		create_path_tab(env.results, &env.paths, env.nb_path);
-		print_path(&env);
-	}
-	if (env.nb_path == 0)
-	{
-		ft_putendl("No passaran");
-		return (-1);
-	}
+	print_data(env.data, env.nb_line);
 	fill_combinations(&env);
 	choose_combinations(&env);
 	dispatch_ants(&env);

@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 16:44:36 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/22 19:48:49 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/23 13:27:02 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,26 @@ t_path	*add_path(t_path *tocpy, int nb_path, int ptocpy, int len)
 	}
 	free(tocpy);
 	return (paths);
+}
+
+char	**increment_size(char **data, char *line, int realloc)
+{
+	char	**tmp;
+	int		i;
+	int		size;
+
+	tmp = NULL;
+	size = NB_LINE * realloc + 1;
+	ft_printf("realloc : %d\n", realloc);
+	if (!(tmp = ft_memalloc(sizeof(char *) * size)))
+		exit(-1);
+	i = 0;
+	while (data[i])
+	{
+		tmp[i] = data[i];
+		i++;
+	}
+	tmp[i] = line;
+	free(data);
+	return (tmp);
 }

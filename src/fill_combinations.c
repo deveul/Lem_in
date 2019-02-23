@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 12:10:03 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/20 19:10:05 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/23 13:32:03 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,10 @@ void		count_dup(t_env *env)
 	int		j;
 	int		k;
 	int		eq;
+	int		nb_c_dup;
 
 	i = 0;
-	env->nb_c_dup = 0;
+	nb_c_dup = 0;
 	while (i < env->nb_path)
 	{
 		j = i + 1;
@@ -82,7 +83,7 @@ void		count_dup(t_env *env)
 						eq++;
 					if (eq == env->combi[j].nb_combi && env->combi[j].dup == 0)
 					{
-						env->nb_c_dup++;
+						nb_c_dup++;
 						env->combi[j].dup = 1;
 					}
 					k++;
@@ -92,7 +93,7 @@ void		count_dup(t_env *env)
 		}
 		i++;
 	}
-	env->nb_f_c = env->nb_path - env->nb_c_dup;
+	env->nb_f_c = env->nb_path - nb_c_dup;
 }
 
 void		del_dup_combi(t_env *env)
@@ -208,7 +209,7 @@ void		fill_combinations(t_env *env)
 		check_combi(env, i);
 		i++;
 	}
-	print_combi_ini(env);
+//	print_combi_ini(env);
 	del_dup_combi(env);
-	print_combi(env);
+//	print_combi(env);
 }

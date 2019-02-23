@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:13:09 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/18 17:09:44 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/23 11:42:49 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,26 @@ static void		init_t_room(t_room *tmp)
 	tmp->end = 0;
 	tmp->check = 0;
 	tmp->index = 0;
+}
+
+void			add_node(t_node **nodes, t_room room)
+{
+	t_node *tmp;
+	t_node *new;
+
+	tmp = *nodes;
+	if (!(new = ft_memalloc(sizeof(t_node))))
+		exit (-1);
+	new->room = room;
+	new->next = NULL;
+	if (*nodes == NULL)
+	{
+		*nodes = new;
+		return ;
+	}
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = new;
 }
 
 int				fill_room(t_env *env, char **tab)

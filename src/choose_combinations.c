@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 11:59:09 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/20 16:07:10 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/23 12:11:31 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,9 @@ static int	sum_lenght(t_env *env, int index)
 	len = 0;
 	while (i < env->final_combi[index].nb_combi)
 	{
-		ft_printf("index:%d\tlen:%d\n", index, len);
 		len += env->paths[env->final_combi[index].index_array[i]].len;
 		i++;
 	}
-	ft_printf("index:%d\tlen:%d\n", index, len);
 	return (len);
 }
 

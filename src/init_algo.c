@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 19:08:47 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/22 19:53:20 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/23 11:26:15 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,15 @@ void	fill_initial_fifo(t_env *env)
 	}
 }
 
-void	reset_paths(t_env *env)
+void            init_flow(t_env *env)
 {
-	int		i;
+	int i;
 
 	i = 0;
-	while (i < env->nb_path)
+	env->flow = ft_memalloc(sizeof(int *)* env->nb_nodes);
+	while(i < env->nb_nodes)
 	{
-		free(env->paths[i].path);
+		env->flow[i] = ft_memalloc(sizeof(int) * env->nb_nodes);
 		i++;
 	}
-	free(env->paths);
-	free(env->fifo);
-	i = 0;
-	while (i < env->nb_nodes)
-	{
-		env->rooms[i].check = 0;
-		i++;
-	}
-	env->nb_path = 0;
-	env->nb_fifo = 0;
-	env->end_found = 0;
 }
