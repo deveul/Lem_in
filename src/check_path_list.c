@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 16:30:51 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/22 20:03:02 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/23 16:29:39 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	save_path(t_env *env, t_dij *dij)
 	while (i < tmp.len)
 	{
 		env->flow[tmp.path[i]][tmp.path[i + 1]] = INFINITE;
+		env->rooms[tmp.path[i]].check = 1;
 		i++;
 	}
 	add_result(&env->results, tmp);

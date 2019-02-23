@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 11:33:26 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/23 11:25:44 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/23 17:03:02 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,10 @@ static int	enqueue_fifo(t_env *env, int i, int *nb_path_needed, t_fifo tmp)
 	}
 	else
 	{
-		if (!(env->paths = add_path(env->paths,
-						env->nb_path, tmp.path_index, env->nb_nodes)))
-			return (-1);
+	//	if (!(env->paths = add_path(env->paths,
+	//					env->nb_path, tmp.path_index, env->nb_nodes)))
+	//		return (-1);
+		add_path(env->paths, env->nb_path, tmp.path_index, env->nb_nodes);
 		env->fifo[env->nb_fifo].path_index = env->nb_path++;
 	}
 	env->nb_fifo++;
@@ -106,7 +107,7 @@ t_path		bfs(t_env *env)
 			env->nb_path++;
 		i++;
 	}
-	if (!(env->paths = ft_memalloc(sizeof(t_path) * env->nb_path)))
+	if (!(env->paths = ft_memalloc(sizeof(t_path) * env->nb_nodes)))
 		exit(-1);
 	env->nb_fifo = env->nb_path;
 	if (init_paths(env) == -1)

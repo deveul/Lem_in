@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 16:44:36 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/23 13:27:02 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/23 15:02:12 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		*expand_table(int *src, int len, int to_add)
 	dst[len] = to_add;
 	return (dst);
 }
-
+/*
 t_path	*add_path(t_path *tocpy, int nb_path, int ptocpy, int len)
 {
 	t_path	*paths;
@@ -62,6 +62,13 @@ t_path	*add_path(t_path *tocpy, int nb_path, int ptocpy, int len)
 	free(tocpy);
 	return (paths);
 }
+*/
+
+void	add_path(t_path *tocpy, int nb_path, int ptocpy, int len)
+{
+	tocpy[nb_path].path = dup_table(tocpy[ptocpy].path, len);
+	tocpy[nb_path].len = tocpy[ptocpy].len;
+}
 
 char	**increment_size(char **data, char *line, int realloc)
 {
@@ -71,7 +78,6 @@ char	**increment_size(char **data, char *line, int realloc)
 
 	tmp = NULL;
 	size = NB_LINE * realloc + 1;
-	ft_printf("realloc : %d\n", realloc);
 	if (!(tmp = ft_memalloc(sizeof(char *) * size)))
 		exit(-1);
 	i = 0;

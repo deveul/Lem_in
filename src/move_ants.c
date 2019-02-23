@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 15:04:12 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/23 12:19:45 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/23 14:38:49 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,5 @@ void		move_ants(t_env *env, t_ants ants)
 		line_printed++;
 		ft_putendl("");
 	}
-//	ft_printf("line printed:%d\n", line_printed);
+	ft_printf("line printed:%d\n", line_printed);
 }

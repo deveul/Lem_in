@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/23 13:44:46 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/23 17:03:03 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # include <get_next_line.h>
 
 #define	INFINITE	99999	
-#define NB_LINE		1000
+#define NB_LINE		100
+#define NB_PATH		100
 
 typedef struct		s_room
 {
@@ -137,7 +138,7 @@ int					init_paths(t_env *env);
 int					init_paths_algo(t_env *env);
 int					read_data(t_env *env);
 int					save_path(t_env *env, t_dij *dij);
-t_path				*add_path(t_path *tocpy, int nb_path, int pathtocpy, int len);
+void				add_path(t_path *tocpy, int nb_path, int pathtocpy, int len);
 t_path				bfs(t_env *env);
 void				add_node(t_node **nodes, t_room room);
 void				add_result(t_res **results, t_path path);

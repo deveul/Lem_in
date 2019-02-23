@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 11:07:08 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/23 13:41:34 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/23 14:59:07 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		free_memory(t_env *env)
 	free(env->matrice);
 	free(env->flow);
 	i = 0;
-	while (i < env->nb_f_c)
+	while (i < env->nb_path)
 		free(env->combi[i++].index_array);
 	free(env->final_combi[env->c_c].ants_by_index);
 	free(env->combi);
