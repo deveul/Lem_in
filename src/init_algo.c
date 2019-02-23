@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 19:08:47 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/23 14:36:56 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/23 17:13:41 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	fill_initial_fifo(t_env *env)
 	}
 }
 
-void            init_flow(t_env *env)
+void	init_flow(t_env *env)
 {
 	int i;
 

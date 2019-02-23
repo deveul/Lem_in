@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2019/02/23 14:53:59 by vrenaudi         ###   ########.fr        #
+#    Updated: 2019/02/23 17:12:57 by vrenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,5 +87,5 @@ re:
 .PHONY: all, clean, fclean, re
 
 norme:
-	norminette $(SRC)
+	norminette ***/*.(c|h)
 	norminette ./include
