@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/01 11:09:58 by smakni           ###   ########.fr       */
+/*   Updated: 2019/03/01 11:28:39 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ static void		init_env(t_env *env)
 	env->end_nb = 0;
 	env->start_index = -1;
 	env->end_index = -1;
-	env->i_e = 0;
-	env->i_s = 0;
 	env->flow = NULL;
 	env->nb_path_ok = 0;
 	env->nb_line = 0;
@@ -49,7 +47,7 @@ int				main(void)
 	if (analyze_graph(&env) == -1)
 	{
 		ft_printf("ERROR\n");
-		exit(-1);
+		exit (-1);
 	}
 	print_data(env.data, env.nb_line);
 	fill_combinations(&env);

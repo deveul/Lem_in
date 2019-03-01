@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 19:53:12 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/21 12:06:03 by marvin           ###   ########.fr       */
+/*   Updated: 2019/03/01 11:39:11 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		create_rooms(t_node *node, t_room **rooms, int nb_nodes)
 	i = 0;
 	tmp = node;
 	if (!(*rooms = ft_memalloc(sizeof(t_room) * nb_nodes)))
-		exit (-1);
+		exit(-1);
 	while (tmp != NULL)
 	{
 		(*rooms)[i] = tmp->room;

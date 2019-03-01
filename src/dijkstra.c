@@ -6,22 +6,22 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:46:39 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/01 11:10:28 by smakni           ###   ########.fr       */
+/*   Updated: 2019/03/01 12:59:38 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lemin.h>
 
-static void	init_dijkstra(t_dij *dij, t_env *env)
+static	void	init_dijkstra(t_dij *dij, t_env *env)
 {
 	int i;
 
 	if (!(dij->distance = ft_memalloc(sizeof(int) * env->nb_nodes)))
-		exit (-1);
+		exit(-1);
 	if (!(dij->visited = ft_memalloc(sizeof(int) * env->nb_nodes)))
-		exit (-1);
+		exit(-1);
 	if (!(dij->pred = ft_memalloc(sizeof(int) * env->nb_nodes)))
-		exit (-1);
+		exit(-1);
 	i = 0;
 	while (i < env->nb_nodes)
 	{
@@ -34,7 +34,7 @@ static void	init_dijkstra(t_dij *dij, t_env *env)
 	dij->visited[env->start_index] = 1;
 }
 
-static void	search_nextnode(t_dij *dij, t_env *env, int n)
+static	void	search_nextnode(t_dij *dij, t_env *env, int n)
 {
 	int i;
 
@@ -54,13 +54,13 @@ static void	search_nextnode(t_dij *dij, t_env *env, int n)
 	dij->visited[dij->nextnode] = 1;
 }
 
-static int	check_path_nextnode(t_env *env, t_dij *dij, int n)
+static	int		check_path_nextnode(t_env *env, t_dij *dij, int n)
 {
 	int i;
 
 	i = 0;
 	while (i < n)
-	{			
+	{
 		if (!dij->visited[i])
 		{
 			if (dij->min + env->flow[dij->nextnode][i] < dij->distance[i])
@@ -76,14 +76,14 @@ static int	check_path_nextnode(t_env *env, t_dij *dij, int n)
 	return (i);
 }
 
-static void free_dij(t_dij *dij)
+static	void	free_dij(t_dij *dij)
 {
 	free(dij->visited);
 	free(dij->distance);
 	free(dij->pred);
 }
 
-int			dijkstra(t_env *env, int n)
+int				dijkstra(t_env *env, int n)
 {
 	t_dij	dij;
 	int		count;
@@ -97,9 +97,7 @@ int			dijkstra(t_env *env, int n)
 			break ;
 		count++;
 	}
-	if (save_path(env, &dij) != -1)
-		env->nb_path++;
+	save_path(env, &dij);
 	free_dij(&dij);
 	return (0);
 }
-

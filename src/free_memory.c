@@ -6,15 +6,15 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 11:07:08 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/23 14:59:07 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/01 13:32:37 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lemin.h>
 
-void		free_memory(t_env *env)
+static	void	free_rooms(t_env *env)
 {
-	int		i;
+	int i;
 
 	i = 0;
 	while (i < env->nb_nodes)
@@ -23,6 +23,12 @@ void		free_memory(t_env *env)
 		i++;
 	}
 	free(env->rooms);
+}
+
+static	void	free_matrice(t_env *env)
+{
+	int		i;
+
 	i = 0;
 	while (i < env->nb_nodes)
 	{
@@ -32,6 +38,14 @@ void		free_memory(t_env *env)
 	}
 	free(env->matrice);
 	free(env->flow);
+}
+
+void			free_memory(t_env *env)
+{
+	int i;
+
+	free_rooms(env);
+	free_matrice(env);
 	i = 0;
 	while (i < env->nb_path)
 		free(env->combi[i++].index_array);

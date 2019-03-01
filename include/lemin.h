@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/23 17:03:03 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/01 13:21:14 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ typedef struct		s_env
 	int				end_found;
 	int				end_index;
 	int				end_nb;
-	int				i_e;
-	int				i_s;
 	int				nb_edges;
 	int				nb_f_c;
 	int				nb_fifo;
@@ -137,7 +135,7 @@ int					handle_start_end_com(t_env *env, char *line);
 int					init_paths(t_env *env);
 int					init_paths_algo(t_env *env);
 int					read_data(t_env *env);
-int					save_path(t_env *env, t_dij *dij);
+void				save_path(t_env *env, t_dij *dij);
 void				add_path(t_path *tocpy, int nb_path, int pathtocpy, int len);
 t_path				bfs(t_env *env);
 void				add_node(t_node **nodes, t_room room);
@@ -159,7 +157,7 @@ void				print_data(char **data, int nb_line);
 void				print_env(t_env *env);
 void				print_flow(t_env *env);
 void				print_path(t_env *env);
-void				update_matrice(t_env *env, int index);
-void				update_matrice_2(t_env *env, int index);
+int					edmonds_karp(t_env *env);
+int					while_fifo(t_env *env, int nb_path_needed);
 
 #endif

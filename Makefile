@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2019/03/01 11:09:03 by smakni           ###   ########.fr        #
+#    Updated: 2019/03/01 13:32:41 by smakni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,20 +30,19 @@ SRC_NAME	=	main.c \
 				print_env.c \
 				fill.c \
 				read_data.c \
-				fill_matrice.c \
+				create_matrice.c \
 				handle_memory.c \
 				create_rooms.c \
 				dijkstra.c \
-				aff_data_dij.c \
 				check_path_list.c \
-				update_matrice.c \
-				update_matrice_2.c \
 				fill_combinations.c \
 				dispatch_ants.c \
 				move_ants.c \
 				choose_combinations.c \
 				bfs.c \
+				fifo.c \
 				algo.c \
+				edmonds_karp.c \
 				init_algo.c \
 				free_memory.c
 
@@ -86,7 +85,10 @@ re:
 
 .PHONY: all, clean, fclean, re
 
-norme:
-	norminette */*.[ch]
-	norminette */*/*.[ch]
+norme_src:
+	norminette src/*.[ch]
 	norminette ./include
+
+norme_lib:
+	norminette ./libft/*/*.[ch]
+	norminette ./libft/include

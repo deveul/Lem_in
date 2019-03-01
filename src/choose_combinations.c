@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 11:59:09 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/23 12:11:31 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/01 11:38:46 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		choose_combinations(t_env *env)
 	int		sum;
 
 	sum = sum_lenght(env, 0);
-	nb_line = (sum  + env->nb_ants) / env->final_combi[0].nb_combi;
+	nb_line = (sum + env->nb_ants) / env->final_combi[0].nb_combi;
 	if ((sum + env->nb_ants) % env->final_combi[0].nb_combi == 0)
 		nb_line--;
 	save = 0;
@@ -47,11 +47,8 @@ void		choose_combinations(t_env *env)
 		tmp = (sum + env->nb_ants) / env->final_combi[i].nb_combi;
 		if ((sum + env->nb_ants) % env->final_combi[0].nb_combi == 0)
 			tmp--;
-		if (tmp < nb_line)
-		{
+		if (tmp < nb_line && (save = i))
 			nb_line = tmp;
-			save = i;
-		}
 		i++;
 	}
 	env->c_c = save;
