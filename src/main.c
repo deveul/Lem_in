@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/23 12:58:41 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/01 11:09:58 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,13 @@ static void		init_env(t_env *env)
 int				main(void)
 {
 	t_env	env;
-	int		i;
 
 	init_env(&env);
-//	ft_printf(">>>>>>>>>>>>>>>>>ANALYSE_DATA<<<<<<<<<<<<<<<<<<<<\n");
-	i = 0;
 	if (read_data(&env) == -1)
 	{
 		ft_printf("ERROR\n");
 		return (-1);
 	}
-//	ft_printf("\n>>>>>>>>>>>>>>>>>SEARCH_PATH<<<<<<<<<<<<<<<<<<<<\n\n");
 	if (analyze_graph(&env) == -1)
 	{
 		ft_printf("ERROR\n");

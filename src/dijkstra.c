@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:46:39 by smakni            #+#    #+#             */
-/*   Updated: 2019/02/23 15:32:14 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/01 11:10:28 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,11 @@ static void	search_nextnode(t_dij *dij, t_env *env, int n)
 {
 	int i;
 
-	//ft_printf("\n>>>>>>>>>>>>>>>CHECK_1<<<<<<<<<<<<<<<<<<\n");
-	(void)env;
 	dij->nextnode = 0;
 	dij->min = INFINITE;
 	i = 0;
 	while (i < n)
 	{
-//		aff_data_2(dij, i);
 		if (dij->distance[i] < dij->min && !dij->visited[i]
 				&& env->rooms[i].check == 0)
 		{
@@ -61,23 +58,17 @@ static int	check_path_nextnode(t_env *env, t_dij *dij, int n)
 {
 	int i;
 
-	//ft_printf("\n>>>>>>>>>>>>>>>CHECK_2<<<<<<<<<<<<<<<<<<\n");
 	i = 0;
 	while (i < n)
 	{			
-	//	aff_data_3(dij, i, env);
 		if (!dij->visited[i])
 		{
 			if (dij->min + env->flow[dij->nextnode][i] < dij->distance[i])
 			{
-	//			ft_printf("YES\n");
 				dij->distance[i] = dij->min + env->flow[dij->nextnode][i];
 				dij->pred[i] = dij->nextnode;
 				if (i == env->end_index)
-				{
-					//ft_printf("END_[%d] = %s\n", i, env->rooms[i].name);
 					break ;
-				}
 			}
 		}
 		i++;
@@ -90,7 +81,6 @@ static void free_dij(t_dij *dij)
 	free(dij->visited);
 	free(dij->distance);
 	free(dij->pred);
-	//free(dij);
 }
 
 int			dijkstra(t_env *env, int n)
@@ -102,17 +92,13 @@ int			dijkstra(t_env *env, int n)
 	count = 1;
 	while (count < n - 1)
 	{
-//		aff_data_1(&dij, n, count);
 		search_nextnode(&dij, env, n);
 		if (check_path_nextnode(env, &dij, n) == env->end_index)
 			break ;
 		count++;
 	}
-//	ft_printf("\n>>>>>>>>>>>>>>>>>END<<<<<<<<<<<<<<<<<<<\n");
-//	aff_data_1(&dij, n, count);
 	if (save_path(env, &dij) != -1)
 		env->nb_path++;
-	//update_matrice_2(env, index);
 	free_dij(&dij);
 	return (0);
 }
