@@ -40,12 +40,26 @@ static	void	free_matrice(t_env *env)
 	free(env->flow);
 }
 
+static	void	free_paths(t_env *env)
+{
+	int i;
+
+	i = 0;
+	while (i < env->nb_path)
+	{
+		free(env->paths[i].path);
+		i++;
+	}
+	free(env->paths);
+}
+
 void			free_memory(t_env *env)
 {
 	int i;
 
 	free_rooms(env);
 	free_matrice(env);
+	free_paths(env);
 	i = 0;
 	while (i < env->nb_path)
 		free(env->combi[i++].index_array);
@@ -54,5 +68,4 @@ void			free_memory(t_env *env)
 	free(env->final_combi);
 	free(env->start_links);
 	free(env->end_links);
-	free(env->paths);
 }

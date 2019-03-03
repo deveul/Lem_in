@@ -31,7 +31,7 @@ int				analyze_graph(t_env *env)
 		if (trigger == 1)
 			env->nb_path++;
 		create_path_tab(env->results, &env->paths, env->nb_path);
-		print_path(env);
+	//	print_path(env);
 	}
 	if (env->nb_path == 0)
 	{

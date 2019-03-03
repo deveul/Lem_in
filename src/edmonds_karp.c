@@ -68,12 +68,8 @@ static	int		cpy_tmp_init(t_env *env, t_path tmp)
 	tmp_init = tmp;
 	tmp_init.path = ft_memalloc(sizeof(int) * (tmp.len + 1));
 	ft_memcpy(tmp_init.path, tmp.path, sizeof(int) * (tmp.len + 1));
-	if (tmp_init.len > env->nb_ants)
-	{
-		add_result(&env->results, tmp_init);
-		return (1);
-	}
-	return (-1);
+	add_result(&env->results, tmp_init);
+	return (1);
 }
 
 static	void	update_flow(t_path tmp, t_env *env)
@@ -104,7 +100,7 @@ int				edmonds_karp(t_env *env)
 	while (tmp.len != -1)
 	{
 		tmp = bfs(env);
-		if (trigger == 0)
+		if (trigger == 0 && tmp.len > env->nb_ants)
 			trigger = cpy_tmp_init(env, tmp);
 		update_flow(tmp, env);
 		reset_paths(env);

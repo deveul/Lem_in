@@ -73,12 +73,6 @@ void		dispatch_remaining_ants(t_ants ants, int *ants_by_index, int nb_path)
 			i++;
 		}
 		ft_revsort_int_tab(tmp, nb_path);
-		i = 0;
-		while (i < nb_path)
-		{
-			ft_printf("tmp[%d]:%d\n", i, tmp[i]);
-			i++;
-		}
 		j = 0;
 		i = 0;
 		while (i < nb_path && j < ants_missing)

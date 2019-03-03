@@ -40,14 +40,11 @@ int				main(void)
 
 	init_env(&env);
 	if (read_data(&env) == -1)
-	{
 		ft_printf("ERROR\n");
-		return (-1);
-	}
 	if (analyze_graph(&env) == -1)
 	{
 		ft_printf("ERROR\n");
-		exit (-1);
+		exit(-1);
 	}
 	print_data(env.data, env.nb_line);
 	fill_combinations(&env);

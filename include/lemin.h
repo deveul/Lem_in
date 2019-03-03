@@ -130,7 +130,6 @@ int					create_matrice(t_env *env);
 int					dijkstra(t_env *env, int n);
 int					fill_matrice(t_env *env, char **tab);
 int					fill_room(t_env *env, char **tab);
-int					get_ants_nb(t_env *env, char *line);
 int					handle_start_end_com(t_env *env, char *line);
 int					init_paths(t_env *env);
 int					init_paths_algo(t_env *env);

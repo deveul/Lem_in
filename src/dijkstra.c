@@ -43,8 +43,8 @@ static	void	search_nextnode(t_dij *dij, t_env *env, int n)
 	i = 0;
 	while (i < n)
 	{
-		if (dij->distance[i] < dij->min && !dij->visited[i]
-				&& env->rooms[i].check == 0)
+		if (env->rooms[i].check == 0 
+			 && !dij->visited[i] && dij->distance[i] < dij->min)
 		{
 			dij->min = dij->distance[i];
 			dij->nextnode = i;
@@ -61,7 +61,7 @@ static	int		check_path_nextnode(t_env *env, t_dij *dij, int n)
 	i = 0;
 	while (i < n)
 	{
-		if (!dij->visited[i])
+		if (env->rooms[i].check == 0 && !dij->visited[i])
 		{
 			if (dij->min + env->flow[dij->nextnode][i] < dij->distance[i])
 			{
