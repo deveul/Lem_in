@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_memory.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 16:44:36 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/23 15:02:12 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/03 17:23:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,33 +36,6 @@ int		*expand_table(int *src, int len, int to_add)
 	dst[len] = to_add;
 	return (dst);
 }
-/*
-t_path	*add_path(t_path *tocpy, int nb_path, int ptocpy, int len)
-{
-	t_path	*paths;
-	int		i;
-
-	if (!(paths = ft_memalloc(sizeof(t_path) * (nb_path + 1))))
-		return (NULL);
-	i = 0;
-	while (i < nb_path)
-	{
-		paths[i].path = dup_table(tocpy[i].path, len);
-		paths[i].len = tocpy[i].len;
-		i++;
-	}
-	paths[nb_path].path = dup_table(tocpy[ptocpy].path, len);
-	paths[nb_path].len = tocpy[ptocpy].len;
-	i = 0;
-	while (i < nb_path)
-	{
-		free(tocpy[i].path);
-		i++;
-	}
-	free(tocpy);
-	return (paths);
-}
-*/
 
 void	add_path(t_path *tocpy, int nb_path, int ptocpy, int len)
 {

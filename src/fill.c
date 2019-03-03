@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:13:09 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/23 11:42:49 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/03 17:39:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,10 @@ int				fill_room(t_env *env, char **tab)
 	t_room tmp;
 
 	init_t_room(&tmp);
-	if (check_unicity(env->nodes, tab[0]) == -1)
+	if (check_unicity(env->nodes, tab[0]) == -1
+		|| ft_isnumber(tab[1]) == -1 || ft_isnumber(tab[2]) == -1)
 		return (-1);
 	tmp.name = ft_strdup(tab[0]);
-	if (ft_isnumber(tab[1]) == -1 || ft_isnumber(tab[2]) == -1)
-	{
-		ft_printf("Wrong coordinates\n");
-		return (-1);
-	}
 	check_start_end(env, &tmp);
 	tmp.index = env->nb_nodes;
 	tmp.check = 0;

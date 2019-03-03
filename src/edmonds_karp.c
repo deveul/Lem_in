@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edmonds_karp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 12:50:41 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/01 13:18:33 by smakni           ###   ########.fr       */
+/*   Updated: 2019/03/03 17:27:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,10 @@ static	void	update_flow(t_path tmp, t_env *env)
 int				edmonds_karp(t_env *env)
 {
 	t_path		tmp;
-	int			save;
 	int			trigger;
 
 	tmp.len = 0;
 	trigger = 0;
-	save = 0;
 	while (tmp.len != -1)
 	{
 		tmp = bfs(env);

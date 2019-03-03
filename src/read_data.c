@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:21:51 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/23 13:27:04 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/03 17:32:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,24 @@
 
 static void	get_ants_nb(t_env *env, char *line)
 {
-	while (env->nb_ants == -1)
+	while (env->nb_ants == -1 && get_next_line(0, &line) > 0)
 	{
-		if (get_next_line(0, &line) > 0)
+		if (line[0] != '#')
 		{
-			if (line[0] != '#')
-			{
-				env->nb_ants = ft_atoi(line);
-				if ((env->nb_ants <= 0 || env->nb_ants > INT_MAX) 
-						&& ft_printf("Wrong number of ants.\n"))
-				{	
-					ft_printf("line = %s\n", line);
-					exit(-1);
-				}
+			env->nb_ants = ft_atoi(line);
+			if ((env->nb_ants <= 0 || env->nb_ants > INT_MAX) 
+					&& ft_printf("Wrong number of ants.\n"))
+			{	
+				ft_printf("line = %s\n", line);
+				exit(-1);
 			}
-			env->data[env->nb_line++] = line;
 		}
 		else
 		{
 			ft_printf("Empty spaces, what are we waiting for ?\n");
 			exit(-1);
 		}
+		env->data[env->nb_line++] = line;
 	}
 }
 
@@ -156,22 +153,13 @@ int		read_data(t_env *env)
 {
 	char	*line;
 	int		realloc;
-	int		error;
 
 	line = NULL;
 	realloc = 1;
-	error = 0;
 	env->data = ft_memalloc(sizeof(char*) * NB_LINE + 1);
 	get_ants_nb(env, line);
-	while (error == 0 && get_next_line(0, &line) > 0)
-	{
-		if (line && line[0] == '#')
-		{
-			if (handle_start_end_com(env, line) == -1)
-				break ;
-		}
-		else if (analyze_node_edge(env, line) == -1)
-				break ;
+	while (get_next_line(0, &line) > 0)
+	{	
 		if (env->nb_line < (NB_LINE * realloc) - 1)
 			env->data[env->nb_line++] = line;
 		else
@@ -179,6 +167,13 @@ int		read_data(t_env *env)
 			env->data = increment_size(env->data, line, ++realloc);
 			env->nb_line++;
 		}
+		if (line && line[0] == '#')
+		{
+			if (handle_start_end_com(env, line) == -1)
+				break ;
+		}
+		else if (analyze_node_edge(env, line) == -1)
+				break ;
 	}
 	if (env->nb_edges == 0)
 		return (-1);
