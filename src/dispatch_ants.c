@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 14:00:23 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/23 13:41:35 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/04 11:00:38 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,18 @@ static int	get_turn_lenght(t_env *env, int *len)
 	int		i;
 	int		index_long;
 
-	i = 1;
-	index_long = 0;
-	(*len) = env->paths[env->final_combi[env->c_c].index_array[0]].len;
-	while (i < env->final_combi[env->c_c].nb_combi)
+	i = -1;
+	while (++i < env->final_combi[env->c_c].nb_combi)
+	{
+		if (env->final_combi[env->c_c].ants_by_index[i] != -1)
+		{
+			index_long = i;
+			(*len) = env->paths[env->final_combi[env->c_c].index_array[i]].len;
+			break ;
+		}
+	}
+	i = -1;
+	while (++i < env->final_combi[env->c_c].nb_combi)
 	{
 		if (env->final_combi[env->c_c].ants_by_index[i] != -1)
 		{
@@ -30,7 +38,6 @@ static int	get_turn_lenght(t_env *env, int *len)
 				(*len) = env->paths[env->final_combi[env->c_c].index_array[i]].len;
 			}
 		}
-		i++;
 	}
 	return (index_long);
 }
@@ -115,11 +122,6 @@ void		dispatch_ants(t_env *env)
 		}
 		ants.same_ants_nb = (env->nb_ants - ants.by_turn) / ants.nb_path;
 	}
-/*	ft_printf("same_ants_nb:%d\n", ants.same_ants_nb);
-	ft_printf("ants_by_turn:%d\n", ants.by_turn);
-	ft_printf("ants.nb_path:%d\n", ants.nb_path);
-	ft_printf("env->nb_ants:%d\n", env->nb_ants);
-	ft_printf("env->combi_chosen:%d\n", env->c_c);*/
 	dispatch_remaining_ants(ants, env->final_combi[env->c_c].ants_by_index, env->final_combi[env->c_c].nb_combi);
 	i = -1;
 	while (++i < env->final_combi[env->c_c].nb_combi)
