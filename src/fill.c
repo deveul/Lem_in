@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:13:09 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/03 17:39:21 by marvin           ###   ########.fr       */
+/*   Updated: 2019/03/04 17:10:47 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int				fill_room(t_env *env, char **tab)
 	tmp.index = env->nb_nodes;
 	tmp.check = 0;
 	tmp.room_content = 0;
+	tmp.capacity = 0;
 	add_node(&env->nodes, tmp);
 	env->nb_nodes++;
 	return (0);

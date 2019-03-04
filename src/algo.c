@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 11:19:42 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/04 13:30:49 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/04 19:42:07 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int				analyze_graph(t_env *env)
 	if (env->start_nb >= 1 && env->end_nb >= 1)
 		trigger = edmonds_karp(env);
 	i = 0;
-	while (i < env->start_nb)
+	bfs_second(env);
+/*	while (i < env->start_nb)
 	{
 		dijkstra(env, env->nb_nodes);
 		i++;
@@ -32,7 +33,7 @@ int				analyze_graph(t_env *env)
 			env->nb_path++;
 		create_path_tab(env->results, &env->paths, env->nb_path);
 		print_path(env);
-	}
+	}*/
 	if (env->nb_path == 0)
 	{
 		ft_putendl("No passaran");

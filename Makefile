@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2019/03/01 13:32:41 by smakni           ###   ########.fr        #
+#    Updated: 2019/03/04 13:45:45 by vrenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,8 @@ SRC_NAME	=	main.c \
 				choose_combinations.c \
 				bfs.c \
 				fifo.c \
+				bfs_second.c \
+				fifo_second.c \
 				algo.c \
 				edmonds_karp.c \
 				init_algo.c \
