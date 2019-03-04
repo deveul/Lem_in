@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 11:59:09 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/01 11:38:46 by smakni           ###   ########.fr       */
+/*   Updated: 2019/03/04 11:17:30 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,5 @@ void		choose_combinations(t_env *env)
 	}
 	env->c_c = save;
 	env->nb_line = nb_line;
+	ft_printf("line estimated:%d\n", nb_line);
 }

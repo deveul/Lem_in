@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 12:50:41 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/03 17:27:22 by marvin           ###   ########.fr       */
+/*   Updated: 2019/03/04 13:30:51 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static	void	clean_flow(t_env *env)
 		j = 0;
 		while (j < env->nb_nodes)
 		{
-			if (env->flow[i][j] == -1 && env->flow[j][i] == 1)
+			if (env->flow[i][j] == -1)
 			{
 				env->flow[i][j] = INFINITE;
-				env->flow[j][i] = INFINITE;
+//				env->flow[j][i] = INFINITE;
 			}
 			else if (env->flow[i][j] == 0)
 				env->flow[i][j] = INFINITE;
@@ -79,11 +79,18 @@ static	void	update_flow(t_path tmp, t_env *env)
 	i = 0;
 	while (i <= tmp.len)
 	{
-		if (i < tmp.len && env->flow[tmp.path[i]][tmp.path[i + 1]] == 0
+	/*	if (i < tmp.len && env->flow[tmp.path[i]][tmp.path[i + 1]] == 0
 				&& env->flow[tmp.path[i + 1]][tmp.path[i]] != 1)
 			env->flow[tmp.path[i]][tmp.path[i + 1]] = 1;
 		else if (i < tmp.len)
-			env->flow[tmp.path[i]][tmp.path[i + 1]] = -1;
+			env->flow[tmp.path[i]][tmp.path[i + 1]] = -1;*/
+		if (i < tmp.len)
+		{
+			env->flow[tmp.path[i]][tmp.path[i + 1]] = 1;
+			if (env->flow[tmp.path[i + 1]][tmp.path[i]] == 1)
+				env->flow[tmp.path[i + 1]][tmp.path[i]] = -1;
+		}
+		
 		i++;
 	}
 }
@@ -100,9 +107,12 @@ int				edmonds_karp(t_env *env)
 		tmp = bfs(env);
 		if (trigger == 0 && tmp.len > env->nb_ants)
 			trigger = cpy_tmp_init(env, tmp);
+		else if (trigger == 0)
+			trigger = 2;
 		update_flow(tmp, env);
 		reset_paths(env);
 	}
 	clean_flow(env);
+	//print_flow(env);
 	return (trigger);
 }

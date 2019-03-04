@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 14:00:23 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/04 11:00:38 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/04 12:13:40 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ void		dispatch_ants(t_env *env)
 
 	len = 0;
 	ants.nb_ants = env->nb_ants;
+	ft_printf("env->c_c : %d\n", env->c_c);
+	ft_printf("ants_nb : %d\n", env->nb_ants);
 	ants.nb_path = env->final_combi[env->c_c].nb_combi;
 	if (!(env->final_combi[env->c_c].ants_by_index = ft_memalloc(sizeof(int) * ants.nb_path)))
 		exit(-1);
@@ -129,6 +131,12 @@ void		dispatch_ants(t_env *env)
 		if (env->final_combi[env->c_c].ants_by_index[i] != -1)
 			env->final_combi[env->c_c].ants_by_index[i] += ants.same_ants_nb;
 		env->paths[env->final_combi[env->c_c].index_array[i]].ants_launched = 0;
+	}
+	i = -1;
+	while (++i < env->final_combi[env->c_c].nb_combi)
+	{
+		ft_printf("ants_by_index[%d]:%d\n", i, env->final_combi[env->c_c].ants_by_index[i]);
+		ft_printf("len_index[%d]:%d\n", i, env->paths[env->final_combi[env->c_c].index_array[i]].len);
 	}
 	move_ants(env, ants);
 }
