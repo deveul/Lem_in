@@ -131,6 +131,7 @@ int					analyze_graph(t_env *env);
 int					analyze_node_edge(t_env *env, char *line);
 int					create_matrice(t_env *env);
 int					dijkstra(t_env *env, int n);
+int					dijkstra_old(t_env *env, int n);
 int					fill_matrice(t_env *env, char **tab);
 int					fill_room(t_env *env, char **tab);
 int					init_paths(t_env *env);

@@ -14,7 +14,7 @@ NAME		=	lem-in
 
 CC			=	gcc
 
-CFLAGS		+=	-Wall -Werror -Wextra -g3
+CFLAGS		+=	-Wall -Werror -Wextra -O3 -flto -march=native
 
 CPPFLAGS	=	-I include -I libft/include
 				
@@ -34,6 +34,7 @@ SRC_NAME	=	main.c \
 				handle_memory.c \
 				create_rooms.c \
 				dijkstra.c \
+				dijkstra_old.c \
 				check_path_list.c \
 				fill_combinations.c \
 				dispatch_ants.c \

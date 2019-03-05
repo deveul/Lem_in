@@ -37,22 +37,23 @@ static void	cpy_paths(t_env *env)
 		env->prepaths[i].len--;
 		i++;
 	}
-	if (!(env->paths = ft_memalloc(sizeof(t_path) * env->end_found)))
-		exit(-1);
+	//if (!(env->paths = ft_memalloc(sizeof(t_path) * env->end_found)))
+	//	exit(-1);
 	i = 0;
 	j = 0;
 	while (i < env->nb_path)
 	{
 		if (env->prepaths[i].end_found == 1)
 		{
-			env->paths[j] = env->prepaths[i];
+			add_result(&env->results, env->prepaths[i]);
+	//		env->paths[j] = env->prepaths[i];
 			j++;
 		}
 		i++;
 	}
 	env->nb_path = env->end_found;
 	ft_printf("nb_end_found:%d\n", env->end_found);
-	print_path(env);
+	//print_path(env);
 }
 
 void		bfs_second(t_env *env)
