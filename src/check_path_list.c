@@ -19,7 +19,9 @@ static	void	check_visited_rooms(t_path tmp, t_env *env)
 	i = 0;
 	while (i < tmp.len)
 	{
-		env->flow[tmp.path[i]][tmp.path[i + 1]] = INFINITE;
+	//	env->matrice[tmp.path[i]][tmp.path[i + 1]] = INFINITE;
+	//	env->matrice[tmp.path[i + 1]][tmp.path[i]] = INFINITE;
+	//	env->flow[tmp.path[i]][tmp.path[i + 1]] = INFINITE;
 		env->rooms[tmp.path[i]].check = 1;
 		i++;
 	}

@@ -34,6 +34,7 @@ SRC_NAME	=	main.c \
 				handle_memory.c \
 				create_rooms.c \
 				dijkstra.c \
+				dijkstra_old.c \
 				check_path_list.c \
 				fill_combinations.c \
 				dispatch_ants.c \
