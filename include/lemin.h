@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/05 10:49:54 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/05 14:38:25 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct		s_room
 	char			*name;
 	int				check;
 	int				capacity;
+	int				v_in;
+	int				v_out;
 	int				end;
 	int				index;
 	int				room_content;
@@ -52,6 +54,8 @@ typedef struct		s_fifo
 	int				index;
 	int				path_index;
 	int				from;
+	int				v_in;
+	int				v_out;
 }					t_fifo;
 
 typedef struct		s_res

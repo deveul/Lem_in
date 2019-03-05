@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:13:09 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/05 10:42:46 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/05 15:05:28 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int				fill_room(t_env *env, char **tab)
 	tmp.end = 0;
 	tmp.check = 0;
 	tmp.index = 0;
+	tmp.v_in = -1;
+	tmp.v_out = -1;
 	if (check_unicity(env->nodes, tab[0]) == -1
 			|| ft_isnumber(tab[1]) == -1 || ft_isnumber(tab[2]) == -1)
 		return (-1);

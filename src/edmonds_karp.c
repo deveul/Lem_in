@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 12:50:41 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/05 09:40:32 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/05 15:46:59 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,23 @@ static	void	update_flow(t_path tmp, t_env *env)
 		{
 			if (env->flow[tmp.path[i]][tmp.path[i + 1]] == -1)
 			{
-				env->flow[tmp.path[i]][tmp.path[i + 1]] = -2;
-				env->flow[tmp.path[i + 1]][tmp.path[i]] = -2;
+				env->flow[tmp.path[i]][tmp.path[i + 1]] = 0;
+				env->flow[tmp.path[i + 1]][tmp.path[i]] = 0;
+				env->rooms[tmp.path[i + 1]].v_out = 0;
+				if (env->rooms[tmp.path[i]].v_out == 0)
+					env->rooms[tmp.path[i]].v_in = 0;
 			}
 			else
 			{
 				env->flow[tmp.path[i]][tmp.path[i + 1]] = 1;
 				env->flow[tmp.path[i + 1]][tmp.path[i]] = -1;
+				env->rooms[tmp.path[i + 1]].v_in = tmp.path[i];
+				env->rooms[tmp.path[i]].v_out = tmp.path[i + 1];
 			}
-			env->rooms[tmp.path[i]].capacity = 1;
+			if (env->rooms[tmp.path[i]].v_in != -1 && env->rooms[tmp.path[i]].v_out != -1)
+				env->rooms[tmp.path[i]].capacity = 1;
+			else
+				env->rooms[tmp.path[i]].capacity = 0;
 		}
 		i++;
 	}
