@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/05 11:10:25 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/05 23:07:09 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int				main(void)
 		ft_printf("ERROR\n");
 		exit(-1);
 	}
-	print_data(env.data, env.nb_line);
+//	print_data(env.data, env.nb_line);
 	fill_combinations(&env);
 	choose_combinations(&env);
 	dispatch_ants(&env);

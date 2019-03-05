@@ -6,20 +6,20 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 11:33:26 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/05 11:04:39 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/05 23:31:06 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lemin.h>
 
-static void	check_nb_path(t_env *env)
+static void	check_nb_path(t_env *env, int **flow)
 {
 	int i;
 
 	i = 0;
 	while (i < env->nb_nodes)
 	{
-		if (env->flow[env->start_index][i] == 1)
+		if (flow[env->start_index][i] == 1)
 			env->nb_path++;
 		i++;
 	}
@@ -50,18 +50,20 @@ static void	cpy_paths(t_env *env)
 		}
 		i++;
 	}
+	free(env->prepaths);
+//	free(env->fifo);
 	env->nb_path = env->end_found;
 	ft_printf("nb_end_found:%d\n", env->end_found);
 	print_path(env);
 }
 
-void		bfs_second(t_env *env)
+void		bfs_second(t_env *env, int **flow)
 {
 	int		nb_path_needed;
 
 	nb_path_needed = 0;
 	env->end_found = 0;
-	check_nb_path(env);
+	check_nb_path(env, flow);
 	if (!(env->prepaths = ft_memalloc(sizeof(t_path) * env->nb_nodes)))
 		exit(-1);
 	env->nb_fifo = env->nb_path;
@@ -69,8 +71,8 @@ void		bfs_second(t_env *env)
 		exit(-1);
 	if (!(env->fifo = ft_memalloc(sizeof(t_fifo) * env->nb_nodes)))
 		exit(-1);
-	fill_initial_fifo_second(env);
-	if (while_fifo_second(env, nb_path_needed) == -1)
+	fill_initial_fifo_second(env, flow);
+	if (while_fifo_second(env, nb_path_needed, flow) == -1)
 		exit(-1);
 	ft_printf("nb_path:%d\n", env->nb_path);
 	cpy_paths(env);
