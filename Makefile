@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2019/03/05 10:50:29 by vrenaudi         ###   ########.fr        #
+#    Updated: 2019/03/05 23:35:32 by vrenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRC_NAME	=	main.c \
 				dispatch_ants.c \
 				move_ants.c \
 				choose_combinations.c \
+				calculate_line.c \
 				bfs.c \
 				fifo.c \
 				bfs_second.c \

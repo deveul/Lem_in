@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/05 14:38:25 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/05 23:30:23 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,9 @@ typedef struct		s_combinations
 typedef struct		s_env
 {
 	char			**data;
+	int				**best_flow;
 	int				**flow;
+	int				limit;
 	int				**matrice;
 	int				*end_links;
 	int				*start_links;
@@ -118,6 +120,7 @@ typedef struct		s_env
 	t_fifo			*fifo;
 	t_node			*nodes;
 	t_path			*prepaths;
+	t_path			*save_paths;
 	t_path			*paths;
 	t_res			*results;
 	t_room			*rooms;
@@ -141,7 +144,7 @@ int					read_data(t_env *env);
 void				save_path(t_env *env, t_dij *dij);
 void				add_path(t_path *tocpy, int nb_path, int pathtocpy, int len);
 t_path				bfs(t_env *env);
-void				bfs_second(t_env *env);
+void				bfs_second(t_env *env, int **flow);
 void				add_node(t_node **nodes, t_room room);
 void				add_result(t_res **results, t_path path);
 void				aff_data_1(t_dij *dij, int n, int count);
@@ -153,7 +156,7 @@ void				create_rooms(t_node *node, t_room **rooms, int nb_nodes);
 void				dispatch_ants(t_env *env);
 void				fill_combinations(t_env *env);
 void				fill_initial_fifo(t_env *env);
-void				fill_initial_fifo_second(t_env *env);
+void				fill_initial_fifo_second(t_env *env, int **flow);
 void				fill_initial_fifo_algo(t_env *env);
 void				free_memory(t_env *env);
 void				init_flow(t_env *env);
@@ -164,6 +167,7 @@ void				print_flow(t_env *env);
 void				print_path(t_env *env);
 int					edmonds_karp(t_env *env);
 int					while_fifo(t_env *env);
-int					while_fifo_second(t_env *env, int nb_path_needed);
+int					while_fifo_second(t_env *env, int nb_path_needed, int **flow);
+int					calculate_line(t_env *env);
 
 #endif

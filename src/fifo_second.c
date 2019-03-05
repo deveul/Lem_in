@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 13:19:07 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/05 11:04:59 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/05 23:29:28 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static	int		enqueue_fifo(t_env *env, int i, int *nb_path_needed, t_fifo tmp)
 	return (0);
 }
 
-int				while_fifo_second(t_env *env, int nb_path_needed)
+int				while_fifo_second(t_env *env, int nb_path_needed, int **flow)
 {
 	int		i;
 	t_fifo	tmp;
@@ -73,7 +73,7 @@ int				while_fifo_second(t_env *env, int nb_path_needed)
 		nb_path_needed = 0;
 		while (i < env->nb_nodes)
 		{
-			if (env->flow[tmp.index][i] == 1 && env->rooms[i].check == 0)
+			if (flow[tmp.index][i] == 1 && env->rooms[i].check == 0)
 			{
 				if (enqueue_fifo(env, i, &nb_path_needed, tmp) == -1)
 					return (-1);

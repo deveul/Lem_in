@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 19:08:47 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/05 15:31:12 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/05 23:34:30 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	fill_initial_fifo(t_env *env)
 	}
 }
 
-void	fill_initial_fifo_second(t_env *env)
+void	fill_initial_fifo_second(t_env *env, int **flow)
 {
 	int		i;
 	int		path_index;
@@ -79,7 +79,7 @@ void	fill_initial_fifo_second(t_env *env)
 	path_index = 0;
 	while (i < env->nb_nodes)
 	{
-		if (env->flow[env->start_index][i] == 1)
+		if (flow[env->start_index][i] == 1)
 		{
 			env->fifo[path_index].index = i;
 			env->fifo[path_index].path_index = path_index;

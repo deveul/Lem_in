@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 11:19:42 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/05 10:39:17 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/05 23:37:43 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ int				analyze_graph(t_env *env)
 	if (env->start_nb >= 1 && env->end_nb >= 1)
 		trigger = edmonds_karp(env);
 	i = 0;
-//	bfs_second(env);
-	while (i < env->start_nb)
+	bfs_second(env, env->best_flow);
+	free(env->fifo);
+/*	while (i < env->start_nb)
 	{
 		dijkstra(env, env->nb_nodes);
 		dijkstra_old(env, env->nb_nodes);
