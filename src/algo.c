@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 11:19:42 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/05 23:37:43 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/05 23:38:36 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int				analyze_graph(t_env *env)
 			env->nb_path++;
 		create_path_tab(env->results, &env->paths, env->nb_path);
 	//	print_path(env);
-	}
+	}*/
 	if (env->nb_path == 0)
 	{
 		ft_putendl("No passaran");
