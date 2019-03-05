@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:13:09 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/04 17:10:47 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/05 10:42:46 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,6 @@ static	void	check_start_end(t_env *env, t_room *tmp)
 	}
 }
 
-static void		init_t_room(t_room *tmp)
-{
-	tmp->name = NULL;
-	tmp->start = 0;
-	tmp->end = 0;
-	tmp->check = 0;
-	tmp->index = 0;
-}
-
 void			add_node(t_node **nodes, t_room room)
 {
 	t_node *tmp;
@@ -61,7 +52,7 @@ void			add_node(t_node **nodes, t_room room)
 
 	tmp = *nodes;
 	if (!(new = ft_memalloc(sizeof(t_node))))
-		exit (-1);
+		exit(-1);
 	new->room = room;
 	new->next = NULL;
 	if (*nodes == NULL)
@@ -78,9 +69,13 @@ int				fill_room(t_env *env, char **tab)
 {
 	t_room tmp;
 
-	init_t_room(&tmp);
+	tmp.name = NULL;
+	tmp.start = 0;
+	tmp.end = 0;
+	tmp.check = 0;
+	tmp.index = 0;
 	if (check_unicity(env->nodes, tab[0]) == -1
-		|| ft_isnumber(tab[1]) == -1 || ft_isnumber(tab[2]) == -1)
+			|| ft_isnumber(tab[1]) == -1 || ft_isnumber(tab[2]) == -1)
 		return (-1);
 	tmp.name = ft_strdup(tab[0]);
 	check_start_end(env, &tmp);

@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 19:08:47 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/04 19:42:08 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/05 10:05:38 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	fill_initial_fifo(t_env *env)
 	path_index = 0;
 	while (i < env->nb_nodes)
 	{
-		if (env->matrice[env->start_index][i] == 1 && env->flow[env->start_index][i] == 0)
+		if (env->matrice[env->start_index][i] == 1
+				&& env->flow[env->start_index][i] == 0)
 		{
 			env->fifo[path_index].index = i;
 			env->fifo[path_index].from = 0;
@@ -94,8 +95,8 @@ void	init_flow(t_env *env)
 	int i;
 
 	i = 0;
-	env->flow = ft_memalloc(sizeof(int *)* env->nb_nodes);
-	while(i < env->nb_nodes)
+	env->flow = ft_memalloc(sizeof(int *) * env->nb_nodes);
+	while (i < env->nb_nodes)
 	{
 		env->flow[i] = ft_memalloc(sizeof(int) * env->nb_nodes);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 15:04:12 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/04 11:05:12 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/05 10:10:08 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 void		move_to_last_room(t_env *env, int *tmp, int j)
 {
-	if (env->rooms[tmp[j - 1]].room_content != 0 || tmp[j - 1] == env->start_index)
+	if (env->rooms[tmp[j - 1]].room_content != 0
+			|| tmp[j - 1] == env->start_index)
 	{
-		ft_printf("L%d-%s ", env->rooms[tmp[j - 1]].room_content, env->rooms[env->end_index].name);
+		ft_printf("L%d-%s ", env->rooms[tmp[j - 1]].room_content,
+				env->rooms[env->end_index].name);
 		env->rooms[tmp[j - 1]].room_content = 0;
 		env->nb_ants--;
 	}
@@ -24,7 +26,8 @@ void		move_to_last_room(t_env *env, int *tmp, int j)
 
 void		move_in_graph(t_env *env, int *tmp, int j)
 {
-	ft_printf("L%d-%s ", env->rooms[tmp[j - 1]].room_content, env->rooms[tmp[j]].name);
+	ft_printf("L%d-%s ", env->rooms[tmp[j - 1]].room_content,
+			env->rooms[tmp[j]].name);
 	env->rooms[tmp[j]].room_content = env->rooms[tmp[j - 1]].room_content;
 	env->rooms[tmp[j - 1]].room_content = 0;
 }
@@ -34,7 +37,8 @@ void		move_from_start(t_env *env, int *ants_in, int j, int i)
 	int		*tmp;
 
 	tmp = env->paths[env->final_combi[env->c_c].index_array[i]].path;
-	if (env->paths[env->final_combi[env->c_c].index_array[i]].ants_launched < env->final_combi[env->c_c].ants_by_index[i])
+	if (env->paths[env->final_combi[env->c_c].index_array[i]].ants_launched
+			< env->final_combi[env->c_c].ants_by_index[i])
 	{
 		ft_printf("L%d-%s ", (*ants_in), env->rooms[tmp[1]].name);
 		env->rooms[tmp[j]].room_content = (*ants_in)++;
@@ -42,7 +46,7 @@ void		move_from_start(t_env *env, int *ants_in, int j, int i)
 	}
 }
 
-void		move_ants(t_env *env, t_ants ants)
+void		move_ants(t_env *env)
 {
 	int		i;
 	int		j;
@@ -50,7 +54,6 @@ void		move_ants(t_env *env, t_ants ants)
 	int		line_printed;
 	int		*tmp;
 
-	ants_in = ants.nb_path;
 	ants_in = 1;
 	line_printed = 0;
 	while (env->nb_ants > 0)

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 12:50:41 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/04 19:39:48 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/05 09:40:32 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,7 @@ static	void	clean_flow(t_env *env)
 		while (j < env->nb_nodes)
 		{
 			if (env->flow[i][j] != 1)
-		//	{
 				env->flow[i][j] = INFINITE;
-				//				env->flow[j][i] = INFINITE;
-		//	}
-		//	else if (env->flow[i][j] == 0)
-		//		env->flow[i][j] = INFINITE;
 			j++;
 		}
 		i++;
@@ -79,11 +74,6 @@ static	void	update_flow(t_path tmp, t_env *env)
 	i = 0;
 	while (i <= tmp.len)
 	{
-		/*	if (i < tmp.len && env->flow[tmp.path[i]][tmp.path[i + 1]] == 0
-			&& env->flow[tmp.path[i + 1]][tmp.path[i]] != 1)
-			env->flow[tmp.path[i]][tmp.path[i + 1]] = 1;
-			else if (i < tmp.len)
-			env->flow[tmp.path[i]][tmp.path[i + 1]] = -1;*/
 		if (i < tmp.len)
 		{
 			if (env->flow[tmp.path[i]][tmp.path[i + 1]] == -1)
@@ -98,12 +88,8 @@ static	void	update_flow(t_path tmp, t_env *env)
 			}
 			env->rooms[tmp.path[i]].capacity = 1;
 		}
-
 		i++;
 	}
-	i = -1;
-	//	while (++i < env->nb_nodes)
-	//		ft_printf("room[%d].capcity : %d\n", i, env->rooms[i].capacity);
 }
 
 int				edmonds_karp(t_env *env)
@@ -124,6 +110,5 @@ int				edmonds_karp(t_env *env)
 		reset_paths(env);
 	}
 	clean_flow(env);
-	//	print_flow(env);
 	return (trigger);
 }

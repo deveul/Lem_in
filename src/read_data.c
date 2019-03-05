@@ -6,22 +6,22 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:21:51 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/03 17:32:25 by marvin           ###   ########.fr       */
+/*   Updated: 2019/03/05 11:08:55 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lemin.h>
 
-static void	get_ants_nb(t_env *env, char *line)
+static void		get_ants_nb(t_env *env, char *line)
 {
 	while (env->nb_ants == -1 && get_next_line(0, &line) > 0)
 	{
 		if (line[0] != '#')
 		{
 			env->nb_ants = ft_atoi(line);
-			if ((env->nb_ants <= 0 || env->nb_ants > INT_MAX) 
+			if ((env->nb_ants <= 0 || env->nb_ants > INT_MAX)
 					&& ft_printf("Wrong number of ants.\n"))
-			{	
+			{
 				ft_printf("line = %s\n", line);
 				exit(-1);
 			}
@@ -35,7 +35,7 @@ static void	get_ants_nb(t_env *env, char *line)
 	}
 }
 
-int	handle_start_end_com(t_env *env, char *line)
+static int		handle_start_end_com(t_env *env, char *line)
 {
 	if (ft_strequ(line, "##start"))
 	{
@@ -58,79 +58,7 @@ int	handle_start_end_com(t_env *env, char *line)
 	return (0);
 }
 
-int	analyze_node(t_env *env, char *line)
-{
-	char	**tab;
-
-	if (env->matrice)
-		return (-1);
-	tab = ft_strsplit(line, ' ');
-	if (ft_tablen(tab) != 3)
-	{
-		ft_printf("too many coordinates\n");
-		ft_delete_tab(tab);
-		return (-1);
-	}
-	if (fill_room(env, tab) == -1)
-	{
-		ft_delete_tab(tab);
-		return (-1);
-	}
-	ft_delete_tab(tab);
-	return (0);
-}
-
-int	analyze_edge(t_env *env, char *line)
-{
-	char	**tab;
-	int		error;
-
-	error = 0;
-	if ((env->start_index == -1 || env->end_index == -1)
-			|| (env->start_index == env->end_index && env->start_index != -1))
-	{
-		ft_printf("Problem with end or start\n");
-		return (-1);
-	}
-	if (!env->matrice)
-		create_matrice(env);
-	tab = ft_strsplit(line, '-');
-	if (ft_tablen(tab) != 2)
-	{
-		ft_printf("edge should be : room1-romm2\n");
-		error = -1;
-	}
-	if (fill_matrice(env, tab) == -1)
-	{
-		ft_printf("Ground control to Major Tom\n");
-		error = -1;
-	}
-	env->nb_edges++;
-	ft_delete_tab(tab);
-	return (error);
-}
-
-int	analyze_node_edge(t_env *env, char *line)
-{
-	if (line[0] == 'L')
-	{
-		ft_printf("Wrong name for node\n");
-		return (-1);
-	}
-	else if (ft_strchr(line, ' '))
-	{
-		if (analyze_node(env, line) == -1)
-			return (-1);
-	}
-	else if (ft_strchr(line, '-'))
-	{
-		if (analyze_edge(env, line) == -1)
-			return (-1);
-	}
-	return (0);
-}
-
-void			get_connexion_start_end(t_env *env)
+static void		get_connexion_start_end(t_env *env)
 {
 	int		i;
 
@@ -149,17 +77,18 @@ void			get_connexion_start_end(t_env *env)
 	}
 }
 
-int		read_data(t_env *env)
+int				read_data(t_env *env)
 {
 	char	*line;
 	int		realloc;
 
 	line = NULL;
 	realloc = 1;
-	env->data = ft_memalloc(sizeof(char*) * NB_LINE + 1);
+	if (!(env->data = ft_memalloc(sizeof(char*) * NB_LINE + 1)))
+		exit(-1);
 	get_ants_nb(env, line);
 	while (get_next_line(0, &line) > 0)
-	{	
+	{
 		if (env->nb_line < (NB_LINE * realloc) - 1)
 			env->data[env->nb_line++] = line;
 		else
@@ -173,7 +102,7 @@ int		read_data(t_env *env)
 				break ;
 		}
 		else if (analyze_node_edge(env, line) == -1)
-				break ;
+			break ;
 	}
 	if (env->nb_edges == 0)
 		return (-1);

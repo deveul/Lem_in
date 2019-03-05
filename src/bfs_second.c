@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algo.c                                             :+:      :+:    :+:   */
+/*   bfs_second.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 11:33:26 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/04 18:06:04 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/05 11:04:39 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lemin.h>
 
-static	void	check_nb_path(t_env *env)
+static void	check_nb_path(t_env *env)
 {
 	int i;
 
@@ -23,29 +23,14 @@ static	void	check_nb_path(t_env *env)
 			env->nb_path++;
 		i++;
 	}
-		ft_printf("at first nb_path:%d\n", env->nb_path);
+	ft_printf("at first nb_path:%d\n", env->nb_path);
 }
 
-void			bfs_second(t_env *env)
+static void	cpy_paths(t_env *env)
 {
-	int		nb_path_needed;
 	int		i;
 	int		j;
 
-	nb_path_needed = 0;
-	env->end_found = 0;
-	check_nb_path(env);
-	if (!(env->prepaths = ft_memalloc(sizeof(t_path) * env->nb_nodes)))
-		exit(-1);
-	env->nb_fifo = env->nb_path;
-	if (init_paths_second(env) == -1)
-		exit(-1);
-	if (!(env->fifo = ft_memalloc(sizeof(t_fifo) * env->nb_nodes)))
-		exit(-1);
-	fill_initial_fifo_second(env);
-	if (while_fifo_second(env, nb_path_needed) == -1)
-		exit(-1);
-	ft_printf("nb_path:%d\n", env->nb_path);
 	i = 0;
 	while (i < env->nb_path)
 	{
@@ -68,4 +53,25 @@ void			bfs_second(t_env *env)
 	env->nb_path = env->end_found;
 	ft_printf("nb_end_found:%d\n", env->end_found);
 	print_path(env);
+}
+
+void		bfs_second(t_env *env)
+{
+	int		nb_path_needed;
+
+	nb_path_needed = 0;
+	env->end_found = 0;
+	check_nb_path(env);
+	if (!(env->prepaths = ft_memalloc(sizeof(t_path) * env->nb_nodes)))
+		exit(-1);
+	env->nb_fifo = env->nb_path;
+	if (init_paths_second(env) == -1)
+		exit(-1);
+	if (!(env->fifo = ft_memalloc(sizeof(t_fifo) * env->nb_nodes)))
+		exit(-1);
+	fill_initial_fifo_second(env);
+	if (while_fifo_second(env, nb_path_needed) == -1)
+		exit(-1);
+	ft_printf("nb_path:%d\n", env->nb_path);
+	cpy_paths(env);
 }

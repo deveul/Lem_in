@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 11:19:42 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/04 19:42:07 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/05 10:39:17 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int				analyze_graph(t_env *env)
 	if (env->nb_path == 0)
 	{
 		ft_putendl("No passaran");
+		ft_putendl("ERROR");
 		exit(-1);
 	}
 	return (0);

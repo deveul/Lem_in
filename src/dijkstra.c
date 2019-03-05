@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:46:39 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/04 12:48:01 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/05 10:40:07 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static	void	search_nextnode(t_dij *dij, t_env *env, int n)
 	i = 0;
 	while (i < n)
 	{
-		if (env->rooms[i].check == 0 
-			 && !dij->visited[i] && dij->distance[i] < dij->min)
+		if (env->rooms[i].check == 0
+				&& !dij->visited[i] && dij->distance[i] < dij->min)
 		{
 			dij->min = dij->distance[i];
 			dij->nextnode = i;

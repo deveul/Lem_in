@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/04 17:53:22 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/05 10:49:54 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,18 +123,12 @@ char				**increment_size(char **data, char *line, int realloc);
 int					*dup_table(int *src, int len);
 int					*expand_table(int *src, int len, int to_add);
 int					algo(t_env *env);
-int					analyze_edge(t_env *env, char *line);
-int					analyze_edge(t_env *env, char *line);
 int					analyze_graph(t_env *env);
-int					analyze_node(t_env *env, char *line);
-int					analyze_node(t_env *env, char *line);
-int					analyze_node_edge(t_env *env, char *line);
 int					analyze_node_edge(t_env *env, char *line);
 int					create_matrice(t_env *env);
 int					dijkstra(t_env *env, int n);
 int					fill_matrice(t_env *env, char **tab);
 int					fill_room(t_env *env, char **tab);
-int					handle_start_end_com(t_env *env, char *line);
 int					init_paths(t_env *env);
 int					init_paths_second(t_env *env);
 int					init_paths_algo(t_env *env);
@@ -158,7 +152,7 @@ void				fill_initial_fifo_second(t_env *env);
 void				fill_initial_fifo_algo(t_env *env);
 void				free_memory(t_env *env);
 void				init_flow(t_env *env);
-void				move_ants(t_env *env, t_ants ants);
+void				move_ants(t_env *env);
 void				print_data(char **data, int nb_line);
 void				print_env(t_env *env);
 void				print_flow(t_env *env);

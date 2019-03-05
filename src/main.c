@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/04 17:34:12 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/05 11:10:25 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,11 @@ int				main(void)
 
 	init_env(&env);
 	if (read_data(&env) == -1)
+	{
 		ft_printf("ERROR\n");
+		if (env.nb_edges == 0)
+			exit(-1);
+	}
 	if (analyze_graph(&env) == -1)
 	{
 		ft_printf("ERROR\n");

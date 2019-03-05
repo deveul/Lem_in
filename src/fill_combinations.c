@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 12:10:03 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/02/23 15:58:26 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/05 10:39:05 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void		print_combi_ini(t_env *env)
 		i++;
 	}
 }
+
 void		print_combi(t_env *env)
 {
 	int		i;
@@ -113,7 +114,7 @@ void		del_dup_combi(t_env *env)
 	{
 		ft_printf("env->nb_f_c:%d\n", env->nb_f_c);
 		ft_printf("malloc_error\n");
-		exit (-1);
+		exit(-1);
 	}
 	i = 0;
 	j = 0;
@@ -157,7 +158,7 @@ int			confront_two_paths(t_path p1, t_path p2)
 void		init_combi(t_env *env, int i)
 {
 	if (!(env->combi[i].index_array = ft_memalloc(env->nb_path * sizeof(int))))
-		exit (-1);
+		exit(-1);
 	env->combi[i].index_array[0] = i;
 	env->combi[i].nb_combi = 1;
 }
@@ -183,7 +184,7 @@ void		check_combi(t_env *env, int i)
 					{
 						if (env->paths[env->combi[i].index_array[l]].len > env->paths[k].len)
 							env->combi[i].index_array[l] = k;
-						break;
+						break ;
 					}
 					l++;
 				}
@@ -203,7 +204,7 @@ void		fill_combinations(t_env *env)
 
 	i = 0;
 	if (!(env->combi = ft_memalloc(env->nb_path * sizeof(t_combinations))))
-		exit (-1);
+		exit(-1);
 	while (i < env->nb_path)
 	{
 		check_combi(env, i);

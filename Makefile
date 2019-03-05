@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2019/03/04 13:45:45 by vrenaudi         ###   ########.fr        #
+#    Updated: 2019/03/05 10:50:29 by vrenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,8 @@ SRC_NAME	=	main.c \
 				algo.c \
 				edmonds_karp.c \
 				init_algo.c \
-				free_memory.c
+				free_memory.c \
+				analyze_node_edge.c
 
 OBJ_NAME	=	$(SRC_NAME:.c=.o)
 

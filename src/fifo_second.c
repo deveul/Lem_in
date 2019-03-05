@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fifo.c                                             :+:      :+:    :+:   */
+/*   fifo_second.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 13:19:07 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/04 14:45:49 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/05 11:04:59 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ int				while_fifo_second(t_env *env, int nb_path_needed)
 	{
 		tmp = env->fifo[0];
 		dequeue_one_fifo(env);
-//		if (env->end_found == 1)
-//			break ;
 		i = 0;
 		nb_path_needed = 0;
 		while (i < env->nb_nodes)
