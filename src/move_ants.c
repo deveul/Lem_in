@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 15:04:12 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/05 22:15:53 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 09:52:24 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ void		move_from_start(t_env *env, int *ants_in, int j, int i)
 {
 	int		*tmp;
 
-	tmp = env->paths[env->final_combi[env->c_c].index_array[i]].path;
-	if (env->paths[env->final_combi[env->c_c].index_array[i]].ants_launched
-			< env->final_combi[env->c_c].ants_by_index[i])
+	tmp = env->paths[env->combi.index_array[i]].path;
+	if (env->paths[env->combi.index_array[i]].ants_launched
+			< env->combi.ants_by_index[i])
 	{
 		ft_printf("L%d-%s ", (*ants_in), env->rooms[tmp[1]].name);
 		env->rooms[tmp[j]].room_content = (*ants_in)++;
-		env->paths[env->final_combi[env->c_c].index_array[i]].ants_launched++;
+		env->paths[env->combi.index_array[i]].ants_launched++;
 	}
 }
 
@@ -59,10 +59,10 @@ void		move_ants(t_env *env)
 	while (env->nb_ants > 0)
 	{
 		i = -1;
-		while (++i < env->final_combi[env->c_c].nb_combi)
+		while (++i < env->nb_path)
 		{
-			tmp = env->paths[env->final_combi[env->c_c].index_array[i]].path;
-			j = env->paths[env->final_combi[env->c_c].index_array[i]].len;
+			tmp = env->paths[env->combi.index_array[i]].path;
+			j = env->paths[env->combi.index_array[i]].len;
 			move_to_last_room(env, tmp, j);
 			while (--j > 0)
 				if (env->rooms[tmp[j]].room_content == 0)

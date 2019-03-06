@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/06 09:27:00 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 10:05:31 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,7 @@ typedef struct		s_env
 	int				start_nb;
 	int				flow_to_find;
 	long			nb_ants;
-	t_combinations	*combi;
-	t_combinations	*final_combi;
+	t_combinations	combi;
 	t_fifo			*fifo;
 	t_node			*nodes;
 	t_path			*prepaths;
@@ -149,7 +148,6 @@ void				add_result(t_res **results, t_path path);
 void				aff_data_1(t_dij *dij, int n, int count);
 void				aff_data_2(t_dij *dij, int i);
 void				aff_data_3(t_dij *dij, int i, t_env *env);
-void				choose_combinations(t_env *env);
 void				create_path_tab(t_res *res, t_path **paths_ok, int nb_paths);
 void				create_rooms(t_node *node, t_room **rooms, int nb_nodes);
 void				dispatch_ants(t_env *env);
