@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 12:50:41 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/05 23:34:55 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 09:31:35 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,7 @@ static	void	reset_paths(t_env *env)
 	env->nb_fifo = 0;
 	env->end_found = 0;
 }
-/*
-   static	int		cpy_tmp_init(t_env *env, t_path tmp)
-   {
-   t_path		tmp_init;
 
-   tmp_init.len = 0;
-   tmp_init.path = NULL;
-   tmp_init = tmp;
-   tmp_init.path = ft_memalloc(sizeof(int) * (tmp.len + 1));
-   ft_memcpy(tmp_init.path, tmp.path, sizeof(int) * (tmp.len + 1));
-   add_result(&env->results, tmp_init);
-   return (1);
-   }
-   */
 static	void	update_flow(t_path tmp, t_env *env)
 {
 	int i;
@@ -132,16 +119,14 @@ static void		save_flow(t_env *env)
 	}
 }
 
-int				edmonds_karp(t_env *env)
+void			edmonds_karp(t_env *env)
 {
 	t_path		tmp;
-	int			trigger;
 	int			i;
 	int			tmp_nb_line;
 	int			save;
 
 	tmp.len = 0;
-	trigger = 0;
 	tmp_nb_line = INFINITE;
 	save = INFINITE;
 	env->best_flow = NULL;
@@ -149,10 +134,6 @@ int				edmonds_karp(t_env *env)
 	while (tmp.len != -1)
 	{
 		tmp = bfs(env);
-		//		if (trigger == 0 && tmp.len > env->nb_ants)
-		//			trigger = cpy_tmp_init(env, tmp);
-		//		else if (trigger == 0)
-		trigger = 2;
 		update_flow(tmp, env);
 		reset_paths(env);
 		bfs_second(env, env->flow);
@@ -171,5 +152,4 @@ int				edmonds_karp(t_env *env)
 		i++;
 	}
 	clean_flow(env);
-	return (trigger);
 }

@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/05 23:30:23 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 09:27:00 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ void				print_data(char **data, int nb_line);
 void				print_env(t_env *env);
 void				print_flow(t_env *env);
 void				print_path(t_env *env);
-int					edmonds_karp(t_env *env);
+void				edmonds_karp(t_env *env);
 int					while_fifo(t_env *env);
 int					while_fifo_second(t_env *env, int nb_path_needed, int **flow);
 int					calculate_line(t_env *env);

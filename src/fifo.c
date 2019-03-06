@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 13:19:07 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/05 22:29:54 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 09:22:19 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void		choose_flow(t_env *env, t_fifo tmp, int i, int *nb_path_needed)
 		if (env->matrice[tmp.index][i] == 1 && env->rooms[i].check == 0
 			&& (env->flow[tmp.index][i] == -1 || env->flow[tmp.index][i] == 0))
 		{
-			tmp.from = 0;
+			tmp.from = env->flow[tmp.index][i];
 			enqueue_fifo(env, i, nb_path_needed, tmp);
 		}
 	}
