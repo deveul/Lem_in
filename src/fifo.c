@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 13:19:07 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/06 11:12:26 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 16:23:56 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_fifo	get_tmp_info(t_fifo fifo)
 	return (tmp);
 }
 
-static void		dequeue_one_fifo(t_env *env)
+static int		dequeue_one_fifo(t_env *env)
 {
 	int		i;
 	int		j;
@@ -41,13 +41,13 @@ static void		dequeue_one_fifo(t_env *env)
 	if (tmp.index == env->end_index)
 	{
 		env->paths[tmp.path_index].end_found = 1;
-		env->end_found = 1;
-		env->nb_path_ok++;
+		return (1);
 	}
 	if (env->rooms[tmp.index].capacity == 1 && tmp.from == 0)
 		env->flow_to_find = -1;
 	else
 		env->flow_to_find = 0;
+	return (0);
 }
 
 static void		enqueue_fifo(t_env *env, int i, int *nb_path_needed, t_fifo tmp)
@@ -98,11 +98,10 @@ int				while_fifo(t_env *env)
 	t_fifo	tmp;
 
 	env->flow_to_find = 0;
-	while (env->nb_fifo != 0 && env->end_found == 0)
+	while (env->nb_fifo != 0)
 	{
 		tmp = env->fifo[0];
-		dequeue_one_fifo(env);
-		if (env->end_found == 1)
+		if (dequeue_one_fifo(env) == 1)
 			break ;
 		i = -1;
 		nb_path_needed = 0;

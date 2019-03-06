@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 10:49:03 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/06 11:48:58 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 16:10:15 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,18 @@ static int		create_matrice(t_env *env)
 
 	j = 0;
 	i = 0;
-	if (!(env->matrice = ft_memalloc(sizeof(int*) * env->nb_nodes)))
+	if (!(env->matrice = ft_memalloc(sizeof(char *) * env->nb_nodes)))
 		exit(-1);
 	while (i < env->nb_nodes)
 	{
-		if (!(env->matrice[i] = ft_memalloc(sizeof(int) * env->nb_nodes)))
+		if (!(env->matrice[i] = ft_memalloc(sizeof(char) * env->nb_nodes)))
 			exit(-1);
 		j = 0;
 		while (j < env->nb_nodes)
-			env->matrice[i][j++] = INFINITE;
+		{
+			env->matrice[i][j] = 0;
+			j++;
+		}
 		i++;
 	}
 	return (1);
@@ -79,7 +82,9 @@ static int		analyze_edge(t_env *env, char *line)
 int				analyze_node_edge(t_env *env, char *line)
 {
 	if (line[0] == 'L')
+	{
 		return (-1);
+	}
 	else if (ft_strchr(line, ' '))
 	{
 		if (analyze_node(env, line) == -1)

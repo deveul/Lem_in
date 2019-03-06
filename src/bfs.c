@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 11:33:26 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/06 11:31:42 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 16:23:39 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ t_path			bfs(t_env *env)
 	int		save;
 	t_path	not_found;
 
-	env->end_found = 0;
 	check_nb_path(env);
 	if (!(env->paths = ft_memalloc(sizeof(t_path) * env->nb_nodes)))
 		exit(-1);

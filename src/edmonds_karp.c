@@ -6,32 +6,11 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 12:50:41 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/06 11:43:04 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 16:01:23 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lemin.h>
-
-static void		clean_flow(t_env *env)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (i < env->nb_nodes)
-	{
-		j = 0;
-		while (j < env->nb_nodes)
-		{
-			if (env->flow[i][j] != 1)
-				env->flow[i][j] = INFINITE;
-			if (env->best_flow[i][j] != 1)
-				env->best_flow[i][j] = INFINITE;
-			j++;
-		}
-		i++;
-	}
-}
 
 static void		update_flow(t_path tmp, t_env *env)
 {
@@ -64,26 +43,26 @@ static void		update_flow(t_path tmp, t_env *env)
 		}
 }
 
-static void		save_flow(t_env *env)
+static void		save_flow(t_env *e)
 {
 	int		i;
 	int		j;
 
-	if (!env->best_flow)
+	if (!e->best_flow)
 	{
-		if (!(env->best_flow = ft_memalloc(sizeof(int *) * env->nb_nodes)))
+		if (!(e->best_flow = ft_memalloc(sizeof(char *) * e->nb_nodes)))
 			exit(-1);
 		i = -1;
-		while (++i < env->nb_nodes)
-			if (!(env->best_flow[i] = ft_memalloc(sizeof(int) * env->nb_nodes)))
+		while (++i < e->nb_nodes)
+			if (!(e->best_flow[i] = ft_memalloc(sizeof(char) * e->nb_nodes)))
 				exit(-1);
 	}
 	i = -1;
-	while (++i < env->nb_nodes)
+	while (++i < e->nb_nodes)
 	{
 		j = -1;
-		while (++j < env->nb_nodes)
-			env->best_flow[i][j] = env->flow[i][j];
+		while (++j < e->nb_nodes)
+			e->best_flow[i][j] = e->flow[i][j];
 	}
 }
 
@@ -94,8 +73,8 @@ void			edmonds_karp(t_env *env)
 	int			save;
 
 	tmp.len = 0;
-	tmp_nb_line = INFINITE;
-	save = INFINITE;
+	tmp_nb_line = 0;
+	save = INT_MAX;
 	env->best_flow = NULL;
 	while (tmp.len != -1)
 	{
@@ -112,5 +91,4 @@ void			edmonds_karp(t_env *env)
 		else
 			break ;
 	}
-	clean_flow(env);
 }

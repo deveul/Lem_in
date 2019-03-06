@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 19:08:47 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/05 23:34:30 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 16:27:51 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ int		init_paths_second(t_env *env)
 	env->rooms[env->start_index].check = 1;
 	while (i < env->nb_path)
 	{
-		if (!(env->prepaths[i].path = ft_memalloc(sizeof(int) * env->nb_nodes)))
+		if (!(env->paths[i].path = ft_memalloc(sizeof(int) * env->nb_nodes)))
 			return (-1);
-		env->prepaths[i].path[0] = env->start_index;
-		env->prepaths[i].len = 1;
-		env->prepaths[i].end_found = 0;
+		env->paths[i].path[0] = env->start_index;
+		env->paths[i].len = 1;
+		env->paths[i].end_found = 0;
 		i++;
 	}
 	return (0);
@@ -70,7 +70,7 @@ void	fill_initial_fifo(t_env *env)
 	}
 }
 
-void	fill_initial_fifo_second(t_env *env, int **flow)
+void	fill_initial_fifo_second(t_env *env, char **flow)
 {
 	int		i;
 	int		path_index;
@@ -95,10 +95,13 @@ void	init_flow(t_env *env)
 	int i;
 
 	i = 0;
-	env->flow = ft_memalloc(sizeof(int *) * env->nb_nodes);
+	ft_printf("ici env->nb_nodes:%d\n", env->nb_nodes);
+	if (!(env->flow = ft_memalloc(sizeof(char *) * env->nb_nodes)))
+		exit(-1);
 	while (i < env->nb_nodes)
 	{
-		env->flow[i] = ft_memalloc(sizeof(int) * env->nb_nodes);
+		if (!(env->flow[i] = ft_memalloc(sizeof(char) * env->nb_nodes)))
+			exit(-1);
 		i++;
 	}
 }

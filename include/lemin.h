@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/06 12:10:32 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 16:26:33 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <ft_printf.h>
 # include <get_next_line.h>
 
-# define INFINITE		99999
 # define NB_LINE		100
 # define NB_PATH		100
 
@@ -54,8 +53,6 @@ typedef struct		s_fifo
 	int				index;
 	int				path_index;
 	int				from;
-	int				v_in;
-	int				v_out;
 }					t_fifo;
 
 typedef struct		s_res
@@ -72,61 +69,38 @@ typedef struct		s_ants
 	int				same_ants_nb;
 }					t_ants;
 
-typedef struct		s_dij
-{
-	int				*distance;
-	int				*pred;
-	int				*visited;
-	int				min;
-	int				nextnode;
-}					t_dij;
-
 typedef struct		s_combinations
 {
 	int				*index_array;
 	int				*ants_by_index;
-	int				nb_combi;
-	int				dup;
 }					t_combinations;
 
 typedef struct		s_env
 {
 	char			**data;
-	int				**best_flow;
-	int				**flow;
-	int				limit;
-	int				**matrice;
-	int				*end_links;
-	int				*start_links;
-	int				c_c;
+	char			**best_flow;
+	char			**flow;
+	char			**matrice;
 	int				end;
-	int				end_found;
 	int				end_index;
-	int				end_nb;
 	int				nb_edges;
-	int				nb_f_c;
 	int				nb_fifo;
 	int				nb_line;
 	int				nb_nodes;
 	int				nb_path;
-	int				nb_path_ok;
 	int				start;
 	int				start_index;
-	int				start_nb;
 	int				flow_to_find;
 	long			nb_ants;
 	t_combinations	combi;
 	t_fifo			*fifo;
 	t_node			*nodes;
-	t_path			*prepaths;
-	t_path			*save_paths;
 	t_path			*paths;
 	t_res			*results;
 	t_room			*rooms;
 }					t_env;
 
-char				**increase_size(char **data, char *line,
-		int *realloc, int *nb_line);
+char				**increase_size(char **d, char *l, int *r, int *nb_line);
 int					*dup_table(int *src, int len);
 int					*expand_table(int *src, int len, int to_add);
 int					algo(t_env *env);
@@ -139,18 +113,16 @@ int					init_paths(t_env *env);
 int					init_paths_second(t_env *env);
 int					read_data(t_env *env);
 int					while_fifo(t_env *env);
-int					while_fifo_second(t_env *env,
-		int nb_path_needed, int **flow);
+int					while_fifo_second(t_env *env, char **flow);
 t_path				bfs(t_env *env);
-void				add_path(t_path *tocpy, int nb_path,
-		int pathtocpy, int len);
-void				bfs_second(t_env *env, int **flow);
+void				add_path(t_path *tocpy, int nb_path, int ptocpy, int len);
+void				bfs_second(t_env *env, char **flow);
 void				create_rooms(t_node *node, t_room **rooms, int nb_nodes);
 void				dispatch_ants(t_env *env);
 void				edmonds_karp(t_env *env);
 void				fill_combinations(t_env *env);
 void				fill_initial_fifo(t_env *env);
-void				fill_initial_fifo_second(t_env *env, int **flow);
+void				fill_initial_fifo_second(t_env *env, char **flow);
 void				free_memory(t_env *env);
 void				init_flow(t_env *env);
 void				move_ants(t_env *env);

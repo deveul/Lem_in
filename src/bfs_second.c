@@ -6,13 +6,13 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 11:33:26 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/06 11:21:06 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 16:26:29 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lemin.h>
 
-static void	check_nb_path(t_env *env, int **flow)
+static void	check_nb_path(t_env *env, char **flow)
 {
 	int i;
 
@@ -26,43 +26,25 @@ static void	check_nb_path(t_env *env, int **flow)
 	ft_printf("at first nb_path:%d\n", env->nb_path);
 }
 
-static void	cpy_paths(t_env *env)
+static void	reduce_len_paths(t_env *env)
 {
 	int		i;
-	int		j;
 
 	i = 0;
 	while (i < env->nb_path)
 	{
-		env->prepaths[i].len--;
+		env->paths[i].len--;
 		i++;
 	}
-	if (!(env->paths = ft_memalloc(sizeof(t_path) * env->end_found)))
-		exit(-1);
-	i = 0;
-	j = 0;
-	while (i < env->nb_path)
-	{
-		if (env->prepaths[i].end_found == 1)
-		{
-			env->paths[j] = env->prepaths[i];
-			j++;
-		}
-		i++;
-	}
-	free(env->prepaths);
-	env->nb_path = env->end_found;
-	ft_printf("nb_end_found:%d\n", env->end_found);
 }
 
-void		bfs_second(t_env *env, int **flow)
+void		bfs_second(t_env *env, char **flow)
 {
 	int		nb_path_needed;
 
 	nb_path_needed = 0;
-	env->end_found = 0;
 	check_nb_path(env, flow);
-	if (!(env->prepaths = ft_memalloc(sizeof(t_path) * env->nb_nodes)))
+	if (!(env->paths = ft_memalloc(sizeof(t_path) * env->nb_path)))
 		exit(-1);
 	env->nb_fifo = env->nb_path;
 	if (init_paths_second(env) == -1)
@@ -70,8 +52,8 @@ void		bfs_second(t_env *env, int **flow)
 	if (!(env->fifo = ft_memalloc(sizeof(t_fifo) * env->nb_nodes)))
 		exit(-1);
 	fill_initial_fifo_second(env, flow);
-	if (while_fifo_second(env, nb_path_needed, flow) == -1)
+	if (while_fifo_second(env, flow) == -1)
 		exit(-1);
 	ft_printf("nb_path:%d\n", env->nb_path);
-	cpy_paths(env);
+	reduce_len_paths(env);
 }

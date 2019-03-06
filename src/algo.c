@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 11:19:42 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/06 11:39:09 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 16:23:30 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void			reset_paths(t_env *env)
 	}
 	env->nb_path = 0;
 	env->nb_fifo = 0;
-	env->end_found = 0;
 }
 
 int				analyze_graph(t_env *env)
@@ -42,7 +41,7 @@ int				analyze_graph(t_env *env)
 	int		i;
 
 	init_flow(env);
-	if (env->start_nb >= 1 && env->end_nb >= 1)
+	if (env->start >= 1 && env->end >= 1)
 		edmonds_karp(env);
 	i = 0;
 	reset_paths(env);

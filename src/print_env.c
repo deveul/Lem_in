@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:57:29 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/06 12:12:16 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 16:26:31 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_path_with_name(t_env *env)
 
 	i = 0;
 	ft_putendl(">>>>>>>>>>>Paths with name<<<<<<<<<<<<<<<");
-	while (i < env->end_found)
+	while (i < env->nb_path)
 	{
 		ft_putendl("");
 		ft_printf("Path[%2d]: ", i);
@@ -42,7 +42,7 @@ void	print_path(t_env *env)
 
 	i = 0;
 	ft_putendl(">>>>>>>>>>>Paths<<<<<<<<<<<<<<<");
-	while (i < env->end_found)
+	while (i < env->nb_path)
 	{
 		ft_putendl("");
 		ft_printf("Path[%2d]: ", i);

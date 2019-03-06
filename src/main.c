@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 13:07:20 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/06 11:01:40 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 15:59:35 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,10 @@
 
 static void		init_env(t_env *env)
 {
-	env->nodes = NULL;
-	env->data = NULL;
-	env->results = NULL;
-	env->rooms = NULL;
-	env->matrice = NULL;
+	ft_bzero(env, sizeof(t_env));
 	env->nb_ants = -1;
-	env->nb_nodes = 0;
-	env->nb_path = 0;
-	env->nb_edges = 0;
-	env->start = 0;
-	env->start_nb = 0;
-	env->end = 0;
-	env->end_nb = 0;
 	env->start_index = -1;
 	env->end_index = -1;
-	env->flow = NULL;
-	env->nb_path_ok = 0;
-	env->nb_line = 0;
 }
 
 int				main(void)

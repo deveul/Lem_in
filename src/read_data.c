@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:21:51 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/06 12:06:47 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 16:10:13 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,14 @@ static void		get_connexion_start_end(t_env *env)
 	int		i;
 
 	i = 0;
-	if (!(env->start_links = ft_memalloc(sizeof(int) * env->nb_nodes)))
-		return ;
-	if (!(env->end_links = ft_memalloc(sizeof(int) * env->nb_nodes)))
-		return ;
+	env->start = 0;
+	env->end = 0;
 	while (i < env->nb_nodes)
 	{
 		if (env->matrice[env->start_index][i] == 1)
-			env->start_links[env->start_nb++] = i;
+			env->start++;
 		if (env->matrice[env->end_index][i] == 1)
-			env->end_links[env->end_nb++] = i;
+			env->end++;
 		i++;
 	}
 }
