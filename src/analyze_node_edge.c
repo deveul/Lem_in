@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 10:49:03 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/06 16:10:15 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 17:46:06 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,20 @@ static int		analyze_node(t_env *env, char *line)
 	tab = ft_strsplit(line, ' ');
 	if (ft_tablen(tab) != 3)
 	{
+		ft_putendl(ERROR_TOO_MANY_SPACES_FOR_NODES);
 		ft_delete_tab(tab);
-		return (-1);
+		exit(-1);
+	}
+	if (ft_strchr(tab[0], '-') || tab[0][0] == 'L')
+	{
+		ft_putendl(ERROR_IN_NAME_OF_NODE);
+		ft_delete_tab(tab);
+		exit(-1);
 	}
 	if (fill_room(env, tab) == -1)
 	{
 		ft_delete_tab(tab);
-		return (-1);
+		exit(-1);
 	}
 	ft_delete_tab(tab);
 	return (0);
@@ -65,7 +72,10 @@ static int		analyze_edge(t_env *env, char *line)
 	error = 0;
 	if ((env->start_index == -1 || env->end_index == -1)
 			|| (env->start_index == env->end_index && env->start_index != -1))
-		return (-1);
+	{
+		ft_putendl(ERROR_WITH_START_OR_END);
+		exit(-1);
+	}
 	if (!env->matrice)
 		create_matrice(env);
 	tab = ft_strsplit(line, '-');
@@ -81,11 +91,7 @@ static int		analyze_edge(t_env *env, char *line)
 
 int				analyze_node_edge(t_env *env, char *line)
 {
-	if (line[0] == 'L')
-	{
-		return (-1);
-	}
-	else if (ft_strchr(line, ' '))
+	if (ft_strchr(line, ' '))
 	{
 		if (analyze_node(env, line) == -1)
 			return (-1);

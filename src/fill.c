@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:13:09 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/06 16:13:00 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 17:47:48 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int		check_unicity(t_node *nodes, char *name)
 	{
 		if (ft_strequ(name, tmp->room.name))
 		{
-			ft_printf("Duplicate room\n");
+			ft_putendl(ERROR_DUPLICATE_ROOM);
 			return (-1);
 		}
 		tmp = tmp->next;
@@ -76,9 +76,13 @@ int				fill_room(t_env *env, char **tab)
 	tmp.index = 0;
 	tmp.v_in = -1;
 	tmp.v_out = -1;
-	if (check_unicity(env->nodes, tab[0]) == -1
-			|| ft_isnumber(tab[1]) == -1 || ft_isnumber(tab[2]) == -1)
+	if (check_unicity(env->nodes, tab[0]) == -1)
 		return (-1);
+	if (ft_isnumber(tab[1]) == -1 || ft_isnumber(tab[2]) == -1)
+	{
+		ft_putendl(ERROR_IN_COORDINATES);
+		return (-1);
+	}
 	tmp.name = ft_strdup(tab[0]);
 	check_start_end(env, &tmp);
 	tmp.index = env->nb_nodes;

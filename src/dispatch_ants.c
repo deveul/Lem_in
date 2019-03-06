@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 14:00:23 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/06 09:52:45 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 17:52:02 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,6 @@ static void	fill_ants_by_index(t_env *env, t_ants ants)
 		if (env->combi.ants_by_index[i] != -1)
 			env->combi.ants_by_index[i] += ants.same_ants_nb;
 		env->paths[env->combi.index_array[i]].ants_launched = 0;
-	}
-	i = -1;
-	while (++i < env->nb_path)
-	{
-		ft_printf("ants_by_index[%d]:%d\n", i,
-				env->combi.ants_by_index[i]);
-		ft_printf("len_index[%d]:%d\n", i,
-				env->paths[env->combi.index_array[i]].len);
 	}
 	move_ants(env);
 }

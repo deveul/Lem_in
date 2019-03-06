@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 15:04:12 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/06 11:49:38 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 18:22:16 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,9 @@ void		move_ants(t_env *env)
 	int		i;
 	int		j;
 	int		ants_in;
-	int		line_printed;
 	int		*tmp;
 
 	ants_in = 1;
-	line_printed = 0;
 	while (env->nb_ants > 0)
 	{
 		i = -1;
@@ -73,8 +71,6 @@ void		move_ants(t_env *env)
 						move_from_start(env, &ants_in, j, i);
 				}
 		}
-		line_printed++;
 		ft_putendl("");
 	}
-	ft_printf("line printed:%d\n", line_printed);
 }

@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/06 16:26:33 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 18:21:49 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,33 @@
 # include <ft_printf.h>
 # include <get_next_line.h>
 
-# define NB_LINE		100
+# define NB_LINE		1
 # define NB_PATH		100
+# define DEV			1
+
+# if DEV == 1
+#  define ERROR_NUMBER_ANTS "error with number of ants"
+#  define ERROR_TOO_MANY_STARTS "error too many starts"
+#  define ERROR_TOO_MANY_ENDS "error too many ends"
+#  define ERROR_WITH_START_OR_END "error either end or start missing or equal"
+#  define ERROR_TOO_MANY_SPACES_FOR_NODES "error too many spaces for nodes"
+#  define ERROR_IN_NAME_OF_NODE "error wrong character in node's name"
+#  define ERROR_DUPLICATE_ROOM "error duplicate room"
+#  define ERROR_IN_COORDINATES "error in coordinates of room"
+#  define ERROR_NO_PATH "error no path found"
+#  define ERROR_NO_EDGE "error no edge found"
+# else
+#  define ERROR_NUMBER_ANTS "ERROR"
+#  define ERROR_TOO_MANY_STARTS "ERROR"
+#  define ERROR_TOO_MANY_ENDS "ERROR"
+#  define ERROR_WITH_START_OR_END "ERROR"
+#  define ERROR_TOO_MANY_SPACES_FOR_NODES "ERROR"
+#  define ERROR_IN_NAME_OF_NODE "ERROR"
+#  define ERROR_DUPLICATE_ROOM "ERROR"
+#  define ERROR_IN_COORDINATES "ERROR"
+#  define ERROR_NO_PATH "ERROR"
+#  define ERROR_NO_EDGE "ERROR"
+# endif
 
 typedef struct		s_room
 {

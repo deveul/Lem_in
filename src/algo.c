@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 11:19:42 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/06 16:23:30 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 17:48:49 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,10 @@ int				analyze_graph(t_env *env)
 	i = 0;
 	reset_paths(env);
 	bfs_second(env, env->best_flow);
-	print_path(env);
 	free(env->fifo);
 	if (env->nb_path == 0)
 	{
-		ft_putendl("No passaran");
-		ft_putendl("ERROR");
+		ft_putendl(ERROR_NO_PATH);
 		exit(-1);
 	}
 	return (0);

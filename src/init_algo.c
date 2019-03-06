@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 19:08:47 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/06 16:27:51 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 17:48:06 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void	init_flow(t_env *env)
 	int i;
 
 	i = 0;
-	ft_printf("ici env->nb_nodes:%d\n", env->nb_nodes);
 	if (!(env->flow = ft_memalloc(sizeof(char *) * env->nb_nodes)))
 		exit(-1);
 	while (i < env->nb_nodes)

@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 11:33:26 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/06 16:26:29 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 17:48:40 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void	check_nb_path(t_env *env, char **flow)
 			env->nb_path++;
 		i++;
 	}
-	ft_printf("at first nb_path:%d\n", env->nb_path);
 }
 
 static void	reduce_len_paths(t_env *env)
@@ -43,6 +42,8 @@ void		bfs_second(t_env *env, char **flow)
 	int		nb_path_needed;
 
 	nb_path_needed = 0;
+	if (!flow)
+		return ;
 	check_nb_path(env, flow);
 	if (!(env->paths = ft_memalloc(sizeof(t_path) * env->nb_path)))
 		exit(-1);
@@ -54,6 +55,5 @@ void		bfs_second(t_env *env, char **flow)
 	fill_initial_fifo_second(env, flow);
 	if (while_fifo_second(env, flow) == -1)
 		exit(-1);
-	ft_printf("nb_path:%d\n", env->nb_path);
 	reduce_len_paths(env);
 }

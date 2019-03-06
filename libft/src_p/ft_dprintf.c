@@ -6,13 +6,13 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 14:45:26 by smakni            #+#    #+#             */
-/*   Updated: 2018/12/05 14:01:26 by smakni           ###   ########.fr       */
+/*   Updated: 2019/03/06 17:47:12 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
 
-static int case_1_fd(t_format *arg, t_control *ctr,
+static int	case_1_fd(t_format *arg, t_control *ctr,
 					const char *format, va_list av)
 {
 	if ((arg->type = check_conv(format, ctr->i)) == '0')
