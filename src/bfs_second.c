@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 11:33:26 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/06 10:07:06 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 10:16:33 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,16 @@ static void	cpy_paths(t_env *env)
 		env->prepaths[i].len--;
 		i++;
 	}
-	//if (!(env->paths = ft_memalloc(sizeof(t_path) * env->end_found)))
-	//	exit(-1);
+	if (!(env->paths = ft_memalloc(sizeof(t_path) * env->end_found)))
+		exit(-1);
 	i = 0;
 	j = 0;
 	while (i < env->nb_path)
 	{
 		if (env->prepaths[i].end_found == 1)
 		{
-			add_result(&env->results, env->prepaths[i]);
-	//		env->paths[j] = env->prepaths[i];
+	//		add_result(&env->results, env->prepaths[i]);
+			env->paths[j] = env->prepaths[i];
 			j++;
 		}
 		i++;
