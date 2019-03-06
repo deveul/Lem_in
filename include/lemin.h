@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/06 18:21:49 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 18:51:29 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,8 @@ int					fill_matrice(t_env *env, char **tab);
 int					fill_room(t_env *env, char **tab);
 int					init_paths(t_env *env);
 int					init_paths_second(t_env *env);
-int					read_data(t_env *env);
+void				read_data(t_env *env);
+void				get_connexion_start_end(t_env *env);
 int					while_fifo(t_env *env);
 int					while_fifo_second(t_env *env, char **flow);
 t_path				bfs(t_env *env);

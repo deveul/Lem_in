@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:21:51 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/06 18:21:52 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 18:50:13 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,13 @@ static void		handle_start_end_com(t_env *env, int *re, char *line)
 		}
 		env->end = 1;
 	}
-	if (ft_strequ(line, "##start") || ft_strequ(line, "##end"))
-	{
-		if (env->nb_line < ((NB_LINE * (*re)) - 1))
-			env->data[env->nb_line++] = line;
-		else
-			env->data = increase_size(env->data, line, re, &env->nb_line);
-	}
+	if (env->nb_line < ((NB_LINE * (*re)) - 1))
+		env->data[env->nb_line++] = line;
+	else
+		env->data = increase_size(env->data, line, re, &env->nb_line);
 }
 
-static void		get_connexion_start_end(t_env *env)
+void			get_connexion_start_end(t_env *env)
 {
 	int		i;
 
@@ -79,7 +76,7 @@ static void		get_connexion_start_end(t_env *env)
 	}
 }
 
-int				read_data(t_env *env)
+void			read_data(t_env *env)
 {
 	char	*line;
 	int		re;
@@ -93,8 +90,11 @@ int				read_data(t_env *env)
 			env->data[env->nb_line++] = line;
 		else if (env->nb_line >= ((NB_LINE * re) - 1) && line[0] != '#')
 			env->data = increase_size(env->data, line, &re, &env->nb_line);
-		if (line && line[0] == '#')
+		if (line && line[0] == '#'
+				&& (ft_strequ(line, "##start") || ft_strequ(line, "##end")))
 			handle_start_end_com(env, &re, line);
+		else if (line && line[0] == '#')
+			ft_strdel(&line);
 		else if (analyze_node_edge(env, line) == -1)
 			break ;
 	}
@@ -103,6 +103,4 @@ int				read_data(t_env *env)
 		ft_putendl(ERROR_NO_EDGE);
 		exit(-1);
 	}
-	get_connexion_start_end(env);
-	return (0);
 }
