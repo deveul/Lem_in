@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 11:33:26 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/06 10:16:33 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 10:37:09 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,12 @@ static void	cpy_paths(t_env *env)
 	{
 		if (env->prepaths[i].end_found == 1)
 		{
-	//		add_result(&env->results, env->prepaths[i]);
 			env->paths[j] = env->prepaths[i];
 			j++;
 		}
 		i++;
 	}
 	free(env->prepaths);
-//	free(env->fifo);
 	env->nb_path = env->end_found;
 	ft_printf("nb_end_found:%d\n", env->end_found);
 }

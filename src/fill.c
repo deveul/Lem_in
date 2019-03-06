@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:13:09 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/05 15:05:28 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 10:36:56 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static	void	check_start_end(t_env *env, t_room *tmp)
 	}
 }
 
-void			add_node(t_node **nodes, t_room room)
+static void		add_node(t_node **nodes, t_room room)
 {
 	t_node *tmp;
 	t_node *new;

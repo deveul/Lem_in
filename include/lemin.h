@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/06 10:05:31 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 10:42:22 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,31 +131,23 @@ int					*expand_table(int *src, int len, int to_add);
 int					algo(t_env *env);
 int					analyze_graph(t_env *env);
 int					analyze_node_edge(t_env *env, char *line);
-int					create_matrice(t_env *env);
-int					dijkstra(t_env *env, int n);
-int					dijkstra_old(t_env *env, int n);
+int					calculate_line(t_env *env);
 int					fill_matrice(t_env *env, char **tab);
 int					fill_room(t_env *env, char **tab);
 int					init_paths(t_env *env);
 int					init_paths_second(t_env *env);
-int					init_paths_algo(t_env *env);
 int					read_data(t_env *env);
-void				save_path(t_env *env, t_dij *dij);
-void				add_path(t_path *tocpy, int nb_path, int pathtocpy, int len);
+int					while_fifo(t_env *env);
+int					while_fifo_second(t_env *env, int nb_path_needed, int **flow);
 t_path				bfs(t_env *env);
+void				add_path(t_path *tocpy, int nb_path, int pathtocpy, int len);
 void				bfs_second(t_env *env, int **flow);
-void				add_node(t_node **nodes, t_room room);
-void				add_result(t_res **results, t_path path);
-void				aff_data_1(t_dij *dij, int n, int count);
-void				aff_data_2(t_dij *dij, int i);
-void				aff_data_3(t_dij *dij, int i, t_env *env);
-void				create_path_tab(t_res *res, t_path **paths_ok, int nb_paths);
 void				create_rooms(t_node *node, t_room **rooms, int nb_nodes);
 void				dispatch_ants(t_env *env);
+void				edmonds_karp(t_env *env);
 void				fill_combinations(t_env *env);
 void				fill_initial_fifo(t_env *env);
 void				fill_initial_fifo_second(t_env *env, int **flow);
-void				fill_initial_fifo_algo(t_env *env);
 void				free_memory(t_env *env);
 void				init_flow(t_env *env);
 void				move_ants(t_env *env);
@@ -163,9 +155,5 @@ void				print_data(char **data, int nb_line);
 void				print_env(t_env *env);
 void				print_flow(t_env *env);
 void				print_path(t_env *env);
-void				edmonds_karp(t_env *env);
-int					while_fifo(t_env *env);
-int					while_fifo_second(t_env *env, int nb_path_needed, int **flow);
-int					calculate_line(t_env *env);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2019/03/06 09:53:58 by vrenaudi         ###   ########.fr        #
+#    Updated: 2019/03/06 10:34:49 by vrenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,12 +30,8 @@ SRC_NAME	=	main.c \
 				print_env.c \
 				fill.c \
 				read_data.c \
-				create_matrice.c \
 				handle_memory.c \
 				create_rooms.c \
-				dijkstra.c \
-				dijkstra_old.c \
-				check_path_list.c \
 				fill_combinations.c \
 				dispatch_ants.c \
 				move_ants.c \
