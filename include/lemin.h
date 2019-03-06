@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/06 10:42:22 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 11:32:49 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,5 +155,6 @@ void				print_data(char **data, int nb_line);
 void				print_env(t_env *env);
 void				print_flow(t_env *env);
 void				print_path(t_env *env);
+void				reset_paths(t_env *env);
 
 #endif

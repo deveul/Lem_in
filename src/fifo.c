@@ -6,11 +6,21 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 13:19:07 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/06 09:22:19 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 11:12:26 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lemin.h>
+
+static t_fifo	get_tmp_info(t_fifo fifo)
+{
+	t_fifo	tmp;
+
+	tmp.index = fifo.index;
+	tmp.path_index = fifo.path_index;
+	tmp.from = fifo.from;
+	return (tmp);
+}
 
 static void		dequeue_one_fifo(t_env *env)
 {
@@ -21,9 +31,7 @@ static void		dequeue_one_fifo(t_env *env)
 
 	i = 1;
 	j = 0;
-	tmp.index = env->fifo[0].index;
-	tmp.path_index = env->fifo[0].path_index;
-	tmp.from = env->fifo[0].from;
+	tmp = get_tmp_info(env->fifo[0]);
 	len = env->paths[tmp.path_index].len;
 	while (i < env->nb_fifo)
 		env->fifo[j++] = env->fifo[i++];

@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 11:07:08 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/06 10:02:09 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 11:01:31 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,10 @@ static	void	free_paths(t_env *env)
 
 void			free_memory(t_env *env)
 {
-	int i;
-
 	free_rooms(env);
 	free_matrice(env);
 	free_paths(env);
-	i = 0;
 	free(env->combi.index_array);
-	free(env->combi.ants_by_index);
-	i = 0;
-	while (env->data[i])
-		free(env->data[i++]);
-	free(env->data);
 	free(env->start_links);
 	free(env->end_links);
 }

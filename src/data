@@ -1,0 +1,333 @@
+algo.c:	if (env->start_nb >= 1 && env->end_nb >= 1)
+algo.c:	bfs_second(env, env->best_flow);
+algo.c:	free(env->fifo);
+algo.c:	if (env->nb_path == 0)
+analyze_node_edge.c:	if (!(env->matrice = ft_memalloc(sizeof(int*) * env->nb_nodes)))
+analyze_node_edge.c:	while (i < env->nb_nodes)
+analyze_node_edge.c:		if (!(env->matrice[i] = ft_memalloc(sizeof(int) * env->nb_nodes)))
+analyze_node_edge.c:		while (j < env->nb_nodes)
+analyze_node_edge.c:			env->matrice[i][j++] = INFINITE;
+analyze_node_edge.c:	if (env->matrice)
+analyze_node_edge.c:	if ((env->start_index == -1 || env->end_index == -1)
+analyze_node_edge.c:			|| (env->start_index == env->end_index && env->start_index != -1))
+analyze_node_edge.c:	if (!env->matrice)
+analyze_node_edge.c:		env->nb_edges++;
+bfs.c:	while (i < env->nb_nodes)
+bfs.c:		if (env->matrice[env->start_index][i] == 1
+bfs.c:				&& env->flow[env->start_index][i] == 0)
+bfs.c:			env->nb_path++;
+bfs.c:	while (i < env->nb_path)
+bfs.c:		if (env->paths[i].end_found == 1)
+bfs.c:		env->paths[i].len--;
+bfs.c:	env->end_found = 0;
+bfs.c:	if (!(env->paths = ft_memalloc(sizeof(t_path) * env->nb_nodes)))
+bfs.c:	env->nb_fifo = env->nb_path;
+bfs.c:	if (!(env->fifo = ft_memalloc(sizeof(t_fifo) * env->nb_nodes)))
+bfs.c:	return (env->paths[save]);
+bfs_second.c:	while (i < env->nb_nodes)
+bfs_second.c:		if (flow[env->start_index][i] == 1)
+bfs_second.c:			env->nb_path++;
+bfs_second.c:	ft_printf("at first nb_path:%d\n", env->nb_path);
+bfs_second.c:	while (i < env->nb_path)
+bfs_second.c:		env->prepaths[i].len--;
+bfs_second.c:	if (!(env->paths = ft_memalloc(sizeof(t_path) * env->end_found)))
+bfs_second.c:	while (i < env->nb_path)
+bfs_second.c:		if (env->prepaths[i].end_found == 1)
+bfs_second.c:			env->paths[j] = env->prepaths[i];
+bfs_second.c:	free(env->prepaths);
+bfs_second.c:	env->nb_path = env->end_found;
+bfs_second.c:	ft_printf("nb_end_found:%d\n", env->end_found);
+bfs_second.c:	env->end_found = 0;
+bfs_second.c:	if (!(env->prepaths = ft_memalloc(sizeof(t_path) * env->nb_nodes)))
+bfs_second.c:	env->nb_fifo = env->nb_path;
+bfs_second.c:	if (!(env->fifo = ft_memalloc(sizeof(t_fifo) * env->nb_nodes)))
+bfs_second.c:	ft_printf("nb_path:%d\n", env->nb_path);
+calculate_line.c:	while (i < env->nb_path)
+calculate_line.c:		len += env->paths[i].len;
+calculate_line.c:	nb_line = (sum + env->nb_ants) / env->nb_path;
+calculate_line.c:	if ((sum + env->nb_ants) % env->nb_path == 0)
+dispatch_ants.c:	while (++i < env->nb_path)
+dispatch_ants.c:		if (env->combi.ants_by_index[i] != -1)
+dispatch_ants.c:			(*len) = env->paths[env->combi.index_array[i]].len;
+dispatch_ants.c:	while (++i < env->nb_path)
+dispatch_ants.c:		if (env->combi.ants_by_index[i] != -1)
+dispatch_ants.c:			if (env->paths[env->combi.index_array[i]].len
+dispatch_ants.c:				(*len) = env->paths[env->combi.index_array[i]].len;
+dispatch_ants.c:	while (i < env->nb_path)
+dispatch_ants.c:		if (env->combi.ants_by_index[i] != -1)
+dispatch_ants.c:			ants -= env->paths[env->combi.index_array[i]].len;
+dispatch_ants.c:			tmp = env->paths[env->combi.index_array[i]].len;
+dispatch_ants.c:			env->combi.ants_by_index[i] = 1 + len - tmp;
+dispatch_ants.c:	dispatch_remaining(ants, env->combi.ants_by_index,
+dispatch_ants.c:			env->nb_path);
+dispatch_ants.c:	while (++i < env->nb_path)
+dispatch_ants.c:		if (env->combi.ants_by_index[i] != -1)
+dispatch_ants.c:			env->combi.ants_by_index[i] += ants.same_ants_nb;
+dispatch_ants.c:		env->paths[env->combi.index_array[i]].ants_launched = 0;
+dispatch_ants.c:	while (++i < env->nb_path)
+dispatch_ants.c:				env->combi.ants_by_index[i]);
+dispatch_ants.c:				env->paths[env->combi.index_array[i]].len);
+dispatch_ants.c:	ants.nb_ants = env->nb_ants;
+dispatch_ants.c:	ants.nb_path = env->nb_path;
+dispatch_ants.c:	if (!(env->combi.ants_by_index = ft_memalloc(sizeof(int)
+dispatch_ants.c:	while (ants.by_turn > env->nb_ants && ants.nb_path > 1)
+dispatch_ants.c:		env->combi.ants_by_index[index_long] = -1;
+dispatch_ants.c:	ants.same_ants_nb = (env->nb_ants - ants.by_turn) / ants.nb_path;
+edmonds_karp.c:	while (i < env->nb_nodes)
+edmonds_karp.c:		while (j < env->nb_nodes)
+edmonds_karp.c:			if (env->flow[i][j] != 1)
+edmonds_karp.c:				env->flow[i][j] = INFINITE;
+edmonds_karp.c:			if (env->best_flow[i][j] != 1)
+edmonds_karp.c:				env->best_flow[i][j] = INFINITE;
+edmonds_karp.c:	while (i < env->nb_path)
+edmonds_karp.c:		free(env->paths[i].path);
+edmonds_karp.c:	free(env->paths);
+edmonds_karp.c:	free(env->fifo);
+edmonds_karp.c:	while (i < env->nb_nodes)
+edmonds_karp.c:		env->rooms[i].check = 0;
+edmonds_karp.c:	env->nb_path = 0;
+edmonds_karp.c:	env->nb_fifo = 0;
+edmonds_karp.c:	env->end_found = 0;
+edmonds_karp.c:			if (env->flow[tmp.path[i]][tmp.path[i + 1]] == -1)
+edmonds_karp.c:				env->flow[tmp.path[i]][tmp.path[i + 1]] = 0;
+edmonds_karp.c:				env->flow[tmp.path[i + 1]][tmp.path[i]] = 0;
+edmonds_karp.c://				env->rooms[tmp.path[i + 1]].v_out = 0;
+edmonds_karp.c://				if (env->rooms[tmp.path[i]].v_out == 0)
+edmonds_karp.c://					env->rooms[tmp.path[i]].v_in = 0;
+edmonds_karp.c:				env->flow[tmp.path[i]][tmp.path[i + 1]] = 1;
+edmonds_karp.c:				env->flow[tmp.path[i + 1]][tmp.path[i]] = -1;
+edmonds_karp.c://				env->rooms[tmp.path[i + 1]].v_in = tmp.path[i];
+edmonds_karp.c://				env->rooms[tmp.path[i]].v_out = tmp.path[i + 1];
+edmonds_karp.c://			if (env->rooms[tmp.path[i]].v_in != -1 && env->rooms[tmp.path[i]].v_out != -1)
+edmonds_karp.c:				env->rooms[tmp.path[i]].capacity = 1;
+edmonds_karp.c://				env->rooms[tmp.path[i]].capacity = 0;
+edmonds_karp.c:	if (!env->best_flow)
+edmonds_karp.c:		if (!(env->best_flow = ft_memalloc(sizeof(int *) * env->nb_nodes)))
+edmonds_karp.c:		while (i < env->nb_nodes)
+edmonds_karp.c:			if (!(env->best_flow[i] = ft_memalloc(sizeof(int) * env->nb_nodes)))
+edmonds_karp.c:	while (i < env->nb_nodes)
+edmonds_karp.c:		while (j < env->nb_nodes)
+edmonds_karp.c:			env->best_flow[i][j] = env->flow[i][j];
+edmonds_karp.c:	env->best_flow = NULL;
+edmonds_karp.c:		bfs_second(env, env->flow);
+fifo.c:	tmp.index = env->fifo[0].index;
+fifo.c:	tmp.path_index = env->fifo[0].path_index;
+fifo.c:	tmp.from = env->fifo[0].from;
+fifo.c:	len = env->paths[tmp.path_index].len;
+fifo.c:	while (i < env->nb_fifo)
+fifo.c:		env->fifo[j++] = env->fifo[i++];
+fifo.c:	env->nb_fifo--;
+fifo.c:	env->paths[tmp.path_index].len++;
+fifo.c:	env->paths[tmp.path_index].path[len] = tmp.index;
+fifo.c:	if (tmp.index == env->end_index)
+fifo.c:		env->paths[tmp.path_index].end_found = 1;
+fifo.c:		env->end_found = 1;
+fifo.c:		env->nb_path_ok++;
+fifo.c:	if (env->rooms[tmp.index].capacity == 1 && tmp.from == 0)
+fifo.c:		env->flow_to_find = -1;
+fifo.c:		env->flow_to_find = 0;
+fifo.c:	env->fifo[env->nb_fifo].index = i;
+fifo.c:	env->fifo[env->nb_fifo].from = tmp.from;
+fifo.c:	if (i != env->end_index)
+fifo.c:		env->rooms[i].check = 1;
+fifo.c:		env->fifo[env->nb_fifo].path_index = tmp.path_index;
+fifo.c:		add_path(env->paths, env->nb_path, tmp.path_index, env->nb_nodes);
+fifo.c:		env->fifo[env->nb_fifo].path_index = env->nb_path++;
+fifo.c:	env->nb_fifo++;
+fifo.c:	if (env->flow_to_find == -1)
+fifo.c:		if (env->matrice[tmp.index][i] == 1 && env->rooms[i].check == 0
+fifo.c:				&& env->flow[tmp.index][i] == -1)
+fifo.c:	else if (env->flow_to_find == 0)
+fifo.c:		if (env->matrice[tmp.index][i] == 1 && env->rooms[i].check == 0
+fifo.c:			&& (env->flow[tmp.index][i] == -1 || env->flow[tmp.index][i] == 0))
+fifo.c:			tmp.from = env->flow[tmp.index][i];
+fifo.c:	env->flow_to_find = 0;
+fifo.c:	while (env->nb_fifo != 0 && env->end_found == 0)
+fifo.c:		tmp = env->fifo[0];
+fifo.c:		if (env->end_found == 1)
+fifo.c:		while (++i < env->nb_nodes)
+fifo_second.c:	tmp_index = env->fifo[0].index;
+fifo_second.c:	tmp_i_p = env->fifo[0].path_index;
+fifo_second.c:	len = env->prepaths[tmp_i_p].len;
+fifo_second.c:	while (i < env->nb_fifo)
+fifo_second.c:		env->fifo[j++] = env->fifo[i++];
+fifo_second.c:	if (env->prepaths[tmp_i_p].end_found == 0)
+fifo_second.c:		env->prepaths[tmp_i_p].len++;
+fifo_second.c:		env->prepaths[tmp_i_p].path[len] = tmp_index;
+fifo_second.c:		if (tmp_index == env->end_index)
+fifo_second.c:			env->prepaths[tmp_i_p].end_found = 1;
+fifo_second.c:			env->end_found++;
+fifo_second.c:			env->nb_path_ok++;
+fifo_second.c:	env->nb_fifo--;
+fifo_second.c:	env->fifo[env->nb_fifo].index = i;
+fifo_second.c:	if (i != env->end_index)
+fifo_second.c:		env->rooms[i].check = 1;
+fifo_second.c:		env->fifo[env->nb_fifo].path_index = tmp.path_index;
+fifo_second.c:		add_path(env->prepaths, env->nb_path, tmp.path_index, env->nb_nodes);
+fifo_second.c:		env->fifo[env->nb_fifo].path_index = env->nb_path++;
+fifo_second.c:	env->nb_fifo++;
+fifo_second.c:	while (env->nb_fifo != 0)
+fifo_second.c:		tmp = env->fifo[0];
+fifo_second.c:		while (i < env->nb_nodes)
+fifo_second.c:			if (flow[tmp.index][i] == 1 && env->rooms[i].check == 0)
+fill.c:	if (env->start == 1)
+fill.c:		env->start = 2;
+fill.c:		env->start_index = env->nb_nodes;
+fill.c:	if (env->end == 1)
+fill.c:		env->end = 2;
+fill.c:		env->end_index = env->nb_nodes;
+fill.c:	if (check_unicity(env->nodes, tab[0]) == -1
+fill.c:	tmp.index = env->nb_nodes;
+fill.c:	add_node(&env->nodes, tmp);
+fill.c:	env->nb_nodes++;
+fill.c:	if (env->rooms == NULL)
+fill.c:		create_rooms(env->nodes, &env->rooms, env->nb_nodes);
+fill.c:	while (i < env->nb_nodes)
+fill.c:		if (ft_strequ(tab[0], env->rooms[i].name))
+fill.c:			while (j < env->nb_nodes)
+fill.c:				if (ft_strequ(tab[1], env->rooms[j].name))
+fill.c:					env->matrice[i][j] = 1;
+fill.c:					env->matrice[j][i] = 1;
+fill_combinations.c:	if (!(env->combi.index_array = ft_memalloc(sizeof(int) * env->nb_path)))
+fill_combinations.c:	while (i < env->nb_path)
+fill_combinations.c:		env->combi.index_array[i] = i;
+free_memory.c:	while (i < env->nb_nodes)
+free_memory.c:		free(env->rooms[i].name);
+free_memory.c:	free(env->rooms);
+free_memory.c:	while (i < env->nb_nodes)
+free_memory.c:		free(env->matrice[i]);
+free_memory.c:		free(env->flow[i]);
+free_memory.c:		free(env->best_flow[i]);
+free_memory.c:	free(env->matrice);
+free_memory.c:	free(env->flow);
+free_memory.c:	free(env->best_flow);
+free_memory.c:	while (i < env->nb_path)
+free_memory.c:		free(env->paths[i].path);
+free_memory.c:	free(env->paths);
+free_memory.c:	free(env->combi.index_array);
+free_memory.c:	free(env->combi.ants_by_index);
+free_memory.c:	while (env->data[++i])
+free_memory.c:		free(env->data[i]);
+free_memory.c:	free(env->data);
+free_memory.c:	free(env->start_links);
+free_memory.c:	free(env->end_links);
+init_algo.c:	env->rooms[env->start_index].check = 1;
+init_algo.c:	while (i < env->nb_path)
+init_algo.c:		if (!(env->paths[i].path = ft_memalloc(sizeof(int) * env->nb_nodes)))
+init_algo.c:		env->paths[i].path[0] = env->start_index;
+init_algo.c:		env->paths[i].len = 1;
+init_algo.c:		env->paths[i].end_found = 0;
+init_algo.c:	env->rooms[env->start_index].check = 1;
+init_algo.c:	while (i < env->nb_path)
+init_algo.c:		if (!(env->prepaths[i].path = ft_memalloc(sizeof(int) * env->nb_nodes)))
+init_algo.c:		env->prepaths[i].path[0] = env->start_index;
+init_algo.c:		env->prepaths[i].len = 1;
+init_algo.c:		env->prepaths[i].end_found = 0;
+init_algo.c:	while (i < env->nb_nodes)
+init_algo.c:		if (env->matrice[env->start_index][i] == 1
+init_algo.c:				&& env->flow[env->start_index][i] == 0)
+init_algo.c:			env->fifo[path_index].index = i;
+init_algo.c:			env->fifo[path_index].from = 0;
+init_algo.c:			env->fifo[path_index].path_index = path_index;
+init_algo.c:			env->rooms[i].check = 1;
+init_algo.c:	while (i < env->nb_nodes)
+init_algo.c:		if (flow[env->start_index][i] == 1)
+init_algo.c:			env->fifo[path_index].index = i;
+init_algo.c:			env->fifo[path_index].path_index = path_index;
+init_algo.c:			env->rooms[i].check = 1;
+init_algo.c:	env->flow = ft_memalloc(sizeof(int *) * env->nb_nodes);
+init_algo.c:	while (i < env->nb_nodes)
+init_algo.c:		env->flow[i] = ft_memalloc(sizeof(int) * env->nb_nodes);
+main.c:	env->nodes = NULL;
+main.c:	env->data = NULL;
+main.c:	env->results = NULL;
+main.c:	env->rooms = NULL;
+main.c:	env->matrice = NULL;
+main.c:	env->nb_ants = -1;
+main.c:	env->nb_nodes = 0;
+main.c:	env->nb_path = 0;
+main.c:	env->nb_edges = 0;
+main.c:	env->start = 0;
+main.c:	env->start_nb = 0;
+main.c:	env->end = 0;
+main.c:	env->end_nb = 0;
+main.c:	env->start_index = -1;
+main.c:	env->end_index = -1;
+main.c:	env->flow = NULL;
+main.c:	env->nb_path_ok = 0;
+main.c:	env->nb_line = 0;
+move_ants.c:	if (env->rooms[tmp[j - 1]].room_content != 0
+move_ants.c:			|| tmp[j - 1] == env->start_index)
+move_ants.c:		ft_printf("L%d-%s ", env->rooms[tmp[j - 1]].room_content,
+move_ants.c:				env->rooms[env->end_index].name);
+move_ants.c:		env->rooms[tmp[j - 1]].room_content = 0;
+move_ants.c:		env->nb_ants--;
+move_ants.c:	ft_printf("L%d-%s ", env->rooms[tmp[j - 1]].room_content,
+move_ants.c:			env->rooms[tmp[j]].name);
+move_ants.c:	env->rooms[tmp[j]].room_content = env->rooms[tmp[j - 1]].room_content;
+move_ants.c:	env->rooms[tmp[j - 1]].room_content = 0;
+move_ants.c:	tmp = env->paths[env->combi.index_array[i]].path;
+move_ants.c:	if (env->paths[env->combi.index_array[i]].ants_launched
+move_ants.c:			< env->combi.ants_by_index[i])
+move_ants.c:		ft_printf("L%d-%s ", (*ants_in), env->rooms[tmp[1]].name);
+move_ants.c:		env->rooms[tmp[j]].room_content = (*ants_in)++;
+move_ants.c:		env->paths[env->combi.index_array[i]].ants_launched++;
+move_ants.c:	while (env->nb_ants > 0)
+move_ants.c:		while (++i < env->nb_path)
+move_ants.c:			tmp = env->paths[env->combi.index_array[i]].path;
+move_ants.c:			j = env->paths[env->combi.index_array[i]].len;
+move_ants.c:				if (env->rooms[tmp[j]].room_content == 0)
+move_ants.c:					if (j > 1 && env->rooms[tmp[j - 1]].room_content != 0)
+print_env.c:	while (i < env->end_found)
+print_env.c:		while (j <= env->paths[i].len)
+print_env.c:			ft_printf("%-10s", env->rooms[env->paths[i].path[j]].name);
+print_env.c:	while (i < env->end_found)
+print_env.c:		while (j <= env->paths[i].len)
+print_env.c:			ft_printf("%-5d", env->paths[i].path[j]);
+print_env.c:	while (i < env->nb_nodes)
+print_env.c:		while (j < env->nb_nodes)
+print_env.c:			if (j != env->nb_nodes - 1)
+print_env.c:		while (j < env->nb_nodes)
+print_env.c:				ft_printf("%4d |", env->matrice[i][j]);
+print_env.c:			else if (j < env->nb_nodes - 1)
+print_env.c:				ft_printf(" %4d |", env->matrice[i][j]);
+print_env.c:				ft_printf(" %4d", env->matrice[i][j]);
+print_env.c:		ft_printf("\t[%04d]", env->rooms[i].index);
+print_env.c:		ft_printf("\t%-10s ", env->rooms[i].name);
+print_env.c:		if (env->rooms[i].start == 1)
+print_env.c:		if (env->rooms[i].end == 1)
+print_env.c:	while (i < env->nb_nodes)
+print_env.c:		while (j < env->nb_nodes)
+print_env.c:			if (j != env->nb_nodes - 1)
+print_env.c:		while (j < env->nb_nodes)
+print_env.c:				ft_printf("%4d |", env->flow[i][j]);
+print_env.c:			else if (j < env->nb_nodes - 1)
+print_env.c:				ft_printf(" %4d |", env->flow[i][j]);
+print_env.c:				ft_printf(" %4d", env->flow[i][j]);
+print_env.c:		ft_printf("\t[%04d]", env->rooms[i].index);
+print_env.c:		ft_printf("\t%-10s ", env->rooms[i].name);
+print_env.c:		if (env->rooms[i].start == 1)
+print_env.c:		if (env->rooms[i].end == 1)
+print_env.c:	ft_printf("Ants number : %ld\n\n", env->nb_ants);
+print_env.c:	ft_printf("Nodes number : %d\n\n", env->nb_nodes);
+read_data.c:	while (env->nb_ants == -1 && get_next_line(0, &line) > 0)
+read_data.c:			env->nb_ants = ft_atoi(line);
+read_data.c:			if ((env->nb_ants <= 0 || env->nb_ants > INT_MAX)
+read_data.c:		env->data[env->nb_line++] = line;
+read_data.c:		if (env->start == 2)
+read_data.c:		env->start = 1;
+read_data.c:		if (env->end == 2)
+read_data.c:		env->end = 1;
+read_data.c:	if (!(env->start_links = ft_memalloc(sizeof(int) * env->nb_nodes)))
+read_data.c:	if (!(env->end_links = ft_memalloc(sizeof(int) * env->nb_nodes)))
+read_data.c:	while (i < env->nb_nodes)
+read_data.c:		if (env->matrice[env->start_index][i] == 1)
+read_data.c:			env->start_links[env->start_nb++] = i;
+read_data.c:		if (env->matrice[env->end_index][i] == 1)
+read_data.c:			env->end_links[env->end_nb++] = i;
+read_data.c:	if (!(env->data = ft_memalloc(sizeof(char*) * NB_LINE + 1)))
+read_data.c:		if (env->nb_line < (NB_LINE * realloc) - 1)
+read_data.c:			env->data[env->nb_line++] = line;
+read_data.c:			env->data = increment_size(env->data, line, ++realloc);
+read_data.c:			env->nb_line++;
+read_data.c:	if (env->nb_edges == 0)
