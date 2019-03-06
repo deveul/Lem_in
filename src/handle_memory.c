@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 16:44:36 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/06 10:36:09 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 12:06:08 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,15 @@ void	add_path(t_path *tocpy, int nb_path, int ptocpy, int len)
 	tocpy[nb_path].len = tocpy[ptocpy].len;
 }
 
-char	**increment_size(char **data, char *line, int realloc)
+char	**increase_size(char **data, char *line, int *realloc, int *nb_line)
 {
 	char	**tmp;
 	int		i;
 	int		size;
 
 	tmp = NULL;
-	size = NB_LINE * realloc + 1;
+	(*realloc)++;
+	size = NB_LINE * (*realloc) + 1;
 	if (!(tmp = ft_memalloc(sizeof(char *) * size)))
 		exit(-1);
 	i = 0;
@@ -61,5 +62,6 @@ char	**increment_size(char **data, char *line, int realloc)
 	}
 	tmp[i] = line;
 	free(data);
+	(*nb_line)++;
 	return (tmp);
 }

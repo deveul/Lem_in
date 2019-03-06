@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:21:51 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/06 11:01:47 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 12:06:47 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,18 @@
 
 static void		get_ants_nb(t_env *env, char *line)
 {
+	if (!(env->data = ft_memalloc(sizeof(char*) * NB_LINE + 1)))
+		exit(-1);
 	while (env->nb_ants == -1 && get_next_line(0, &line) > 0)
 	{
 		if (line[0] != '#')
 		{
 			env->nb_ants = ft_atoi(line);
-			if ((env->nb_ants <= 0 || env->nb_ants > INT_MAX)
-					&& ft_printf("Wrong number of ants.\n"))
-			{
-				ft_printf("line = %s\n", line);
+			if (env->nb_ants <= 0 || env->nb_ants > INT_MAX)
 				exit(-1);
-			}
 		}
 		else
-		{
-			ft_printf("Empty spaces, what are we waiting for ?\n");
 			exit(-1);
-		}
 		env->data[env->nb_line++] = line;
 	}
 }
@@ -84,18 +79,13 @@ int				read_data(t_env *env)
 
 	line = NULL;
 	realloc = 1;
-	if (!(env->data = ft_memalloc(sizeof(char*) * NB_LINE + 1)))
-		exit(-1);
 	get_ants_nb(env, line);
 	while (get_next_line(0, &line) > 0)
 	{
 		if (env->nb_line < (NB_LINE * realloc) - 1)
 			env->data[env->nb_line++] = line;
 		else
-		{
-			env->data = increment_size(env->data, line, ++realloc);
-			env->nb_line++;
-		}
+			env->data = increase_size(env->data, line, &realloc, &env->nb_line);
 		if (line && line[0] == '#')
 		{
 			if (handle_start_end_com(env, line) == -1)

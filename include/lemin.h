@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lemin.h                                           :+:      :+:    :+:   */
+/*   lemin.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/06 11:32:49 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 12:10:32 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include <ft_printf.h>
 # include <get_next_line.h>
 
-#define	INFINITE	99999	
-#define NB_LINE		100
-#define NB_PATH		100
+# define INFINITE		99999
+# define NB_LINE		100
+# define NB_PATH		100
 
 typedef struct		s_room
 {
@@ -37,7 +37,7 @@ typedef struct		s_room
 typedef struct		s_node
 {
 	t_room			room;
-	struct	s_node 	*next;
+	struct s_node	*next;
 }					t_node;
 
 typedef struct		s_path
@@ -61,7 +61,7 @@ typedef struct		s_fifo
 typedef struct		s_res
 {
 	t_path			path;
-	struct	s_res	*next;
+	struct s_res	*next;
 }					t_res;
 
 typedef struct		s_ants
@@ -125,7 +125,8 @@ typedef struct		s_env
 	t_room			*rooms;
 }					t_env;
 
-char				**increment_size(char **data, char *line, int realloc);
+char				**increase_size(char **data, char *line,
+		int *realloc, int *nb_line);
 int					*dup_table(int *src, int len);
 int					*expand_table(int *src, int len, int to_add);
 int					algo(t_env *env);
@@ -138,9 +139,11 @@ int					init_paths(t_env *env);
 int					init_paths_second(t_env *env);
 int					read_data(t_env *env);
 int					while_fifo(t_env *env);
-int					while_fifo_second(t_env *env, int nb_path_needed, int **flow);
+int					while_fifo_second(t_env *env,
+		int nb_path_needed, int **flow);
 t_path				bfs(t_env *env);
-void				add_path(t_path *tocpy, int nb_path, int pathtocpy, int len);
+void				add_path(t_path *tocpy, int nb_path,
+		int pathtocpy, int len);
 void				bfs_second(t_env *env, int **flow);
 void				create_rooms(t_node *node, t_room **rooms, int nb_nodes);
 void				dispatch_ants(t_env *env);
