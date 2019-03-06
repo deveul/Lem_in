@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 14:00:23 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/05 22:15:41 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 09:52:45 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@ static int	get_turn_lenght(t_env *env, int *len)
 	int		index_long;
 
 	i = -1;
-	while (++i < env->final_combi[env->c_c].nb_combi)
-		if (env->final_combi[env->c_c].ants_by_index[i] != -1)
+	while (++i < env->nb_path)
+		if (env->combi.ants_by_index[i] != -1)
 		{
 			index_long = i;
-			(*len) = env->paths[env->final_combi[env->c_c].index_array[i]].len;
+			(*len) = env->paths[env->combi.index_array[i]].len;
 			break ;
 		}
 	i = -1;
-	while (++i < env->final_combi[env->c_c].nb_combi)
-		if (env->final_combi[env->c_c].ants_by_index[i] != -1)
-			if (env->paths[env->final_combi[env->c_c].index_array[i]].len
+	while (++i < env->nb_path)
+		if (env->combi.ants_by_index[i] != -1)
+			if (env->paths[env->combi.index_array[i]].len
 					> (*len))
 			{
 				index_long = i;
-				(*len) = env->paths[env->final_combi[env->c_c].index_array[i]].len;
+				(*len) = env->paths[env->combi.index_array[i]].len;
 			}
 	return (index_long);
 }
@@ -45,14 +45,14 @@ static int	get_ants_by_turn(t_env *env, int len)
 
 	i = 0;
 	ants = 0;
-	while (i < env->final_combi[env->c_c].nb_combi)
+	while (i < env->nb_path)
 	{
-		if (env->final_combi[env->c_c].ants_by_index[i] != -1)
+		if (env->combi.ants_by_index[i] != -1)
 		{
 			ants += (1 + len);
-			ants -= env->paths[env->final_combi[env->c_c].index_array[i]].len;
-			tmp = env->paths[env->final_combi[env->c_c].index_array[i]].len;
-			env->final_combi[env->c_c].ants_by_index[i] = 1 + len - tmp;
+			ants -= env->paths[env->combi.index_array[i]].len;
+			tmp = env->paths[env->combi.index_array[i]].len;
+			env->combi.ants_by_index[i] = 1 + len - tmp;
 		}
 		i++;
 	}
@@ -92,22 +92,22 @@ static void	fill_ants_by_index(t_env *env, t_ants ants)
 {
 	int		i;
 
-	dispatch_remaining(ants, env->final_combi[env->c_c].ants_by_index,
-			env->final_combi[env->c_c].nb_combi);
+	dispatch_remaining(ants, env->combi.ants_by_index,
+			env->nb_path);
 	i = -1;
-	while (++i < env->final_combi[env->c_c].nb_combi)
+	while (++i < env->nb_path)
 	{
-		if (env->final_combi[env->c_c].ants_by_index[i] != -1)
-			env->final_combi[env->c_c].ants_by_index[i] += ants.same_ants_nb;
-		env->paths[env->final_combi[env->c_c].index_array[i]].ants_launched = 0;
+		if (env->combi.ants_by_index[i] != -1)
+			env->combi.ants_by_index[i] += ants.same_ants_nb;
+		env->paths[env->combi.index_array[i]].ants_launched = 0;
 	}
 	i = -1;
-	while (++i < env->final_combi[env->c_c].nb_combi)
+	while (++i < env->nb_path)
 	{
 		ft_printf("ants_by_index[%d]:%d\n", i,
-				env->final_combi[env->c_c].ants_by_index[i]);
+				env->combi.ants_by_index[i]);
 		ft_printf("len_index[%d]:%d\n", i,
-				env->paths[env->final_combi[env->c_c].index_array[i]].len);
+				env->paths[env->combi.index_array[i]].len);
 	}
 	move_ants(env);
 }
@@ -120,15 +120,15 @@ void		dispatch_ants(t_env *env)
 
 	len = 0;
 	ants.nb_ants = env->nb_ants;
-	ants.nb_path = env->final_combi[env->c_c].nb_combi;
-	if (!(env->final_combi[env->c_c].ants_by_index = ft_memalloc(sizeof(int)
+	ants.nb_path = env->nb_path;
+	if (!(env->combi.ants_by_index = ft_memalloc(sizeof(int)
 					* ants.nb_path)))
 		exit(-1);
 	index_long = get_turn_lenght(env, &len);
 	ants.by_turn = get_ants_by_turn(env, len);
 	while (ants.by_turn > env->nb_ants && ants.nb_path > 1)
 	{
-		env->final_combi[env->c_c].ants_by_index[index_long] = -1;
+		env->combi.ants_by_index[index_long] = -1;
 		ants.nb_path--;
 		index_long = get_turn_lenght(env, &len);
 		ants.by_turn = get_ants_by_turn(env, len);

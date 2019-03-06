@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 11:33:26 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/05 23:31:06 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/06 10:07:06 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static void	cpy_paths(t_env *env)
 //	free(env->fifo);
 	env->nb_path = env->end_found;
 	ft_printf("nb_end_found:%d\n", env->end_found);
-	//print_path(env);
 }
 
 void		bfs_second(t_env *env, int **flow)
