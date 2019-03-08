@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 11:33:26 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/06 17:48:40 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/07 10:58:44 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,6 @@ static void	reduce_len_paths(t_env *env)
 
 void		bfs_second(t_env *env, char **flow)
 {
-	int		nb_path_needed;
-
-	nb_path_needed = 0;
 	if (!flow)
 		return ;
 	check_nb_path(env, flow);

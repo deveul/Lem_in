@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 10:49:03 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/06 17:46:06 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/07 15:25:39 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ static int		analyze_edge(t_env *env, char *line)
 	tab = ft_strsplit(line, '-');
 	if (ft_tablen(tab) != 2)
 		error = -1;
+	if (ft_tablen(tab) == 2 && ft_strequ(tab[0], tab[1]) == 1)
+		error = -1;
 	if (fill_matrice(env, tab) == -1)
 		error = -1;
 	if (error == 0)
@@ -101,5 +103,7 @@ int				analyze_node_edge(t_env *env, char *line)
 		if (analyze_edge(env, line) == -1)
 			return (-1);
 	}
+	else
+		return (-1);
 	return (0);
 }

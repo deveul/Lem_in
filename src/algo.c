@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 11:19:42 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/06 18:46:21 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/07 10:59:46 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,9 @@ void			reset_paths(t_env *env)
 
 int				analyze_graph(t_env *env)
 {
-	int		i;
-
 	init_flow(env);
 	if (env->start >= 1 && env->end >= 1)
 		edmonds_karp(env);
-	i = 0;
 	reset_paths(env);
 	bfs_second(env, env->best_flow);
 	free(env->fifo);

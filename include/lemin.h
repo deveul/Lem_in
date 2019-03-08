@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:05:43 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/06 18:51:29 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/07 15:01:45 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@
 # include <ft_printf.h>
 # include <get_next_line.h>
 
-# define NB_LINE		1
-# define NB_PATH		100
-# define DEV			1
+# define NB_LINE		100
+# define DEV			0
 
 # if DEV == 1
 #  define ERROR_NUMBER_ANTS "error with number of ants"
@@ -50,8 +49,6 @@ typedef struct		s_room
 	char			*name;
 	int				check;
 	int				capacity;
-	int				v_in;
-	int				v_out;
 	int				end;
 	int				index;
 	int				room_content;
@@ -116,6 +113,8 @@ typedef struct		s_env
 	int				start;
 	int				start_index;
 	int				flow_to_find;
+	int				print_option;
+	int				line_printed;
 	long			nb_ants;
 	t_combinations	combi;
 	t_fifo			*fifo;
@@ -142,6 +141,7 @@ int					while_fifo(t_env *env);
 int					while_fifo_second(t_env *env, char **flow);
 t_path				bfs(t_env *env);
 void				add_path(t_path *tocpy, int nb_path, int ptocpy, int len);
+void				analyze_options(t_env *env, char *option);
 void				bfs_second(t_env *env, char **flow);
 void				create_rooms(t_node *node, t_room **rooms, int nb_nodes);
 void				dispatch_ants(t_env *env);
@@ -152,10 +152,11 @@ void				fill_initial_fifo_second(t_env *env, char **flow);
 void				free_memory(t_env *env);
 void				init_flow(t_env *env);
 void				move_ants(t_env *env);
+void				move_all(t_env *env);
 void				print_data(char **data, int nb_line);
 void				print_env(t_env *env);
 void				print_flow(t_env *env);
-void				print_path(t_env *env);
+void				print_option(t_env *env);
 void				reset_paths(t_env *env);
 
 #endif

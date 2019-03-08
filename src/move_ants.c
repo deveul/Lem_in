@@ -6,13 +6,13 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 15:04:12 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/06 18:22:16 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/07 15:01:48 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lemin.h>
 
-void		move_to_last_room(t_env *env, int *tmp, int j)
+static void	move_to_last_room(t_env *env, int *tmp, int j)
 {
 	if (env->rooms[tmp[j - 1]].room_content != 0
 			|| tmp[j - 1] == env->start_index)
@@ -24,15 +24,18 @@ void		move_to_last_room(t_env *env, int *tmp, int j)
 	}
 }
 
-void		move_in_graph(t_env *env, int *tmp, int j)
+static void	move_in_graph(t_env *env, int *tmp, int j)
 {
-	ft_printf("L%d-%s ", env->rooms[tmp[j - 1]].room_content,
-			env->rooms[tmp[j]].name);
-	env->rooms[tmp[j]].room_content = env->rooms[tmp[j - 1]].room_content;
-	env->rooms[tmp[j - 1]].room_content = 0;
+	if (j > 1 && env->rooms[tmp[j - 1]].room_content != 0)
+	{
+		ft_printf("L%d-%s ", env->rooms[tmp[j - 1]].room_content,
+				env->rooms[tmp[j]].name);
+		env->rooms[tmp[j]].room_content = env->rooms[tmp[j - 1]].room_content;
+		env->rooms[tmp[j - 1]].room_content = 0;
+	}
 }
 
-void		move_from_start(t_env *env, int *ants_in, int j, int i)
+static void	move_from_start(t_env *env, int *ants_in, int j, int i)
 {
 	int		*tmp;
 
@@ -44,6 +47,19 @@ void		move_from_start(t_env *env, int *ants_in, int j, int i)
 		env->rooms[tmp[j]].room_content = (*ants_in)++;
 		env->paths[env->combi.index_array[i]].ants_launched++;
 	}
+}
+
+void		move_all(t_env *env)
+{
+	int		i;
+
+	i = 1;
+	while (i < env->nb_ants)
+	{
+		ft_printf("L%d-%s ", i, env->rooms[env->end_index].name);
+		i++;
+	}
+	ft_printf("L%d-%s\n", i, env->rooms[env->end_index].name);
 }
 
 void		move_ants(t_env *env)
@@ -65,12 +81,12 @@ void		move_ants(t_env *env)
 			while (--j > 0)
 				if (env->rooms[tmp[j]].room_content == 0)
 				{
-					if (j > 1 && env->rooms[tmp[j - 1]].room_content != 0)
-						move_in_graph(env, tmp, j);
-					else if (j == 1)
+					move_in_graph(env, tmp, j);
+					if (j == 1)
 						move_from_start(env, &ants_in, j, i);
 				}
 		}
 		ft_putendl("");
+		env->line_printed++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:21:51 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/06 18:50:13 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/07 13:09:21 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void		get_ants_nb(t_env *env, char *line)
 	}
 }
 
-static void		handle_start_end_com(t_env *env, int *re, char *line)
+static void		handle_start_end_com(t_env *env, char *line)
 {
 	if (ft_strequ(line, "##start"))
 	{
@@ -53,10 +53,6 @@ static void		handle_start_end_com(t_env *env, int *re, char *line)
 		}
 		env->end = 1;
 	}
-	if (env->nb_line < ((NB_LINE * (*re)) - 1))
-		env->data[env->nb_line++] = line;
-	else
-		env->data = increase_size(env->data, line, re, &env->nb_line);
 }
 
 void			get_connexion_start_end(t_env *env)
@@ -86,17 +82,17 @@ void			read_data(t_env *env)
 	get_ants_nb(env, line);
 	while (get_next_line(0, &line) > 0)
 	{
-		if (env->nb_line < ((NB_LINE * re) - 1) && line[0] != '#')
-			env->data[env->nb_line++] = line;
-		else if (env->nb_line >= ((NB_LINE * re) - 1) && line[0] != '#')
-			env->data = increase_size(env->data, line, &re, &env->nb_line);
-		if (line && line[0] == '#'
-				&& (ft_strequ(line, "##start") || ft_strequ(line, "##end")))
-			handle_start_end_com(env, &re, line);
-		else if (line && line[0] == '#')
-			ft_strdel(&line);
+		if (line[0] == '#')
+			handle_start_end_com(env, line);
 		else if (analyze_node_edge(env, line) == -1)
+		{
+			ft_strdel(&line);
 			break ;
+		}
+		if (env->nb_line < ((NB_LINE * re) - 1))
+			env->data[env->nb_line++] = line;
+		else
+			env->data = increase_size(env->data, line, &re, &env->nb_line);
 	}
 	if (env->nb_edges == 0)
 	{

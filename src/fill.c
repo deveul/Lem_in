@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:13:09 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/06 17:47:48 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/07 12:14:27 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,11 @@ int				fill_room(t_env *env, char **tab)
 {
 	t_room tmp;
 
-	tmp.name = NULL;
-	tmp.start = 0;
-	tmp.end = 0;
-	tmp.check = 0;
-	tmp.index = 0;
-	tmp.v_in = -1;
-	tmp.v_out = -1;
+	ft_bzero(&tmp, sizeof(t_room));
 	if (check_unicity(env->nodes, tab[0]) == -1)
 		return (-1);
-	if (ft_isnumber(tab[1]) == -1 || ft_isnumber(tab[2]) == -1)
+	if (ft_isnumber(tab[1]) == -1 || ft_isnumber(tab[2]) == -1
+			|| tab[1][0] == '-' || tab[2][0] == '-')
 	{
 		ft_putendl(ERROR_IN_COORDINATES);
 		return (-1);

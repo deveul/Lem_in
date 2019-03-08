@@ -6,7 +6,7 @@
 /*   By: sabri <sabri@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 11:15:06 by smakni            #+#    #+#             */
-/*   Updated: 2018/12/05 09:56:13 by smakni           ###   ########.fr       */
+/*   Updated: 2019/03/08 18:45:25 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		get_next_line(const int fd, char **line)
 		return (-1);
 	if (!tmp && !(tmp = ft_memalloc(1)))
 		return (-1);
-	while ((ret = read(fd, buffer, BUFF_SIZE)) > 0)
+	while ((ret = read(fd, buffer, BUFF_SIZE)) > 0 && *buffer)
 	{
 		buffer[ret] = '\0';
 		tmp = ft_strjoin_free1(tmp, buffer);
