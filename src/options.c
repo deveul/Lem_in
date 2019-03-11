@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 14:26:34 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/07 14:55:46 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/11 10:46:45 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	print_option(t_env *env)
 	int		j;
 
 	i = 0;
-	if (env->print_option == 2)
+	if (env->print_option >= 2)
 		ft_printf("\nnumber of line printed : %d\n", env->line_printed);
-	if (env->print_option != 1)
+	if (env->print_option != 1 && env->print_option != 3)
 		return ;
 	ft_putendl("\n>>>>>>>>>>>>>>>>>>>>>>>PATHS<<<<<<<<<<<<<<<<<<<<<<<");
 	while (i < env->nb_path)
@@ -43,6 +43,8 @@ void	analyze_options(t_env *env, char *option)
 {
 	if (ft_strequ(option, "--print_paths"))
 		env->print_option = 1;
-	else if (ft_strequ(option, "--print_line_number"))
+	else if (ft_strequ(option, "--nb_line"))
 		env->print_option = 2;
+	else if (ft_strequ(option, "--print_all"))
+		env->print_option = 3;
 }

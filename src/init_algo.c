@@ -6,7 +6,7 @@
 /*   By: vrenaudi <vrenaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 19:08:47 by vrenaudi          #+#    #+#             */
-/*   Updated: 2019/03/06 17:48:06 by vrenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/11 10:39:38 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ void	fill_initial_fifo_second(t_env *env, char **flow)
 		{
 			env->fifo[path_index].index = i;
 			env->fifo[path_index].path_index = path_index;
-			env->rooms[i].check = 1;
+			if (i != env->end_index)
+				env->rooms[i].check = 1;
 			path_index++;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 12:50:41 by smakni            #+#    #+#             */
-/*   Updated: 2019/03/08 18:39:28 by smakni           ###   ########.fr       */
+/*   Updated: 2019/03/11 10:43:05 by vrenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,6 @@ void			edmonds_karp(t_env *env)
 		reset_paths(env);
 		tmp = bfs(env);
 		update_flow(tmp, env);
-		if (tmp.len == 1)
-		{
-			reset_paths(env);
-			save_flow(env);
-			break ;
-		}
 		reset_paths(env);
 		bfs_second(env, env->flow);
 		if (save == INT_MAX && env->nb_path == 0)
